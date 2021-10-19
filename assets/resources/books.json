@@ -1,0 +1,91 @@
+{
+    "books": [{
+        "title": "Fundamental Problems In Organic Chemistry For NEET",
+        "images": {
+            "front": "front.jpeg",
+            "back": "back.jpeg",
+            "others": "others"
+        },
+        "authors": ["skc", "ra"],
+        "price": 350,
+        "description": "Book by #1 educator on Un-Academy and Joint director Nucleus kota",
+        "details": {
+            "dimensions": "10 x 10 x 10 (L x W x H)",
+            "weight": "350gm",
+            "shipping": "3-7 days",
+            "publication": "Brain Basket",
+            "isbn": "9789354267352",
+            "ratings": "4.7/5"
+        },
+        "reviews": [{
+            "name": "Sit gubergren.",
+            "review": "Mohit est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }]
+    }, {
+        "title": "Fundamental Problems In Organic Chemistry For NEET",
+        "images": {
+            "front": "front.jpeg",
+            "back": "back.jpeg",
+            "others": "others"
+        },
+        "authors": ["skc", "ra"],
+        "price": 350,
+        "description": "Book by #1 educator on Un-Academy and Joint director Nucleus kota",
+        "details": {
+            "dimensions": "10 x 10 x 10 (L x W x H)",
+            "weight": "350gm",
+            "shipping": "3-7 days",
+            "publication": "Brain Basket",
+            "isbn": "9789354267352",
+            "ratings": "4.7/5"
+        },
+        "reviews": [{
+            "name": "Sit gubergren.",
+            "review": " Labore at et sit aliquyam accusam. Invidunt sed diam gubergren diam. Diam dolore sed tempor magna erat no dolores no sit, elitr ut tempor ea consetetur diam diam ut. No ipsum amet erat sadipscing, stet diam stet ipsum et amet duo amet. Elitr invidunt et ea duo diam no labore sea, et sed tempor sadipscing sit. Elitr stet invidunt duo magna tempor et rebum, et sed nonumy amet kasd sit kasd nonumy. Gubergren consetetur ut rebum et duo duo ut et gubergren. Ipsum sit amet et eirmod at gubergren elitr. Dolor tempor magna eirmod no sea et et erat diam..Mohit est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }]
+    }]
+}
