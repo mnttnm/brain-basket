@@ -31,7 +31,7 @@ class BookItemSmall extends StatelessWidget {
             BookTitle(title: book.title),
             BookImageContainer(
                 imagePath:
-                    'books/book-${book.details.isbn}/${book.images.front}',
+                    'assets/books/book-${book.details.isbn}/${book.images.front}',
                 imageWidth: _imageWidth,
                 imageHeight: _imageHeight),
             BookActions(

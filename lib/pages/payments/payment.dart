@@ -82,7 +82,7 @@ class Payment extends StatelessWidget {
                           Column(
                             children: [
                               Image.asset(
-                                'upi-qr.jpeg',
+                                'assets/upi-qr.jpeg',
                                 width: 300,
                                 height: 300,
                               ),
