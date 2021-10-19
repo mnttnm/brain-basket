@@ -9,8 +9,7 @@ import 'package:rs_books/controllers/menu_controller.dart';
 import 'package:rs_books/controllers/navigation_controller.dart';
 import 'package:rs_books/layout.dart';
 
-void main(List<String> args) {
-  print('####');
+void main() {
   Get.put(NavigationController());
   Get.put(MenuController());
   runApp(ChangeNotifierProvider(
