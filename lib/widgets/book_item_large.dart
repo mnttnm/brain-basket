@@ -18,7 +18,7 @@ class BookItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Image image = Image.asset(
-      'books/book-${book.details.isbn}/${book.images.front}',
+      'assets/books/book-${book.details.isbn}/${book.images.front}',
       width: MediaQuery.of(context).size.width / 12 * 2,
     );
     return Card(
@@ -53,7 +53,7 @@ class BookItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min, // TODO: why this is needed?
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+              Container(
                   child: Text(
                     book.title.toUpperCase(),
                     style: TextStyle(

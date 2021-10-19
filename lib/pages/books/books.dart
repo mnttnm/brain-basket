@@ -19,7 +19,7 @@ Future<List<Book>> parseBooks() async {
 }
 
 Future<String> loadBooksAssets() async {
-  return await rootBundle.loadString('resources/books.json');
+  return await rootBundle.loadString('assets/resources/books.json');
 }
 
 class BooksPage extends StatelessWidget {

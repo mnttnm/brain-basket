@@ -48,9 +48,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/html/payment.html
-    - assets/books/
+    - assets/books/book-9789354267352/
     - assets/icons/
-    - assets/images/
+    - assets/images/authors/
     - assets/backgrounds/
     - assets/resources/
     - assets/upi-qr.jpeg
