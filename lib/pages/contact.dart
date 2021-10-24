@@ -40,25 +40,32 @@ class ContactPage extends StatelessWidget {
                   "Please Note:",
                   style: TextStyle(
                     fontSize: 24,
-                    color: Colors.deepPurple.shade300,
+                    color: Colors.purple.shade300,
                   ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        snapshot.data!.elementAt(index),
-                        style: TextStyle(fontSize: 20, letterSpacing: 1.2),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  },
-                  itemCount: snapshot.data!.length,
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: Colors.purpleAccent.shade100, width: 2)),
+                  padding: EdgeInsets.all(20),
+                  constraints: BoxConstraints(maxWidth: 700),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: snapshot.data!
+                        .map<Widget>((instruction) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '-> $instruction',
+                                style:
+                                    TextStyle(fontSize: 20, letterSpacing: 1.2),
+                              ),
+                        ))
+                        .toList(),
+                  ),
                 ),
                 Spacer(),
                 Container(

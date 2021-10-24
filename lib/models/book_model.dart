@@ -51,24 +51,24 @@ class Book {
 
 class Details {
   Details({
-    this.dimensions,
-    this.weight,
+    this.pages,
+    this.language,
     this.shipping,
     this.publication,
     required this.isbn,
     this.ratings,
   });
 
-  final String? dimensions;
-  final String? weight;
+  final String? pages;
+  final String? language;
   final String? shipping;
   final String? publication;
   final String isbn;
   final String? ratings;
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
-        dimensions: json["dimensions"],
-        weight: json["weight"],
+        pages: json["pages"],
+        language: json["language"],
         shipping: json["shipping"],
         publication: json["publication"],
         isbn: json["isbn"],
@@ -76,8 +76,8 @@ class Details {
       );
 
   Map<String, dynamic> toJson() => {
-        "dimensions": dimensions,
-        "weight": weight,
+        "pages": pages,
+        "language": language,
         "shipping": shipping,
         "publication": publication,
         "isbn": isbn,

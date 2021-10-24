@@ -10,12 +10,12 @@
         "price": 350,
         "description": "Book by #1 educator on Un-Academy and Joint director Nucleus kota",
         "details": {
-            "dimensions": "10 x 10 x 10 (L x W x H)",
-            "weight": "350gm",
+            "pages": "304",
             "shipping": "3-7 days",
             "publication": "Brain Basket",
             "isbn": "9789354267352",
-            "ratings": "4.7/5"
+            "ratings": "4.7/5",
+            "language": "English"
         },
         "reviews": [{
             "name": "Sit gubergren.",
@@ -54,12 +54,12 @@
         "price": 350,
         "description": "Book by #1 educator on Un-Academy and Joint director Nucleus kota",
         "details": {
-            "dimensions": "10 x 10 x 10 (L x W x H)",
-            "weight": "350gm",
+            "pages": "304",
             "shipping": "3-7 days",
             "publication": "Brain Basket",
             "isbn": "9789354267352",
-            "ratings": "4.7/5"
+            "ratings": "4.7/5",
+            "language": "English"
         },
         "reviews": [{
             "name": "Sit gubergren.",

@@ -8,12 +8,20 @@ import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/controllers/menu_controller.dart';
 import 'package:rs_books/controllers/navigation_controller.dart';
 import 'package:rs_books/layout.dart';
+import 'package:rs_books/pages/checkout_page.dart';
 
 void main() {
   Get.put(NavigationController());
   Get.put(MenuController());
-  runApp(ChangeNotifierProvider(
-    create: (context) => CartController(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => CartController(),
+    ),
+      ChangeNotifierProvider(
+        create: (context) => AddressController(),
+      ),
+    ],
     child: const MyApp(),
   ));
 }

@@ -129,9 +129,9 @@ class CartPage extends StatelessWidget {
                                     padding: EdgeInsets.all(12)),
                                 onPressed: () {
                                   navigationController
-                                      .navigateTo(PaymentsPageRoute);
+                                      .navigateTo(CheckOutPageRoute);
                                 },
-                                child: const Text('Order Now',
+                                child: const Text('Checkout',
                                     style: TextStyle(fontSize: 18))),
                           ],
                         ),
@@ -156,7 +156,7 @@ class Back extends StatelessWidget {
       child: Text('<  Back',
           style: TextStyle(fontSize: 18, color: Colors.pinkAccent.shade200)),
       onTap: () {
-        navigationController.navigationKey.currentState!.pop();
+        navigationController.goback();
       },
     );
   }
