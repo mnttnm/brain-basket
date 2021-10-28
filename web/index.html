@@ -99,8 +99,25 @@
   </script>
   <script src="https://checkout.razorpay.com/v1/checkout.js" defer> </script>
   <script src="payment.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
   <script>
+    // Import the functions you need from the SDKs you need
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAjq5J6-lWlfcZVcWitNVP1NNm9m3AvPNY",
+      authDomain: "brain-basket-fnr.firebaseapp.com",
+      projectId: "brain-basket-fnr",
+      storageBucket: "brain-basket-fnr.appspot.com",
+      messagingSenderId: "954589206253",
+      appId: "1:954589206253:web:532cad6b70657a69ae1ee4"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
   </script>
     
 </body>

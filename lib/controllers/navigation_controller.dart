@@ -7,7 +7,6 @@ class NavigationController extends GetxController {
   final GlobalKey<NavigatorState> navigationKey = GlobalKey();
 
   void navigateTo(String routeName, {Object? args}) {
-    if (Get.currentRoute != routeName)
       navigationKey.currentState!.pushNamed(routeName, arguments: args);
   }
 

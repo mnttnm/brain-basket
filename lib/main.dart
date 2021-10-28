@@ -7,6 +7,7 @@ import 'package:rs_books/constants/style.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/controllers/menu_controller.dart';
 import 'package:rs_books/controllers/navigation_controller.dart';
+import 'package:rs_books/data/order_dao.dart';
 import 'package:rs_books/layout.dart';
 import 'package:rs_books/pages/checkout_page.dart';
 
@@ -21,6 +22,10 @@ void main() {
       ChangeNotifierProvider(
         create: (context) => AddressController(),
       ),
+      Provider(
+        create: (_) => OrderDao(),
+        lazy: false,
+      )
     ],
     child: const MyApp(),
   ));

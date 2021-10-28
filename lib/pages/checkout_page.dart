@@ -3,38 +3,10 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
+import 'package:rs_books/models/address_model.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/widgets/cart_page.dart';
 import 'package:rs_books/widgets/centered_view.dart';
-
-class AddressModel {
-  String? name;
-  String? address1;
-  String? address2;
-  String? pincode;
-  String? contactNo;
-  String? email;
-
-  AddressModel(
-      {this.name,
-      this.address1,
-      this.address2,
-      this.pincode,
-      this.contactNo,
-      this.email});
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "address1": address1,
-        "address2": address2,
-        "pincode": pincode,
-        "contactNo": contactNo,
-        "email": email,
-      };
-
-  String toString() {
-    return '$name,\n$address1,$address2,$pincode\n$contactNo, $email';
-  }
-}
 
 class AddressController with ChangeNotifier {
   AddressModel? currentAddress;
@@ -200,6 +172,7 @@ class CheckoutPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Back(),
           Text(
             "Shipping Details",
             style: TextStyle(
