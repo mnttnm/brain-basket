@@ -321,13 +321,14 @@ class Payment extends StatelessWidget {
                                   "email": "mohit@example.com",
                                   "contact": "9999009999"
                                 },
-                                'handler': (response) =>
-                                    {print(response.toString())},
-                                'modal': {
-                                  'ondismiss': () {
-                                    print("Payment cancelled"); //3
-                                  },
+                                'handler': (response) {
+                                  cart.clearCart();
+                                  addressController.clearAddress();
+                                  navigationController.navigateTo(
+                                      OrderSuccessPageRoute,
+                                      args: {'orderId': resObject['id']});
                                 },
+                                'ondismiss': () {},
                               };
                               js.context.callMethod('initiatePayment',
                                   [js.JsObject.jsify(options)]);

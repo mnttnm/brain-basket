@@ -30,7 +30,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case OrderSuccessPageRoute:
       return _getPageRoute(
           OrderSuccessPage(
-            orderID: "123",
+            args: settings.arguments,
           ),
           settings.name!);
         

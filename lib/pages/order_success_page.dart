@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rs_books/widgets/centered_view.dart';
 
 class OrderSuccessPage extends StatelessWidget {
-  final String orderID;
-  const OrderSuccessPage({Key? key, required this.orderID}) : super(key: key);
+  final dynamic args;
+  late String orderId;
+  OrderSuccessPage({Key? key, required this.args}) : super(key: key) {
+    this.orderId = this.args['orderId'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,9 @@ class OrderSuccessPage extends StatelessWidget {
                   "Your order has been placed successfuly, you will receive further details on your contact no. Please note your order id ",
                   style: TextStyle(fontSize: 16),
                 ),
-                Text(
-                  "#$orderID",
+                SelectableText(
+                  "$orderId",
+                  enableInteractiveSelection: true,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 Text(

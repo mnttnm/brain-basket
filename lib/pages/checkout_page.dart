@@ -16,6 +16,10 @@ class AddressController with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearAddress() {
+    currentAddress = null;
+  }
+
   AddressModel? get address {
     return currentAddress;
   }
