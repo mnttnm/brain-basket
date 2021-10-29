@@ -47,23 +47,23 @@ class Author {
 class SocialLinks {
   SocialLinks({
     required this.facebook,
-    required this.twitter,
+    required this.telegram,
     required this.instagram,
   });
 
   final String facebook;
-  final String twitter;
+  final String telegram;
   final String instagram;
 
   factory SocialLinks.fromJson(Map<String, dynamic> json) => SocialLinks(
         facebook: json["facebook"],
-        twitter: json["twitter"],
+        telegram: json["telegram"],
         instagram: json["instagram"],
       );
 
   Map<String, dynamic> toJson() => {
         "facebook": facebook,
-        "twitter": twitter,
+        "telegram": telegram,
         "instagram": instagram,
       };
 }

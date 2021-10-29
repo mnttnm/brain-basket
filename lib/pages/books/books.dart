@@ -2,36 +2,24 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rs_books/api/brain_basket_service.dart';
+import 'package:rs_books/data/brain_basket.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/pages/books/widgets/books_large_screen.dart';
 import 'package:rs_books/pages/books/widgets/books_small_screen.dart';
 import 'package:rs_books/widgets/centered_view.dart';
-
-List<Book> parseJson(String booksJson) {
-  final parsed = jsonDecode(booksJson)['books'].cast<Map<String, dynamic>>();
-  return parsed.map<Book>((booksJson) => Book.fromJson(booksJson)).toList();
-}
-
-Future<List<Book>> parseBooks() async {
-  String booksJson = await loadBooksAssets();
-  return compute(parseJson, booksJson);
-}
-
-Future<String> loadBooksAssets() async {
-  return await rootBundle.loadString('assets/resources/books.json');
-}
-
 class BooksPage extends StatelessWidget {
-  const BooksPage({Key? key}) : super(key: key);
+  BooksPage({Key? key}) : super(key: key);
+  final dataService = BrainBasketDataService();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder<List<Book>>(
-            future: parseBooks(),
-            builder: (context, snapshot) {
+        child: FutureBuilder(
+            future: dataService.getData(),
+            builder: (context, AsyncSnapshot<BrainBasketData> snapshot) {
               if (snapshot.hasError) {
                 print('error ${snapshot.error}');
                 return const Center(
@@ -44,9 +32,9 @@ class BooksPage extends StatelessWidget {
                         child: ListView(children: [
                       if (ResponsiveWidget.isLargeScreen(context) ||
                           ResponsiveWidget.isMediumScreen(context))
-                        BooksLargeScreen(books: snapshot.data!)
+                        BooksLargeScreen(books: snapshot.data?.books ?? [])
                       else
-                        BooksSmallScreen(books: snapshot.data!)
+                        BooksSmallScreen(books: snapshot.data?.books ?? [])
                     ]))
                   ]),
                 );
