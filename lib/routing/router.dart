@@ -26,7 +26,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           ),
           settings.name!);
     case CheckOutPageRoute:
-      return _getPageRoute(CheckoutPage(), settings.name!);
+      return _getPageRoute(
+          CheckoutPage(
+            args: settings.arguments,
+          ),
+          settings.name!);
     case OrderSuccessPageRoute:
       return _getPageRoute(
           OrderSuccessPage(

@@ -128,8 +128,10 @@ class CartPage extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.all(12)),
                                 onPressed: () {
-                                  navigationController
-                                      .navigateTo(CheckOutPageRoute);
+                                  navigationController.navigateTo(
+                                    CheckOutPageRoute,
+                                    args: {'orderAmount': cart.total},
+                                  );
                                 },
                                 child: const Text('Checkout',
                                     style: TextStyle(fontSize: 18))),

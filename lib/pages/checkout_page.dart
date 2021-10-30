@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
+import 'package:rs_books/data/order.dart';
 import 'package:rs_books/models/address_model.dart';
 import 'package:rs_books/routing/routes.dart';
 import 'package:rs_books/widgets/cart_page.dart';
@@ -26,7 +27,9 @@ class AddressController with ChangeNotifier {
 }
 
 class AddressForm extends StatefulWidget {
-  const AddressForm({Key? key}) : super(key: key);
+  final void Function(AddressModel) onFormSubmit;
+
+  AddressForm({Key? key, required this.onFormSubmit}) : super(key: key);
 
   @override
   _AddressFormState createState() => _AddressFormState();
@@ -131,12 +134,6 @@ class _AddressFormState extends State<AddressForm> {
               },
               decoration: const InputDecoration(
                   label: const Text('Email'), hintText: 'xyz@gmail.com'),
-              // validator: (String? value) {
-              //   if (value == null || value.isEmpty) {
-              //     return 'Please enter your email id';
-              //   }
-              //   return null;
-              // },
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -147,8 +144,7 @@ class _AddressFormState extends State<AddressForm> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     addressController.updateCurrentAddress(model);
-                    navigationController.navigateTo(PaymentsPageRoute,
-                        args: model);
+                    widget.onFormSubmit(model);
                   }
                 },
                 child: Padding(
@@ -168,7 +164,24 @@ class _AddressFormState extends State<AddressForm> {
 }
 
 class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({Key? key}) : super(key: key);
+  final dynamic args;
+  const CheckoutPage({Key? key, required this.args}) : super(key: key);
+
+  Order createOrder(AddressModel address, double orderAmount) {
+    String orderId = '';
+    DateTime orderTime = DateTime.now();
+    Order order = Order(
+        orderId: orderId,
+        orderCreationTime: orderTime,
+        orderTotal: orderAmount,
+        address: address);
+    return order;
+  }
+
+  void onCheckout(AddressModel model) {
+    navigationController.navigateTo(PaymentsPageRoute,
+        args: createOrder(model, this.args['orderAmount']));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +218,9 @@ class CheckoutPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AddressForm(),
+                  AddressForm(
+                    onFormSubmit: onCheckout,
+                  ),
                 ],
               ),
             ),
