@@ -4,7 +4,7 @@ import 'package:rs_books/widgets/book_item_small.dart';
 
 class BooksSmallScreen extends StatefulWidget {
   final List<Book> books;
-  BooksSmallScreen({Key? key, required this.books}) : super(key: key);
+  const BooksSmallScreen({Key? key, required this.books}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -23,7 +23,13 @@ class _BooksSmallScreenState extends State<BooksSmallScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: widget.books.map((book) => BookItemSmall(book: book,)).toList()
+      children: widget.books
+          .map(
+            (book) => BookItemSmall(
+              book: book,
+            ),
+          )
+          .toList(),
     );
   }
 }

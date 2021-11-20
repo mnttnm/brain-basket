@@ -24,12 +24,13 @@ class AddressModel {
       };
 
   factory AddressModel.fromJson(Map<dynamic, dynamic> json) => AddressModel(
-      name: json['name'],
-      address1: json['address1'],
-      address2: json['address2'],
-      pincode: json['pincode'],
-      contactNo: json['contatctNo'],
-      email: json['email']);
+      name: json['name'].toString(),
+        address1: json['address1'].toString(),
+        address2: json['address2'].toString(),
+        pincode: json['pincode'].toString(),
+        contactNo: json['contatctNo'].toString(),
+        email: json['email'].toString(),
+      );
 
   String toString() {
     return '$name,\n$address1,$address2,$pincode\n$contactNo, $email';

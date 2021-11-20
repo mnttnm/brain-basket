@@ -56,7 +56,9 @@ class __NavBarItemState extends State<_NavBarItem> {
         ),
         decoration: BoxDecoration(
             color: boxColor,
-            borderRadius: BorderRadius.all(Radius.circular(5))),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(5),
+            )),
         child: Text(
           widget.title!,
           style: TextStyle(color: elementColor, fontSize: 16),

@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-Book bookFromJson(String str) => Book.fromJson(json.decode(str));
+Book bookFromJson(String str) =>
+    Book.fromJson(json.decode(str) as Map<String, dynamic>);
 
 String bookToJson(Book data) => json.encode(data.toJson());
 
@@ -28,14 +29,16 @@ class Book {
   final List<Review>? reviews;
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
-        title: json["title"],
-        images: Images.fromJson(json["images"]),
-        authors: List<String>.from(json["authors"].map((x) => x)),
-        price: json["price"],
-        description: json["description"],
-        details: Details.fromJson(json["details"]),
+        title: json["title"] as String,
+        images: Images.fromJson(json["images"] as Map<String, dynamic>),
+        authors:
+            List<String>.from((json["authors"] as List<String>).map((x) => x)),
+        price: json["price"] as int,
+        description: json["description"] as String,
+        details: Details.fromJson(json["details"] as Map<String, dynamic>),
         reviews:
-            List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
+            List<Review>.from((json["reviews"] as List<Review>)
+            .map((x) => Review.fromJson(x as Map<String, dynamic>))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,12 +70,12 @@ class Details {
   final String? ratings;
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
-        pages: json["pages"],
-        language: json["language"],
-        shipping: json["shipping"],
-        publication: json["publication"],
-        isbn: json["isbn"],
-        ratings: json["ratings"],
+        pages: json["pages"] as String,
+        language: json["language"] as String,
+        shipping: json["shipping"] as String,
+        publication: json["publication"] as String,
+        isbn: json["isbn"] as String,
+        ratings: json["ratings"] as String, 
       );
 
   Map<String, dynamic> toJson() => {
@@ -97,9 +100,9 @@ class Images {
   final String others;
 
   factory Images.fromJson(Map<String, dynamic> json) => Images(
-        front: json["front"],
-        back: json["back"],
-        others: json["others"],
+        front: json["front"] as String,
+        back: json["back"] as String,
+        others: json["others"] as String,
       );
 
   Map<String, dynamic> toJson() => {
@@ -123,10 +126,10 @@ class Review {
   final String link;
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
-        name: json["name"],
-        review: json["review"],
-        rating: json["rating"],
-        link: json["link"],
+        name: json["name"] as String,
+        review: json["review"] as String,
+        rating: json["rating"] as int,
+        link: json["link"] as String,
       );
 
   Map<String, dynamic> toJson() => {

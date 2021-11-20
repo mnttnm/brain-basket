@@ -1,11 +1,7 @@
-// To parse this JSON data, do
-//
-//     final book = bookFromMap(jsonString);
-
 import 'dart:convert';
 
 ShipRocketOrder bookFromMap(String str) =>
-    ShipRocketOrder.fromMap(json.decode(str));
+    ShipRocketOrder.fromMap(json.decode(str) as Map<String, dynamic>);
 String bookToMap(ShipRocketOrder data) => json.encode(data.toMap());
 
 class ShipRocketOrder {
@@ -56,28 +52,30 @@ class ShipRocketOrder {
   final double weight;
 
   factory ShipRocketOrder.fromMap(Map<String, dynamic> json) => ShipRocketOrder(
-        mode: json["mode"],
-        orderId: json["order_id"],
-        orderDate: json["order_date"],
-        pickupLocation: json["pickup_location"],
-        billingCustomerName: json["billing_customer_name"],
-        billingCustomerLastName: json['billing_last_name'],
-        billingAddress: json["billing_address"],
-        billingCity: json["billing_city"],
-        billingPincode: json["billing_pincode"],
-        billingState: json["billing_state"],
-        billingCountry: json["billing_country"],
-        billingEmail: json["billing_email"],
-        billingPhone: json["billing_phone"],
-        shippingIsBilling: json["shipping_is_billing"],
+        mode: json["mode"] as String,
+        orderId: json["order_id"] as String,
+        orderDate: json["order_date"] as String,
+        pickupLocation: json["pickup_location"] as String,
+        billingCustomerName: json["billing_customer_name"] as String,
+        billingCustomerLastName: json['billing_last_name'] as String,
+        billingAddress: json["billing_address"] as String,
+        billingCity: json["billing_city"] as String,
+        billingPincode: json["billing_pincode"] as String,
+        billingState: json["billing_state"] as String,
+        billingCountry: json["billing_country"] as String,
+        billingEmail: json["billing_email"] as String,
+        billingPhone: json["billing_phone"] as String,
+        shippingIsBilling: json["shipping_is_billing"] as bool,
         orderItems: List<OrderItem>.from(
-            json["order_items"].map((x) => OrderItem.fromMap(x))),
-        paymentMethod: json["payment_method"],
-        subTotal: json["sub_total"],
-        length: json["length"],
-        breadth: json["breadth"],
-        height: json["height"],
-        weight: json["weight"].toDouble(),
+            (json["order_items"] as List<Map<String, dynamic>>)
+              .map((x) => OrderItem.fromMap(x)),
+        ),
+        paymentMethod: json["payment_method"] as String,
+        subTotal: json["sub_total"] as int,
+        length: json["length"] as int,
+        breadth: json["breadth"] as int,
+        height: json["height"] as int,
+        weight: json["weight"] as double, 
       );
 
   Map<String, dynamic> toMap() => {
@@ -119,10 +117,10 @@ class OrderItem {
   final int sellingPrice;
 
   factory OrderItem.fromMap(Map<String, dynamic> json) => OrderItem(
-        name: json["name"],
-        sku: json["sku"],
-        units: json["units"],
-        sellingPrice: json["selling_price"],
+        name: json["name"] as String,
+        sku: json["sku"] as String,
+        units: json["units"] as int,
+        sellingPrice: json["selling_price"] as int,
       );
 
   Map<String, dynamic> toMap() => {

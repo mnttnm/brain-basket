@@ -26,9 +26,10 @@ class PayementService {
           headers: <String, String>{
             'authorization': basicAuth,
             "content-type": "application/json"
-          });
+          },
+      );
       var resObject = jsonDecode(response.body);
-      return resObject['id'];
+      return resObject['id'] as String;
     } catch (e) {
       print(e);
       return "";

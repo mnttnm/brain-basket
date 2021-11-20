@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/src/provider.dart';
 import 'package:rs_books/models/address_model.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
 
@@ -17,7 +19,7 @@ class CheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
+    final AppTheme theme = context.watch();
     return CenteredView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,24 +32,26 @@ class CheckoutPage extends StatelessWidget {
                 color: theme.accent1,
                 fontWeight: FontWeight.w600),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          VSpace(Insets.sm),
           const Text(
             'Please fill the below form with the complete information about the shipping address and contact deatils.',
             style: TextStyle(fontSize: 16),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          VSpace(Insets.med),
           Align(
             alignment: Alignment.topLeft,
             child: Container(
-              constraints: BoxConstraints(maxWidth: 800),
+              constraints: const BoxConstraints(maxWidth: 800),
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: theme.accent1.withOpacity(0.9), width: 2)),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                      color: theme.accent1.withOpacity(0.9),
+                  width: 2,
+                ),
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: Insets.lg,
+                vertical: Insets.xl,
+              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

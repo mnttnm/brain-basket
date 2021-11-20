@@ -11,7 +11,7 @@ class SiteTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
+    final AppTheme theme = context.watch();
     return CustomText(
       text: "Brain Basket",
       size: 20,

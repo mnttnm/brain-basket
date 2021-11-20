@@ -51,8 +51,8 @@ class AppTheme {
         return AppTheme(
           isDark: false,
           type: t,
-          // bg1: const Color(0xfff3f3f3),
-          bg1: const Color(0xffbcd4f4),
+          bg1: const Color(0xfff3f3f3),
+          // bg1: const Color(0xffbcd4f4),
           surface1: Colors.white,
           surface2: const Color(0xffebf0f3),
           accent1: const Color.fromARGB(255, 62, 167, 136),

@@ -10,7 +10,9 @@ class SmallScreen extends StatelessWidget {
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Insets.xs), child: child),
+          padding: EdgeInsets.symmetric(horizontal: Insets.xs),
+        child: child,
+      ),
     );
   }
 }

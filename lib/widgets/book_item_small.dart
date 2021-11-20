@@ -285,7 +285,10 @@ class AdditionalDetails extends StatelessWidget {
                           .toJson()
                           .entries
                           .map((entry) => BookDetailItem(
-                              label: entry.key, value: entry.value))
+                              label: entry.key,
+                              value: entry.value as String,
+                            ),
+                          )
                           .toList()),
                 )
               ],

@@ -53,9 +53,9 @@ class SideMenu extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: sideMenuItems
                   .map((itemName) => SideMenuItem(
-                      itemName: itemName,
+                      itemName: itemName as String,
                       onTap: () {
-                        if (!menuController.isActive(itemName)) {
+                        if (menuController.isActive(itemName) != true) {
                           menuController.changeActiveItemTo(itemName);
                           context.goNamed(itemName);
                         }

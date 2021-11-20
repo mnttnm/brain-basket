@@ -26,12 +26,13 @@ class Author {
   final List<String>? institutes;
 
   factory Author.fromJson(Map<String, dynamic> json) => Author(
-        name: json["name"],
-        shortName: json["short_name"],
-        about: json["about"],
+        name: json["name"] as String,
+        shortName: json["short_name"] as String,
+        about: json["about"] as String,
         socialLinks: SocialLinks.fromJson(json["social_links"]),
-        experience: json["experience"],
-        institutes: List<String>.from(json["institutes"].map((x) => x)),
+        experience: json["experience"] as int,
+        institutes:
+            List<String>.from(json["institutes"].map((x) => x) as List<String>),
       );
 
   Map<String, dynamic> toJson() => {

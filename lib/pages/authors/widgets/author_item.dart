@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rs_books/helpers/my_flutter_app_icons.dart';
 import 'package:rs_books/models/author_model.dart';
+import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AuthorItem extends StatelessWidget {
@@ -10,12 +12,14 @@ class AuthorItem extends StatelessWidget {
   final double containerWidth;
   final SocialLinks? socialLinks;
   AuthorItem(
-      {Key? key,
+      {
+    Key? key,
       required this.image,
       required this.authorDetails,
       required this.name,
       required this.containerWidth,
-      this.socialLinks})
+      this.socialLinks,
+  })
       : super(key: key);
 
   final Map<String, dynamic> iconMap = {
@@ -38,9 +42,7 @@ class AuthorItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 80,
-        ),
+        const VSpace(80),
         Image.asset(
           image,
           width: 300,
@@ -54,28 +56,29 @@ class AuthorItem extends StatelessWidget {
                 .entries
                 .map((e) => IconButton(
                     onPressed: () async {
-                      if (await canLaunch(e.value!)) {
-                        await launch(e.value);
+                      if (await canLaunch(e.value! as String)) {
+                        await launch(e.value as String);
                       } else {
                         throw 'Could not launch ${e.value}';
                       }
                     },
                     icon: Icon(
-                      iconMap[e.key]!['icon_data'],
-                      color: iconMap[e.key]!['color'],
+                      iconMap[e.key]!['icon_data'] as IconData,
+                      color: iconMap[e.key]!['color'] as Color,
                     )))
                 .toList()),
         Container(
             width: 600,
             height: 400,
-            padding: EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(Insets.xl),
             child: Text(
               authorDetails,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   wordSpacing: 5,
-                  height: 1.5),
+                  height: 1.5,
+              ),
             )),
       ],
     );

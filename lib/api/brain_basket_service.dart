@@ -22,12 +22,13 @@ class BrainBasketDataService {
       'assets/resources/authors.json',
     );
     // Decode to json
-    final Map<String, dynamic> json = jsonDecode(dataString);
+    final Map<String, dynamic> json =
+        jsonDecode(dataString) as Map<String, dynamic>;
     // Go through each recipe and convert json to ExploreRecipe object.
     if (json['authors'] != null) {
       final authors = <Author>[];
       json['authors'].forEach((v) {
-        authors.add(Author.fromJson(v));
+        authors.add(Author.fromJson(v as Map<String, dynamic>));
       });
       return authors;
     } else {
@@ -43,12 +44,13 @@ class BrainBasketDataService {
       'assets/resources/books.json',
     );
     // Decode to json
-    final Map<String, dynamic> json = jsonDecode(dataString);
+    final Map<String, dynamic> json =
+        jsonDecode(dataString) as Map<String, dynamic>;
 
     if (json['books'] != null) {
       final books = <Book>[];
       json['books'].forEach((v) {
-        books.add(Book.fromJson(v));
+        books.add(Book.fromJson(v as Map<String, dynamic>));
       });
       return books;
     } else {

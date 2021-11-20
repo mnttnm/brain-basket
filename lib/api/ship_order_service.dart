@@ -41,8 +41,10 @@ class ShipOrder {
       final jsonResponse = json.decode(await response.stream.bytesToString());
       final cityState = {'city': '', 'state': ''};
       if (jsonResponse[0]['Status'] == 'Success') {
-        cityState['city'] = jsonResponse[0]['PostOffice'][0]['District'];
-        cityState['state'] = jsonResponse[0]['PostOffice'][0]['State'];
+        cityState['city'] =
+            jsonResponse[0]['PostOffice'][0]['District'] as String;
+        cityState['state'] =
+            jsonResponse[0]['PostOffice'][0]['State'] as String;
       }
       return cityState;
     } else {

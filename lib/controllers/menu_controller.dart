@@ -9,21 +9,21 @@ class MenuController extends GetxController {
   var activeItem = BooksPageRoute.obs;
   var hoverItem = "".obs;
 
-  changeActiveItemTo(String itemName) {
+  void changeActiveItemTo(String itemName) {
     activeItem.value = itemName;
   }
 
-  onHover(String itemName) {
+  void onHover(String itemName) {
     if (isActive(itemName) != true) {
       hoverItem.value = itemName;
     }
   }
 
-  isActive(String itemName) {
+  bool isActive(String itemName) {
     return activeItem.value == itemName;
   }
 
-  isHovering(String itemName) => hoverItem.value == itemName;
+  bool isHovering(String itemName) => hoverItem.value == itemName;
 
   Widget returnIconFor(String itemName) {
     switch (itemName) {
