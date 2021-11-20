@@ -4,15 +4,15 @@ import 'package:http/http.dart' as http;
 import 'package:rs_books/data/order.dart';
 
 class PayementService {
-  PayementService() {}
+  PayementService();
 
   Future<String> createOrder(double orderTotal, String orderId) async {
-    String username = 'rzp_test_mmvDFiAwZW0q7S';
-    String password = 'UZVtRMbK1OcMvUgvmykFj9vZ';
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    const String username = 'rzp_test_mmvDFiAwZW0q7S';
+    const String password = 'UZVtRMbK1OcMvUgvmykFj9vZ';
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
 
-    var paymentRequestBody = {
+    final paymentRequestBody = {
       'amount': orderTotal,
       'currency': "INR",
       'receipt': orderId,
@@ -20,7 +20,7 @@ class PayementService {
     };
 
     try {
-      var response = await http.post(
+      final response = await http.post(
           Uri.parse('https://api.razorpay.com/v1/orders'),
           body: jsonEncode(paymentRequestBody),
           headers: <String, String>{
@@ -28,10 +28,9 @@ class PayementService {
             "content-type": "application/json"
           },
       );
-      var resObject = jsonDecode(response.body);
+      final resObject = jsonDecode(response.body);
       return resObject['id'] as String;
     } catch (e) {
-      print(e);
       return "";
     }
   }
@@ -39,8 +38,9 @@ class PayementService {
   void executeOrder(Order orderInfo,
       {required Function() onSuccess,
       Function()? onFailure,
-      Function()? onCancel}) async {
-    var options = {
+      Function()? onCancel,
+  }) {
+    final options = {
       'key': 'rzp_test_mmvDFiAwZW0q7S',
       'amount': orderInfo.orderTotal,
       'currency': "INR",

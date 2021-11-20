@@ -23,12 +23,9 @@ class SocialIcons {
   SocialIcons._();
 
   static const _kFontFam = 'SocialIcons';
-  static const String? _kFontPkg = null;
 
   static const IconData instagram =
-      IconData(0xf16d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData facebook_f =
-      IconData(0xf39e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData telegram_plane =
-      IconData(0xf3fe, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+      IconData(0xf16d, fontFamily: _kFontFam);
+  static const IconData facebook = IconData(0xf39e, fontFamily: _kFontFam);
+  static const IconData telegram = IconData(0xf3fe, fontFamily: _kFontFam);
 }

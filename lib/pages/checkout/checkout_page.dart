@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 import 'package:rs_books/models/address_model.dart';
 import 'package:rs_books/routing/routes.dart';
@@ -30,14 +31,15 @@ class CheckoutPage extends StatelessWidget {
             style: TextStyle(
                 fontSize: 18,
                 color: theme.accent1,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w600,
+            ),
           ),
-          VSpace(Insets.sm),
+          VSpace.sm,
           const Text(
             'Please fill the below form with the complete information about the shipping address and contact deatils.',
             style: TextStyle(fontSize: 16),
           ),
-          VSpace(Insets.med),
+          VSpace.med,
           Align(
             alignment: Alignment.topLeft,
             child: Container(

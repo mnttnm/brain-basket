@@ -10,7 +10,8 @@ class Product {
       {this.quantity = 1,
       required this.name,
       required this.cost,
-      required this.id});
+      required this.id,
+  });
 }
 
 class CartController with ChangeNotifier {
@@ -18,7 +19,7 @@ class CartController with ChangeNotifier {
 
   double get total {
     double total = 0.0;
-    for (var product in products.values) {
+    for (final product in products.values) {
       total = total + (product.cost * product.quantity);
     }
     return total;
@@ -26,7 +27,7 @@ class CartController with ChangeNotifier {
 
   int get booksQuantity {
     int totalQuantity = 0;
-    for (var book in products.values.toList()) {
+    for (final book in products.values.toList()) {
       totalQuantity = totalQuantity + book.quantity;
     }
     return totalQuantity;
@@ -55,7 +56,9 @@ class CartController with ChangeNotifier {
     products.update(product.id, (value) {
       value.quantity = value.quantity + 1;
       return value;
-    }, ifAbsent: () => products.putIfAbsent(product.id, () => product));
+    },
+      ifAbsent: () => products.putIfAbsent(product.id, () => product),
+    );
     notifyListeners();
   }
 

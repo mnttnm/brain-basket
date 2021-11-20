@@ -16,7 +16,8 @@ class PrimaryBtn extends StatelessWidget {
       this.child,
       this.leadingIcon = false,
       this.isCompact = false,
-      this.cornerRadius})
+      this.cornerRadius,
+  })
       : super(key: key);
   final Widget? child;
   final String? label;
@@ -28,18 +29,19 @@ class PrimaryBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
+    final AppTheme theme = context.watch();
     return RawBtn(
       cornerRadius: cornerRadius,
       normalColors: BtnColors(bg: theme.accent1, fg: theme.surface1),
       hoverColors: BtnColors(bg: theme.focus, fg: theme.surface1),
       onPressed: onPressed,
       child: BtnContent(
-          child: child,
           label: label,
           icon: icon,
           leadingIcon: leadingIcon,
-          isCompact: isCompact),
+          isCompact: isCompact,
+        child: child,
+      ),
     );
   }
 }
@@ -66,25 +68,31 @@ class SecondaryBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
-    Widget content = BtnContent(
-        child: child,
+    final AppTheme theme = context.watch();
+    final Widget content = BtnContent(
         label: label,
         icon: icon,
         leadingIcon: leadingIcon,
-        isCompact: isCompact);
+        isCompact: isCompact,
+      child: child,
+    );
     if (isCompact) {
       return RawBtn(
           cornerRadius: cornerRadius,
           enableShadow: false,
           normalColors: BtnColors(
-              bg: theme.bg1, fg: theme.greyMedium, outline: theme.greyWeak),
+              bg: theme.bg1,
+          fg: theme.greyMedium,
+          outline: theme.greyWeak,
+        ),
           hoverColors: BtnColors(
               bg: theme.focus.withOpacity(.15),
               fg: theme.focus,
-              outline: theme.focus),
+              outline: theme.focus,
+        ),
           onPressed: onPressed,
-          child: content);
+          child: content,
+      );
     }
     return RawBtn(
       normalColors: BtnColors(bg: theme.surface1, fg: theme.accent1),
@@ -105,7 +113,8 @@ class SimpleBtn extends StatelessWidget {
       this.normalColors,
       this.hoverColors,
       this.cornerRadius,
-      this.ignoreDensity})
+      this.ignoreDensity,
+  })
       : super(key: key);
   final Widget child;
   final VoidCallback? onPressed;
@@ -122,10 +131,10 @@ class SimpleBtn extends StatelessWidget {
       normalColors: normalColors,
       hoverColors: hoverColors,
       focusMargin: focusMargin ?? 0,
-      child: child,
       enableShadow: false,
       onPressed: onPressed,
       ignoreDensity: ignoreDensity ?? true,
+      child: child,
     );
   }
 }
@@ -137,7 +146,8 @@ class TextBtn extends StatelessWidget {
       required this.onPressed,
       this.isCompact = false,
       this.style,
-      this.showUnderline = false})
+      this.showUnderline = false,
+  })
       : super(key: key);
   final String label;
   final VoidCallback? onPressed;
@@ -147,11 +157,12 @@ class TextBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle finalStyle = style ??
+    final TextStyle finalStyle = style ??
         TextStyles.caption.copyWith(
             decoration:
                 showUnderline ? TextDecoration.underline : TextDecoration.none,
-            fontWeight: FontWeight.w500);
+            fontWeight: FontWeight.w500,
+        );
     return SimpleBtn(
       ignoreDensity: false,
       onPressed: onPressed,
@@ -167,7 +178,8 @@ class IconBtn extends StatelessWidget {
       required this.onPressed,
       this.color,
       this.padding,
-      this.ignoreDensity})
+      this.ignoreDensity,
+  })
       : super(key: key);
   final IconData icon;
   final VoidCallback? onPressed;
@@ -178,13 +190,14 @@ class IconBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleBtn(
         ignoreDensity: ignoreDensity,
+        onPressed: onPressed,
         child: AnimatedPadding(
           duration: Times.fast,
           curve: Curves.easeOut,
           padding: padding ?? EdgeInsets.all(Insets.xs),
           child: Icon(icon, color: color ?? Colors.black, size: 20),
         ),
-        onPressed: onPressed);
+    );
   }
 }
 
@@ -203,7 +216,7 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
+    final AppTheme theme = context.watch();
     return TextButton(
       onPressed: onPressed,
       child: Container(
@@ -211,16 +224,19 @@ class RoundedButton extends StatelessWidget {
         decoration: BoxDecoration(
             color: isPrimary ? theme.accent1 : theme.surface1,
             border: Border.all(
-                color: theme.accent1, width: 1, style: BorderStyle.solid),
-            borderRadius: BorderRadius.all(Radius.elliptical(20, 20))),
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                color: theme.accent1,
+          ),
+          borderRadius: const BorderRadius.all(Radius.elliptical(20, 20)),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Align(
-          alignment: Alignment.center,
           child: Text(label,
               style: TextStyles.title1.copyWith(
                   color: isPrimary
                       ? theme.inverseTextColor
-                      : theme.mainTextColor)),
+                      : theme.mainTextColor,
+            ),
+          ),
         ),
       ),
     );

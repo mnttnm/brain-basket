@@ -19,8 +19,10 @@ class AuthorsSmallScreen extends StatelessWidget {
                     image:
                         'assets/images/authors/${author.shortName}-image.jpeg',
                     socialLinks: author.socialLinks,
-                  ))
-              .toList()),
+                  ),
+            )
+            .toList(),
+      ),
     );
   }
 }

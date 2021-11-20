@@ -31,6 +31,7 @@ class Order {
       };
 
   factory Order.fromSnapshot(DocumentSnapshot snapshot) {
+    // ignore: cast_nullable_to_non_nullable
     final message = Order.fromJson(snapshot.data() as Map<String, dynamic>);
     message.reference = snapshot.reference;
     return message;

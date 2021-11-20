@@ -7,23 +7,22 @@ import 'package:rs_books/widgets/small_screen.dart';
 
 class SiteLayout extends StatelessWidget {
   final Widget child;
-  SiteLayout({required this.child, Key? key}) : super(key: key);
+  const SiteLayout({required this.child, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     return Scaffold(
         key: scaffoldKey,
         appBar: topNavigationBar(context, scaffoldKey),
-        drawer: ResponsiveWidget.isSmallScreen(context) ? SideMenu() : null,
-        body: Container(
-          child: ResponsiveWidget(
-            largeScreen: LargeScreen(
-              child: child,
-            ),
-            smallScreen: SmallScreen(
-              child: child,
-            ),
-          ),
-        ));
+        drawer: ResponsiveWidget.isSmallScreen(context) ? const SideMenu() : null,
+      body: ResponsiveWidget(
+        largeScreen: LargeScreen(
+          child: child,
+        ),
+        smallScreen: SmallScreen(
+          child: child,
+        ),
+      ),
+    );
   }
 }

@@ -13,7 +13,6 @@ import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/address_model.dart';
 import 'package:rs_books/routing/routes.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
-import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
 
@@ -51,41 +50,48 @@ class _PaymentState extends State<Payment> {
     return Consumer<CartController>(
         builder: (BuildContext context, CartController cart, Widget? child) {
       return Consumer<AddressController>(builder: (BuildContext context,
-          AddressController addressController, Widget? child) {
+          AddressController addressController,
+            Widget? child,
+          ) {
         return CenteredView(
           child: Container(
               padding: const EdgeInsets.all(10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Align(alignment: Alignment.topLeft, child: Back()),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: theme.accent1.withOpacity(0.9), width: 2)),
-                    padding: EdgeInsets.symmetric(
+                            color: theme.accent1.withOpacity(0.9),
+                          width: 2,
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
                       vertical: 20,
                       horizontal: 10,
                     ),
                     constraints: BoxConstraints(
                         maxWidth: ResponsiveWidget.isSmallestScreen(context)
                             ? 300
-                            : 700),
+                            : 700,
+                      ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: const Text(
+                        const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
                             'Order Summary',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                           ),
                         ),
-                        VSpace(Insets.sm),
+                        ),
+                          VSpace.sm,
                         Flex(
                           direction: ResponsiveWidget.isSmallestScreen(context)
                               ? Axis.vertical
@@ -103,20 +109,21 @@ class _PaymentState extends State<Payment> {
                                     color: theme.accent1,
                                   ),
                                 ),
-                                VSpace(Insets.xs),
+                                VSpace.xs,
                                 SizedBox(
                                   width: 250,
                                   child: Text(
                                     addressController.address.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 14,
                                     ),
                                   ),
                                 ),
-                                VSpace(Insets.xs),
+                                VSpace.xs,
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: theme.accent1),
+                                      primary: theme.accent1,
+                                    ),
                                   onPressed: () {
                                     context.goNamed(CheckOutPageRoute);
                                   },
@@ -134,11 +141,11 @@ class _PaymentState extends State<Payment> {
                                     color: theme.accent1,
                                   ),
                                 ),
-                                VSpace(Insets.xs),
+                                VSpace.xs,
                                 SizedBox(
                                   child: Text(
                                     '${cart.total}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -153,24 +160,28 @@ class _PaymentState extends State<Payment> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      VSpace(Insets.lg),
-                      Text("Pay here Using Razorpay",
+                      VSpace.lg,
+                        const Text(
+                          "Pay here Using Razorpay",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
-                      VSpace(Insets.lg),
+                              fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        VSpace.lg,
                       ElevatedButton(
                           onPressed: () async {
                             setState(() {
                               errorHappend = false;
                             });
-                            final receiptId = '#' +
-                                addressController.currentAddress!.contactNo! +
-                                DateTime.now().microsecond.toString();
-                            String orderId = await paymentService.createOrder(
+                            final receiptId =
+                                '#${addressController.currentAddress!.contactNo!}${DateTime.now().microsecond}';
+                            final String orderId =
+                                await paymentService.createOrder(
                               cart.total,
                               receiptId,
                             );
-                            if (!orderId.isEmpty) {
+                            if (orderId.isNotEmpty) {
                               final order = _createOrder(
                                 orderId,
                                 cart.total,
@@ -181,13 +192,16 @@ class _PaymentState extends State<Payment> {
                                 order,
                                 onSuccess: () async {
                                   context.goNamed(OrderSuccessPageRoute,
-                                      extra: orderId);
+                                      extra: orderId,
+                                  );
                                   await shipOrderService.createQuickShipment(
-                                      order, cart);
+                                      order,
+                                    cart,
+                                  );
                                   cart.clearCart();
                                 },
                                 onCancel: () {
-                                  print('Order Cancelled');
+                                  // print('Order Cancelled');
                                 },
                                 onFailure: () {
                                   setState(() {
@@ -201,12 +215,16 @@ class _PaymentState extends State<Payment> {
                               });
                             }
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text("Make Payment",
-                                style: TextStyle(fontSize: 24)),
-                          )),
-                      VSpace(Insets.sm),
+                                style: TextStyle(
+                                fontSize: 24,
+                              ),
+                            ),
+                          ),
+                        ),
+                        VSpace.sm,
                       Visibility(
                           visible: errorHappend,
                           child: const Text(
@@ -214,14 +232,18 @@ class _PaymentState extends State<Payment> {
                             style: TextStyle(
                               color: Colors.red,
                             ),
-                          ))
+                          ),
+                        )
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
-              )),
+              ),
+              ),
         );
-      });
-    });
+      },
+        );
+      },
+    );
   }
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
-import 'package:rs_books/constants/style.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/routing/routes.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
@@ -15,7 +14,8 @@ class _NavBarItem extends StatefulWidget {
   final String? title;
   final bool? isPrimary;
 
-  _NavBarItem({Key? key, this.title, this.isPrimary = false}) : super(key: key);
+  const _NavBarItem({Key? key, this.title, this.isPrimary = false})
+      : super(key: key);
 
   @override
   __NavBarItemState createState() => __NavBarItemState();
@@ -28,7 +28,6 @@ class __NavBarItemState extends State<_NavBarItem> {
   @override
   void initState() {
     super.initState();
-    elementColor = secondaryLight;
   }
 
   @override
@@ -48,7 +47,7 @@ class __NavBarItemState extends State<_NavBarItem> {
         });
       },
       child: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 10,
           bottom: 10,
           left: 15,
@@ -58,7 +57,8 @@ class __NavBarItemState extends State<_NavBarItem> {
             color: boxColor,
             borderRadius: const BorderRadius.all(
               Radius.circular(5),
-            )),
+            ),
+        ),
         child: Text(
           widget.title!,
           style: TextStyle(color: elementColor, fontSize: 16),
@@ -76,11 +76,12 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
               onPressed: () {
                 key.currentState!.openDrawer();
               },
-              icon: Icon(Icons.menu)),
+              icon: const Icon(Icons.menu),
+            ),
       elevation: 0,
-      title: NavBar(),
+      title: const NavBar(),
       iconTheme: IconThemeData(
-        color: light,
+        color: Colors.white,
       ),
     );
 
@@ -117,13 +118,14 @@ class NavBar extends StatelessWidget {
               RichText(
                   text: TextSpan(
                 text: "Brain Basket",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _onTap(context, BooksPageRoute),
-              )),
+              ),
+              ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           HorizontalMenuItem(
             itemName: BooksPageRoute,
             onTap: () => _onTap(context, BooksPageRoute),
@@ -137,7 +139,7 @@ class NavBar extends StatelessWidget {
             onTap: () => _onTap(context, ContactPageRoute),
           ),
         ],
-        Spacer(),
+        const Spacer(),
         HorizontalMenuItem(
           itemName: CartPageRoute,
           onTap: () => _onTap(context, CartPageRoute),

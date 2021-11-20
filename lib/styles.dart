@@ -60,15 +60,15 @@ class Shadows {
   static List<BoxShadow> get universal => [
         BoxShadow(
             color: const Color(0xff333333).withOpacity(.15),
-            spreadRadius: 0,
-            blurRadius: 10),
+            blurRadius: 10,
+        ),
       ];
   static List<BoxShadow> get small => [
         BoxShadow(
             color: const Color(0xff333333).withOpacity(.15),
-            spreadRadius: 0,
             blurRadius: 3,
-            offset: const Offset(0, 1)),
+            offset: const Offset(0, 1),
+        ),
       ];
 }
 
@@ -104,36 +104,65 @@ class Fonts {
 class TextStyles {
   /// Declare a base style for each Family
   static const TextStyle poppins = TextStyle(
-      fontFamily: Fonts.poppins, fontWeight: FontWeight.w400, height: 1);
+      fontFamily: Fonts.poppins,
+    fontWeight: FontWeight.w400,
+    height: 1,
+  );
   static const TextStyle montserrat = TextStyle(
-      fontFamily: Fonts.montserrat, fontWeight: FontWeight.w400, height: 1);
+      fontFamily: Fonts.montserrat,
+    fontWeight: FontWeight.w400,
+    height: 1,
+  );
 
   static TextStyle get h1 => poppins.copyWith(
       fontWeight: FontWeight.w600,
       fontSize: FontSizes.s48,
       letterSpacing: -1,
-      height: 1.17);
+      height: 1.17,
+      );
   static TextStyle get h2 =>
       h1.copyWith(fontSize: FontSizes.s24, letterSpacing: -.5, height: 1.16);
   static TextStyle get h3 =>
       h1.copyWith(fontSize: FontSizes.s14, letterSpacing: -.05, height: 1.29);
   static TextStyle get title1 => poppins.copyWith(
-      fontWeight: FontWeight.bold, fontSize: FontSizes.s16, height: 1.31);
+      fontWeight: FontWeight.bold,
+        fontSize: FontSizes.s16,
+        height: 1.31,
+      );
   static TextStyle get title2 => montserrat.copyWith(
-      fontWeight: FontWeight.w500, fontSize: FontSizes.s14, height: 1.36);
+      fontWeight: FontWeight.w500,
+        fontSize: FontSizes.s14,
+        height: 1.36,
+      );
   static TextStyle get body1 => poppins.copyWith(
-      fontWeight: FontWeight.normal, fontSize: FontSizes.s14, height: 1.71);
+      fontWeight: FontWeight.normal,
+        fontSize: FontSizes.s14,
+        height: 1.71,
+      );
   static TextStyle get body2 => montserrat.copyWith(
-      fontSize: FontSizes.s12, height: 1.5, letterSpacing: .2);
+      fontSize: FontSizes.s12,
+        height: 1.5,
+        letterSpacing: .2,
+      );
   static TextStyle get body3 => body1.copyWith(
-      fontSize: FontSizes.s12, height: 1.5, fontWeight: FontWeight.bold);
+      fontSize: FontSizes.s12,
+        height: 1.5,
+        fontWeight: FontWeight.bold,
+      );
   static TextStyle get callout1 => poppins.copyWith(
       fontWeight: FontWeight.w800,
       fontSize: FontSizes.s12,
       height: 1.17,
-      letterSpacing: .5);
+      letterSpacing: .5,
+      );
   static TextStyle get callout2 => montserrat.copyWith(
-      fontSize: FontSizes.s10, height: 1, letterSpacing: .25);
+      fontSize: FontSizes.s10,
+        height: 1,
+        letterSpacing: .25,
+      );
   static TextStyle get caption => montserrat.copyWith(
-      fontWeight: FontWeight.w500, fontSize: FontSizes.s11, height: 1.36);
+      fontWeight: FontWeight.w500,
+        fontSize: FontSizes.s11,
+        height: 1.36,
+      );
 }

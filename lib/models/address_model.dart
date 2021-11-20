@@ -12,7 +12,8 @@ class AddressModel {
       this.address2,
       this.pincode,
       this.contactNo,
-      this.email});
+      this.email,
+  });
 
   Map<String, dynamic> toJson() => {
         "name": name,
@@ -32,6 +33,7 @@ class AddressModel {
         email: json['email'].toString(),
       );
 
+  @override
   String toString() {
     return '$name,\n$address1,$address2,$pincode\n$contactNo, $email';
   }

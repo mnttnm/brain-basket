@@ -10,10 +10,11 @@ import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/routing/routes.dart';
 import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
 
 class BookItemSmall extends StatelessWidget {
   final Book book;
-  BookItemSmall({Key? key, required this.book}) : super(key: key);
+  const BookItemSmall({Key? key, required this.book}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class BookItemSmall extends StatelessWidget {
     return Card(
       elevation: 5,
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(Insets.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,14 +36,13 @@ class BookItemSmall extends StatelessWidget {
                 imagePath:
                     'assets/books/book-${book.details.isbn}/${book.images.front}',
                 imageWidth: _imageWidth,
-                imageHeight: _imageHeight),
+                imageHeight: _imageHeight,
+            ),
             BookActions(
               book: book,
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Authors(),
+            VSpace.sm,
+            const Authors(),
             AdditionalDetails(
               gridColumnCount: 2,
               bookDetails: book.details,
@@ -72,8 +72,10 @@ class Reviews extends StatelessWidget {
           child: Row(
               children: reviews
                   .map((review) =>
-                      ReviewItem(name: review.name, review: review.review))
-                  .toList()),
+                      ReviewItem(name: review.name, review: review.review),
+                )
+                .toList(),
+          ),
         ),
       ),
     );
@@ -100,14 +102,13 @@ class ReviewItem extends StatelessWidget {
               width: 200,
               child: Text(
                 name.toUpperCase(),
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                 ),
-              )),
+              ),
+          ),
         ),
-        SizedBox(
-          height: 8,
-        ),
+        VSpace.sm,
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
@@ -119,7 +120,8 @@ class ReviewItem extends StatelessWidget {
                     Text(review),
                   ],
                 ),
-              )),
+              ),
+          ),
         )
       ],
     );
@@ -136,18 +138,18 @@ class BookActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30),
+      margin: const EdgeInsets.only(top: 30),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Pricing(
-            bookPrice: this.book.price.toDouble(),
+            bookPrice: book.price.toDouble(),
           ),
           PurchaseOptions(
-            bookId: this.book.details.isbn,
-            bookName: this.book.title,
-            bookPrice: this.book.price.toDouble(),
+            bookId: book.details.isbn,
+            bookName: book.title,
+            bookPrice: book.price.toDouble(),
           )
         ],
       ),
@@ -167,24 +169,30 @@ class Pricing extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Price:',
         ),
-        SizedBox(
-          height: 3,
-        ),
+        VSpace.xs,
         RichText(
             text: TextSpan(children: [
           TextSpan(
               text: '₹ $bookPrice',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-          TextSpan(text: ' '),
-          TextSpan(
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const TextSpan(text: ' '),
+              const TextSpan(
               text: '(₹450)',
               style: TextStyle(
                   decoration: TextDecoration.lineThrough,
-                  decorationThickness: 1.5))
-        ])),
+                  decorationThickness: 1.5,
+                ),
+              )
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -198,7 +206,8 @@ class PurchaseOptions extends StatelessWidget {
       {Key? key,
       required this.bookId,
       required this.bookPrice,
-      required this.bookName})
+      required this.bookName,
+  })
       : super(key: key);
 
   @override
@@ -211,7 +220,8 @@ class PurchaseOptions extends StatelessWidget {
           isPrimary: true,
           onPressed: () {
             context.read<CartController>().addToCart(
-                Product(name: this.bookName, cost: bookPrice, id: this.bookId));
+                Product(name: bookName, cost: bookPrice, id: bookId),
+                );
             menuController.changeActiveItemTo(CartPageRoute);
             context.goNamed(CartPageRoute);
           },
@@ -221,8 +231,14 @@ class PurchaseOptions extends StatelessWidget {
             label: 'Add to Cart',
             onPressed: () {
               context.read<CartController>().addToCart(
-                  Product(name: bookName, cost: bookPrice, id: bookId));
-            }),
+                  Product(
+                    name: bookName,
+                    cost: bookPrice,
+                    id: bookId,
+                  ),
+                );
+          },
+        ),
       ],
     );
   }
@@ -247,16 +263,17 @@ class AdditionalDetails extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: Card(
-            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(bookDescription,
-                  style: Theme.of(context).textTheme.subtitle1),
+                  style: Theme.of(context).textTheme.subtitle1,
+              ),
             ),
           ),
         ),
         Card(
-          margin: EdgeInsets.symmetric(vertical: 8.0),
+          margin: const EdgeInsets.symmetric(vertical: 8.0),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -266,12 +283,10 @@ class AdditionalDetails extends StatelessWidget {
                   'Details:',
                   // style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 16),
                 ),
-                SizedBox(
-                  height: 8,
-                ),
+                VSpace.sm,
                 SingleChildScrollView(
                   child: GridView.count(
-                      physics: ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       shrinkWrap: true,
                       primary: true,
                       mainAxisSpacing: 5,
@@ -289,7 +304,8 @@ class AdditionalDetails extends StatelessWidget {
                               value: entry.value as String,
                             ),
                           )
-                          .toList()),
+                          .toList(),
+                  ),
                 )
               ],
             ),
@@ -310,17 +326,14 @@ class BookDetailItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             label.toUpperCase(),
           ),
-          SizedBox(
-            height: 3,
-          ),
+          VSpace.xs,
           Text(
             value,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -337,16 +350,14 @@ class Authors extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
+        const Text(
           'Authors:',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(
-          width: 10,
-        ),
+        HSpace.sm,
         RichText(
           textAlign: TextAlign.left,
-          text: TextSpan(
+          text: const TextSpan(
             text: 'Rohit Agrawal(RA), Shubhkaran (SKC)',
             // style: TextStyle(fontSize: 14, color: secondaryDark),
           ),
@@ -361,7 +372,8 @@ class BookImageContainer extends StatelessWidget {
       {Key? key,
       required double imageWidth,
       required double imageHeight,
-      required String imagePath})
+      required String imagePath,
+  })
       : _imageWidth = imageWidth,
         _imageHeight = imageHeight,
         _imagePath = imagePath,
@@ -375,15 +387,17 @@ class BookImageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 30),
+        margin: const EdgeInsets.symmetric(vertical: 30),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.5),
               blurRadius: 4,
-              offset: Offset(1, 10))
-        ]),
+              offset: const Offset(1, 10),
+            )
+          ],
+        ),
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
           child: Image.asset(
             _imagePath,
             width: _imageWidth,
@@ -405,13 +419,12 @@ class BookTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        title,
-        style: TextStyle(
-            fontSize: 20,
-            // color: Colors.black.withAlpha(200),
-            fontWeight: FontWeight.bold),
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 20,
+        // color: Colors.black.withAlpha(200),
+          fontWeight: FontWeight.bold,
       ),
     );
   }

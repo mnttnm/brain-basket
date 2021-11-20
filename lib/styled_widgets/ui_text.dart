@@ -17,10 +17,14 @@ class _UiTextState extends State<UiText> {
   Widget build(BuildContext context) {
     if (widget.span != null) {
       return SelectableText.rich(widget.span!,
-          style: widget.style, focusNode: _focusNode);
+          style: widget.style,
+        focusNode: _focusNode,
+      );
     } else {
       return SelectableText(widget.text ?? "",
-          style: widget.style, focusNode: _focusNode);
+          style: widget.style,
+        focusNode: _focusNode,
+      );
     }
   }
 }

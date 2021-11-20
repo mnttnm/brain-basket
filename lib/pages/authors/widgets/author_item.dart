@@ -24,11 +24,11 @@ class AuthorItem extends StatelessWidget {
 
   final Map<String, dynamic> iconMap = {
     "facebook": {
-      'icon_data': SocialIcons.facebook_f,
+      'icon_data': SocialIcons.facebook,
       'color': Colors.pinkAccent.shade400
     },
     "telegram": {
-      'icon_data': SocialIcons.telegram_plane,
+      'icon_data': SocialIcons.telegram,
       'color': Colors.blueAccent.shade400
     },
     "instagram": {
@@ -40,7 +40,6 @@ class AuthorItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const VSpace(80),
         Image.asset(
@@ -65,8 +64,11 @@ class AuthorItem extends StatelessWidget {
                     icon: Icon(
                       iconMap[e.key]!['icon_data'] as IconData,
                       color: iconMap[e.key]!['color'] as Color,
-                    )))
-                .toList()),
+                    ),
+                ),
+              )
+              .toList(),
+        ),
         Container(
             width: 600,
             height: 400,
@@ -79,7 +81,8 @@ class AuthorItem extends StatelessWidget {
                   wordSpacing: 5,
                   height: 1.5,
               ),
-            )),
+            ),
+        ),
       ],
     );
   }

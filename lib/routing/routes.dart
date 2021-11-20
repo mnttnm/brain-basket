@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 const BooksPageRoute = "Books";
 const AuthorsPageRoute = "Authors";
 const ContactPageRoute = "Contact Us";
@@ -7,7 +9,7 @@ const CheckOutPageRoute = "Checkout";
 const OrderSuccessPageRoute = "Order Success";
 
 String getPathStrForRoute(String route) {
-  return '/' + route.replaceAll(' ', '').toLowerCase();
+  return '/${route.replaceAll(' ', '').toLowerCase()}';
 }
 
 List sideMenuItems = [

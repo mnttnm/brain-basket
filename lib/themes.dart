@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 enum ThemeType {
@@ -39,7 +41,8 @@ class AppTheme {
       required this.greyMedium,
       required this.greyStrong,
       required this.focus,
-      required this.isDark}) {
+      required this.isDark,
+  }) {
     mainTextColor = isDark ? Colors.blue : Colors.blue;
     inverseTextColor = isDark ? Colors.black : Colors.white;
   }
@@ -69,7 +72,7 @@ class AppTheme {
 
   // Converts AppTheme into a Material Theme Data, using whatever mappings we like
   ThemeData toThemeData() {
-    var t = ThemeData.from(
+    final t = ThemeData.from(
       // Use the .dark() and .light() constructors to handle the text themes
       textTheme: (isDark ? ThemeData.dark() : ThemeData.light()).textTheme,
       // Use ColorScheme to generate the bulk of the color theme
@@ -86,7 +89,8 @@ class AppTheme {
           onError: mainTextColor,
           onPrimary: inverseTextColor,
           onSecondary: inverseTextColor,
-          error: focus),
+          error: focus,
+      ),
     );
     // Apply additional styling that is missed by ColorScheme
     t.copyWith(
@@ -99,7 +103,8 @@ class AppTheme {
         buttonTheme: t.buttonTheme.copyWith(buttonColor: accent1),
         highlightColor: shift(accent1, .1),
         focusColor: focus,
-        toggleableActiveColor: accent1);
+        toggleableActiveColor: accent1,
+    );
     // All done, return the ThemeData
     return t;
   }
@@ -108,10 +113,10 @@ class AppTheme {
   // Allows the view to just make something "stronger" or "weaker" without worrying what the current theme brightness is
   //      color = theme.shift(someColor, .1); //-10% lum in dark mode, +10% in light mode
   Color shift(Color c, double amt) {
-    amt *= (isDark ? -1 : 1);
-    var hslc = HSLColor.fromColor(c); // Convert to HSL
-    double lightness =
-        (hslc.lightness + amt).clamp(0, 1.0) as double; // Add/Remove lightness
+    final shiftAmnt = isDark ? amt * -1 : amt * 1;
+    final hslc = HSLColor.fromColor(c); // Convert to HSL
+    final double lightness = (hslc.lightness + shiftAmnt).clamp(0, 1.0)
+        as double; // Add/Remove lightness
     return hslc.withLightness(lightness).toColor(); // Convert back to Color
   }
 }

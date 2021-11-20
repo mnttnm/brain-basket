@@ -3,7 +3,7 @@ import 'package:rs_books/styles.dart';
 
 class LargeScreen extends StatelessWidget {
   final Widget child;
-  LargeScreen({required this.child, Key? key}) : super(key: key);
+  const LargeScreen({required this.child, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,8 @@ class LargeScreen extends StatelessWidget {
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: Insets.lg),
-            child: child)
+            child: child,
+      ),
     );
   }
 }

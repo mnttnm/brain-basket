@@ -6,7 +6,7 @@ import 'package:rs_books/models/address_model.dart';
 class AddressForm extends StatefulWidget {
   final void Function(BuildContext context, AddressModel) onFormSubmit;
 
-  AddressForm({Key? key, required this.onFormSubmit}) : super(key: key);
+  const AddressForm({Key? key, required this.onFormSubmit}) : super(key: key);
 
   @override
   _AddressFormState createState() => _AddressFormState();
@@ -19,7 +19,9 @@ class _AddressFormState extends State<AddressForm> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AddressController>(builder: (BuildContext context,
-        AddressController addressController, Widget? child) {
+        AddressController addressController,
+        Widget? child,
+      ) {
       return Form(
         key: _formKey,
         child: Column(
@@ -27,13 +29,15 @@ class _AddressFormState extends State<AddressForm> {
           children: <Widget>[
             TextFormField(
               onSaved: (value) {
-                model.name = value!;
+                model.name = value;
               },
               initialValue: addressController.currentAddress != null
                   ? addressController.currentAddress!.name
                   : "",
               decoration: const InputDecoration(
-                  label: const Text('Name'), hintText: 'Enter your name'),
+                  label: Text('Name'),
+                  hintText: 'Enter your name',
+                ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
@@ -46,11 +50,12 @@ class _AddressFormState extends State<AddressForm> {
                   ? addressController.address!.address1
                   : "",
               onSaved: (value) {
-                model.address1 = value!;
+                model.address1 = value;
               },
               decoration: const InputDecoration(
-                  label: const Text('Address Line 1'),
-                  hintText: 'Address Line 1'),
+                  label: Text('Address Line 1'),
+                  hintText: 'Address Line 1',
+                ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
@@ -63,22 +68,25 @@ class _AddressFormState extends State<AddressForm> {
                   ? addressController.address!.address2
                   : "",
               onSaved: (value) {
-                model.address2 = value!;
+                model.address2 = value;
               },
-              key: Key('address_line_2'),
+              key: const Key('address_line_2'),
               decoration: const InputDecoration(
-                  label: const Text('Address line 2'),
-                  hintText: 'Address Line 2'),
+                  label: Text('Address line 2'),
+                  hintText: 'Address Line 2',
+                ),
             ),
             TextFormField(
               initialValue: addressController.address != null
                   ? addressController.address!.pincode
                   : "",
               onSaved: (value) {
-                model.pincode = value!;
+                model.pincode = value;
               },
               decoration: const InputDecoration(
-                  label: const Text('Pincode'), hintText: 'Enter your pincode'),
+                  label: Text('Pincode'),
+                  hintText: 'Enter your pincode',
+                ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your pin code';
@@ -91,10 +99,12 @@ class _AddressFormState extends State<AddressForm> {
                   ? addressController.address!.contactNo
                   : "",
               onSaved: (value) {
-                model.contactNo = value!;
+                model.contactNo = value;
               },
               decoration: const InputDecoration(
-                  label: const Text('Contact No'), hintText: 'Mobile No'),
+                  label: Text('Contact No'),
+                  hintText: 'Mobile No',
+                ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your mobile phone no';
@@ -107,10 +117,12 @@ class _AddressFormState extends State<AddressForm> {
                   ? addressController.address!.email
                   : "",
               onSaved: (value) {
-                model.email = value!;
+                model.email = value;
               },
               decoration: const InputDecoration(
-                  label: const Text('Email'), hintText: 'xyz@gmail.com'),
+                  label: Text('Email'),
+                  hintText: 'xyz@gmail.com',
+                ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -124,9 +136,9 @@ class _AddressFormState extends State<AddressForm> {
                     widget.onFormSubmit(context, model);
                   }
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text(
+                child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
                     'Place Order',
                     style: TextStyle(fontSize: 18),
                   ),
@@ -136,6 +148,7 @@ class _AddressFormState extends State<AddressForm> {
           ],
         ),
       );
-    });
+    },
+    );
   }
 }

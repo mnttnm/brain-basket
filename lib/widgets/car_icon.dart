@@ -7,7 +7,7 @@ class CartIcon extends StatelessWidget {
 
   const CartIcon({
     Key? key,
-    required this.icon
+    required this.icon,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class CartIcon extends StatelessWidget {
               builder: (context, cart, child) {
                 return Text(
                   cart.booksQuantity.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12.0,
                   ),

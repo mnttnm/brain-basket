@@ -38,7 +38,7 @@ class DecoratedContainer extends StatelessWidget {
       border = Border.all(color: borderColor!, width: borderWidth);
     }
     // Create decoration
-    BoxDecoration dec = BoxDecoration(
+    final BoxDecoration dec = BoxDecoration(
       color: color,
       border: border,
       borderRadius: BorderRadius.circular(borderRadius),

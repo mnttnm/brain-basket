@@ -15,16 +15,18 @@ class PaymentDetailItem extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-                flex: 1,
                 child: Text('$label:',
-                    style: TextStyle(fontWeight: FontWeight.bold))),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
             Expanded(
                 flex: 2,
                 child: Text(
                   value,
-                  style: TextStyle(fontWeight: FontWeight.normal),
+                  style: const TextStyle(fontWeight: FontWeight.normal),
                   textAlign: TextAlign.center,
-                )),
+                ),
+            ),
           ],
         ),
       ),

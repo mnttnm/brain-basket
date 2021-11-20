@@ -26,7 +26,7 @@ List<GoRoute> generateRoute(BuildContext context) {
       name: ContactPageRoute,
       path: getPathStrForRoute(ContactPageRoute),
       pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: ContactPage()),
+          MaterialPage<void>(key: state.pageKey, child: const ContactPage()),
     ),
     GoRoute(
       name: AuthorsPageRoute,
@@ -44,13 +44,13 @@ List<GoRoute> generateRoute(BuildContext context) {
       name: PaymentsPageRoute,
       path: getPathStrForRoute(PaymentsPageRoute),
       pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: Payment()),
+          MaterialPage<void>(key: state.pageKey, child: const Payment()),
     ),
     GoRoute(
       name: CheckOutPageRoute,
       path: getPathStrForRoute(CheckOutPageRoute),
       pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: CheckoutPage()),
+          MaterialPage<void>(key: state.pageKey, child: const CheckoutPage()),
     ),
     GoRoute(
       name: OrderSuccessPageRoute,
@@ -58,8 +58,9 @@ List<GoRoute> generateRoute(BuildContext context) {
       pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
           child: OrderSuccessPage(
-            orderId: state.extra as String,
-          )),
+            orderId: state.extra! as String,
+        ),
+      ),
     ),
   ];
 }

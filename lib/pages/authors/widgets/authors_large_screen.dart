@@ -18,7 +18,9 @@ class AuthorslargeScreen extends StatelessWidget {
                   containerWidth: _boxWidth,
                   image: 'assets/images/authors/${author.shortName}-image.jpeg',
                   socialLinks: author.socialLinks,
-                ))
-            .toList());
+                ),
+          )
+          .toList(),
+    );
   }
 }

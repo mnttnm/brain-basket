@@ -22,7 +22,8 @@ class RoundedBorder extends StatelessWidget {
       this.width,
       this.radius,
       this.ignorePointer = true,
-      this.child})
+      this.child,
+  })
       : super(key: key);
   final Color? color;
   final double? width;

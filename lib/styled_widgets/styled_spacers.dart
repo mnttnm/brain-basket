@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_constructors_over_static_methods
+
 import 'package:flutter/cupertino.dart';
 import 'package:rs_books/styles.dart';
 
@@ -5,6 +7,7 @@ class VSpace extends StatelessWidget {
   final double size;
 
   const VSpace(this.size, {Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) => SizedBox(height: size);

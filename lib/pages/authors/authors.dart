@@ -27,6 +27,7 @@ class AuthorsPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-        });
+        },
+    );
   }
 }

@@ -1,3 +1,4 @@
+// ignore: eol_at_end_of_file
 // Flexible(
                   //   flex: 2,
                   //   child: Column(
@@ -110,4 +111,4 @@
                   //     ],
                   //   ),
                   // ),
-                  // Divider(height: 2, color: Colors.red),
+                  // Divider(height: 2, color: Colors.red)

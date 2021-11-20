@@ -38,7 +38,8 @@ class Book {
         details: Details.fromJson(json["details"] as Map<String, dynamic>),
         reviews:
             List<Review>.from((json["reviews"] as List<Review>)
-            .map((x) => Review.fromJson(x as Map<String, dynamic>))),
+            .map((x) => Review.fromJson(x as Map<String, dynamic>)),
+        ),
       );
 
   Map<String, dynamic> toJson() => {

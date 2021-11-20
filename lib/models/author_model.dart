@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-Author authorFromJson(String str) => Author.fromJson(json.decode(str));
+Author authorFromJson(String str) =>
+    Author.fromJson(json.decode(str) as Map<String, dynamic>);
 
 String authorToJson(Author data) => json.encode(data.toJson());
 
@@ -29,7 +30,8 @@ class Author {
         name: json["name"] as String,
         shortName: json["short_name"] as String,
         about: json["about"] as String,
-        socialLinks: SocialLinks.fromJson(json["social_links"]),
+        socialLinks:
+            SocialLinks.fromJson(json["social_links"] as Map<String, dynamic>),
         experience: json["experience"] as int,
         institutes:
             List<String>.from(json["institutes"].map((x) => x) as List<String>),
@@ -57,9 +59,9 @@ class SocialLinks {
   final String instagram;
 
   factory SocialLinks.fromJson(Map<String, dynamic> json) => SocialLinks(
-        facebook: json["facebook"],
-        telegram: json["telegram"],
-        instagram: json["instagram"],
+        facebook: json["facebook"] as String,
+        telegram: json["telegram"] as String,
+        instagram: json["instagram"] as String,
       );
 
   Map<String, dynamic> toJson() => {

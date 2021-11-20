@@ -15,81 +15,94 @@ import 'package:rs_books/widgets/book_item_small.dart';
 class BookItem extends StatelessWidget {
   final Book book;
   final bool showDetails;
-  BookItem({Key? key, required this.showDetails, required this.book})
+  const BookItem({Key? key, required this.showDetails, required this.book})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Image image = Image.asset(
+    final Image image = Image.asset(
       'assets/books/book-${book.details.isbn}/${book.images.front}',
       width: MediaQuery.of(context).size.width / 12 * 2,
     );
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       elevation: 6,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(30),
             child: Container(
-              decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+                boxShadow: [
                 BoxShadow(
-                    blurRadius: 6, color: Colors.black54, offset: Offset(2, 10))
-              ]),
+                    blurRadius: 6,
+                    color: Colors.black54,
+                    offset: Offset(2, 10),
+                  )
+                ],
+              ),
               child: ClipRRect(
                   clipBehavior: Clip.hardEdge,
-                  child: image,
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                child: image,
+              ),
             ),
           ),
           Expanded(
               child: Container(
-            margin: EdgeInsets.only(top: 15, right: 30, bottom: 15),
+            margin: const EdgeInsets.only(top: 15, right: 30, bottom: 15),
             padding: EdgeInsets.all(Insets.sm),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3),
                 border: Border.all(
-                    width: 1, color: Colors.black45, style: BorderStyle.solid)),
+                    color: Colors.black45,
+                ),
+              ),
             child: Column(
               mainAxisSize: MainAxisSize.min, // TODO: why this is needed?
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 UiText(
                     text: book.title.toUpperCase(),
-                    style: TextStyles.title2.copyWith(fontSize: FontSizes.s24)),
+                    style: TextStyles.title2.copyWith(fontSize: FontSizes.s24),
+                  ),
                 VSpace.sm,
                 UiText(
                     text: 'By: Rohit Agrawal(RA), Shubhkaran (SKC)',
-                    style: TextStyles.callout1),
+                    style: TextStyles.callout1,
+                  ),
                 Container(
                   margin: EdgeInsets.only(top: Insets.sm),
                   padding: EdgeInsets.symmetric(vertical: Insets.xs),
                   child: Text(
                     book.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                     textAlign: TextAlign.start,
                   ),
                 ),
-                VSpace(Insets.xl),
+                VSpace.xl,
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [Text('₹ ${book.price}', style: TextStyles.h2)],
                     ),
-                    Container(
-                      child: Row(
+                    Row(
                         children: [
                           RoundedButton(
                             isPrimary: true,
                             label: 'Buy Now',
                             onPressed: () {
-                              context.read<CartController>().addToCart(Product(
+                            context.read<CartController>().addToCart(
+                                    Product(
                                   name: book.title,
                                   cost: 120,
-                                  id: this.book.details.isbn));
+                                  id: book.details.isbn,
+                                    ),
+                                  );
                               menuController.changeActiveItemTo(CartPageRoute);
                               context.goNamed(CartPageRoute);
                             },
@@ -97,38 +110,39 @@ class BookItem extends StatelessWidget {
                           RoundedButton(
                             label: 'Add to Cart',
                             onPressed: () {
-                              context.read<CartController>().addToCart(Product(
-                                    name: this.book.title,
+                            context.read<CartController>().addToCart(
+                                    Product(
+                                      name: book.title,
                                     cost: 120,
-                                    id: this.book.details.isbn,
-                                  ));
+                                  id: book.details.isbn,
+                                    ),
+                                  );
                             },
                           ),
                         ],
-                      ),
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
                 Visibility(
+                  visible: showDetails,
                   child: Flexible(
                     child: Column(
                       children: [
-                        VSpace(Insets.sm),
+                        VSpace.sm,
                         AdditionalDetails(
                           gridColumnCount: 3,
-                          bookDetails: this.book.details,
+                          bookDetails: book.details,
                           bookDescription: book.description,
                         ),
                         Reviews(reviews: book.reviews!)
                       ],
                     ),
                   ),
-                  visible: this.showDetails,
                 ),
               ],
             ),
-          ))
+          ),
+          )
         ],
       ),
     );

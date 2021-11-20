@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
-import 'package:rs_books/constants/style.dart';
 import 'package:rs_books/styles.dart';
+import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/custom_text.dart';
+import 'package:rs_books/widgets/menu_item_icon.dart';
 
 class VerticalMenuItem extends StatelessWidget {
   final String itemName;
   final void Function() onTap;
   const VerticalMenuItem(
-      {Key? key, required this.itemName, required this.onTap})
+      {
+    Key? key,
+    required this.itemName,
+    required this.onTap,
+  })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final AppTheme theme = context.watch();
+    final Color linkColor = menuController.isHovering(itemName) == true
+        ? theme.focus
+        : theme.accent1;
     return InkWell(
       onTap: onTap,
       onHover: (value) {
@@ -21,55 +31,50 @@ class VerticalMenuItem extends StatelessWidget {
             ? menuController.onHover(itemName)
             : menuController.onHover("not hovering");
       },
-      child: Obx(() => Container(
-            color: menuController.isHovering(itemName) == true
-                ? lightGrey.withOpacity(0.1)
-                : Colors.transparent,
-            child: Row(
-              children: [
-                Visibility(
-                  visible: menuController.isHovering(itemName) == true ||
+      child: Obx(
+        () => Container(
+          color: menuController.isHovering(itemName) == true
+              ? theme.surface1
+              : Colors.transparent,
+          child: Row(
+            children: [
+              Visibility(
+                visible: menuController.isHovering(itemName) == true ||
                     menuController.isActive(itemName) == true,
+                maintainSize: true,
+                maintainState: true,
+                maintainAnimation: true,
                 child: Container(
-                    width: 6,
-                    height: 72,
-                    color: dark,
-                  ),
-                  maintainSize: true,
-                  maintainState: true,
-                  maintainAnimation: true,
+                  width: 6,
+                  height: 72,
+                  color: theme.greyStrong,
                 ),
-                Expanded(
-                    child: Column(
+              ),
+              Expanded(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
                       padding: EdgeInsets.all(Insets.lg),
-                      child: menuController.returnIconFor(itemName),
-                    ),
-                    if (menuController.isActive(itemName) != true)
-                      Flexible(
-                          child: CustomText(
-                        text: itemName,
-                        color: menuController.isHovering(itemName) == true
-                            ? dark
-                            : Colors.black87,
+                      child: MenuItemIcon(
+                        iconLabel: itemName,
+                        iconColor: linkColor,
                       ),
-                      )
-                    else
-                      Flexible(
-                          child: CustomText(
+                    ),
+                    Flexible(
+                      child: CustomText(
                         text: itemName,
-                        color: dark,
+                        color: linkColor,
                         size: 18,
                         weight: FontWeight.bold,
-                      ))
+                    ),
+                    )
                   ],
                 ),
               )
-              ],
-            ),
+            ],
           ),
+        ),
       ),
     );
   }

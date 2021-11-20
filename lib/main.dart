@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -28,16 +27,17 @@ void main() {
       ),
     ],
     child: MyApp(),
-  ));
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    AppTheme _theme = AppTheme.fromType(ThemeType.Teal_Light);
+    final AppTheme _theme = AppTheme.fromType(ThemeType.Teal_Light);
     final cart = Provider.of<CartController>(context, listen: false);
-    GoRouter _router = GoRouter(
+    final GoRouter _router = GoRouter(
       redirect: (state) {
         if (state.location == '/payment' ||
             state.location == '/ordersuccess' ||
@@ -49,12 +49,11 @@ class MyApp extends StatelessWidget {
         }
       },
       urlPathStrategy: UrlPathStrategy.path,
-      debugLogDiagnostics: false,
       routes: generateRoute(context),
       errorPageBuilder: (context, state) => MaterialPage<void>(
         key: state.pageKey,
-        child: Center(
-          child: const Text("Error Page"),
+        child: const Center(
+          child: Text("Error Page"),
         ),
       ),
       navigatorBuilder: (context, child) => SiteLayout(child: child!),
@@ -68,6 +67,7 @@ class MyApp extends StatelessWidget {
           theme: _theme.toThemeData(),
           debugShowCheckedModeBanner: false,
           title: "Brain Basket",
-        ));
+        ),
+    );
   }
 }
