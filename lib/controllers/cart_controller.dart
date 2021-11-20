@@ -33,7 +33,6 @@ class CartController with ChangeNotifier {
   }
 
   void increaseBookQuantity(String productId) {
-    print('increase quanitty');
     products.update(productId, (value) {
       value.quantity = value.quantity + 1;
       return value;

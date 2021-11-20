@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final AppTheme theme = context.watch();
     return Scaffold(body: Consumer<CartController>(
       builder: (BuildContext context, CartController cart, Widget? child) {
         return cart.products.length <= 0
@@ -27,7 +30,7 @@ class CartPage extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {
                           menuController.changeActiveItemTo(BooksPageRoute);
-                          navigationController.navigateTo(BooksPageRoute);
+                          context.goNamed(BooksPageRoute);
                         },
                         child: const Text('Order Books')),
                   )
@@ -39,7 +42,7 @@ class CartPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Back(),
+                      // Back(),
                       SizedBox(
                         height: 5,
                       ),
@@ -47,7 +50,7 @@ class CartPage extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Colors.pinkAccent.shade400)),
+                                  color: theme.accent1)),
                           child: ListView.builder(
                             padding: EdgeInsets.all(10),
                             itemCount: cart.products.length,
@@ -61,7 +64,7 @@ class CartPage extends StatelessWidget {
                                   title: Text(
                                     item.name.toUpperCase(),
                                     style: TextStyle(
-                                        color: Colors.pinkAccent.shade200,
+                                        color: theme.accent1,
                                         fontSize: 18),
                                   ),
                                   subtitle: BookQuantityControl(
@@ -106,7 +109,7 @@ class CartPage extends StatelessWidget {
                                         style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.pinkAccent.shade200,
+                                          color: theme.accent1,
                                         ))
                                   ])
                             ])),
@@ -128,10 +131,7 @@ class CartPage extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.all(12)),
                                 onPressed: () {
-                                  navigationController.navigateTo(
-                                    CheckOutPageRoute,
-                                    args: {'orderAmount': cart.total},
-                                  );
+                                  context.goNamed(CheckOutPageRoute);
                                 },
                                 child: const Text('Checkout',
                                     style: TextStyle(fontSize: 18))),
@@ -154,11 +154,12 @@ class Back extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppTheme theme = context.watch();
     return InkWell(
       child: Text('<  Back',
-          style: TextStyle(fontSize: 18, color: Colors.pinkAccent.shade200)),
+          style: TextStyle(fontSize: 18, color: theme.accent1)),
       onTap: () {
-        navigationController.goback();
+        Navigator.pop(context);
       },
     );
   }

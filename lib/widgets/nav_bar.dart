@@ -1,11 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/src/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/constants/style.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
+import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/horizontal_menu_items.dart';
 
 class _NavBarItem extends StatefulWidget {
@@ -26,7 +29,6 @@ class __NavBarItemState extends State<_NavBarItem> {
   void initState() {
     super.initState();
     elementColor = secondaryLight;
-    // boxColor = widget.isPrimary == true ? Colors.lightBlueAccent : Colors.white;
   }
 
   @override
@@ -34,7 +36,7 @@ class __NavBarItemState extends State<_NavBarItem> {
     return InkWell(
       onTap: () {
         menuController.changeActiveItemTo(widget.title!);
-        navigationController.navigateTo(widget.title!);
+        context.goNamed(widget.title!);
       },
       onHover: (value) {
         setState(() {
@@ -85,49 +87,59 @@ class NavBar extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  void _onTap(BuildContext context, String itemName) {
+    menuController.changeActiveItemTo(itemName);
+    GoRouter.of(context).goNamed(itemName);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final AppTheme theme = context.watch();
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         if (!ResponsiveWidget.isSmallScreen(context)) ...[
-          RichText(
-              text: TextSpan(
-                  text: "Brain Basket",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      print('sdf');
-                      menuController.changeActiveItemTo(BooksPageRoute);
-                      navigationController.navigateTo(BooksPageRoute);
-                    })),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(Insets.sm),
+                child: Image.asset(
+                  'assets/logo/bb-bw.jpeg',
+                  width: 48,
+                  height: 48,
+                  color: theme.accent1,
+                  colorBlendMode: BlendMode.colorDodge,
+                ),
+              ),
+              HSpace(Insets.sm),
+              RichText(
+                  text: TextSpan(
+                text: "Brain Basket",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => _onTap(context, BooksPageRoute),
+              )),
+            ],
+          ),
           Spacer(),
           HorizontalMenuItem(
-              itemName: BooksPageRoute,
-              onTap: () {
-                menuController.changeActiveItemTo(BooksPageRoute);
-                navigationController.navigateTo(BooksPageRoute);
-              }),
+            itemName: BooksPageRoute,
+            onTap: () => _onTap(context, BooksPageRoute),
+          ),
           HorizontalMenuItem(
-              itemName: AuthorsPageRoute,
-              onTap: () {
-                menuController.changeActiveItemTo(AuthorsPageRoute);
-                navigationController.navigateTo(AuthorsPageRoute);
-              }),
+            itemName: AuthorsPageRoute,
+            onTap: () => _onTap(context, AuthorsPageRoute),
+          ),
           HorizontalMenuItem(
-              itemName: ContactPageRoute,
-              onTap: () {
-                menuController.changeActiveItemTo(ContactPageRoute);
-                navigationController.navigateTo(ContactPageRoute);
-              }),
+            itemName: ContactPageRoute,
+            onTap: () => _onTap(context, ContactPageRoute),
+          ),
         ],
         Spacer(),
         HorizontalMenuItem(
-            itemName: CartPageRoute,
-            onTap: () {
-              menuController.changeActiveItemTo(CartPageRoute);
-              navigationController.navigateTo(CartPageRoute);
-            }),
+          itemName: CartPageRoute,
+          onTap: () => _onTap(context, CartPageRoute),
+        ),
       ],
     );
   }

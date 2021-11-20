@@ -33,6 +33,7 @@ dependencies:
   firebase_core: ^1.8.0
   cloud_firestore: ^2.5.4
   url_launcher: ^6.0.12
+  go_router: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,7 @@ flutter:
     - assets/backgrounds/
     - assets/resources/
     - assets/upi-qr.jpeg
+    - assets/logo/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

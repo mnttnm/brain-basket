@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:rs_books/helpers/local_navigator.dart';
+import 'package:rs_books/styles.dart';
 
 class SmallScreen extends StatelessWidget {
-  const SmallScreen({Key? key}) : super(key: key);
+  final Widget child;
+  const SmallScreen({required this.child, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:5.0),
-        child: localNavigator(),
-      ),
+          padding: EdgeInsets.symmetric(horizontal: Insets.xs), child: child),
     );
   }
 }

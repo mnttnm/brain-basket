@@ -4,19 +4,19 @@ import 'package:http/http.dart' as http;
 import 'package:rs_books/data/order.dart';
 
 class PayementService {
-  final Order orderInfo;
-  PayementService(this.orderInfo) {}
+  PayementService() {}
 
-  Future<String> createOrder() async {
+  Future<String> createOrder(double orderTotal, String orderId) async {
     String username = 'rzp_test_mmvDFiAwZW0q7S';
     String password = 'UZVtRMbK1OcMvUgvmykFj9vZ';
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
     var paymentRequestBody = {
-      'amount': orderInfo.orderTotal,
+      'amount': orderTotal,
       'currency': "INR",
-      'receipt': orderInfo.orderId
+      'receipt': orderId,
+      'partial_payment': false
     };
 
     try {
@@ -35,7 +35,7 @@ class PayementService {
     }
   }
 
-  void executeOrder(Order orderInfo, String orderId,
+  void executeOrder(Order orderInfo,
       {required Function() onSuccess,
       Function()? onFailure,
       Function()? onCancel}) async {
@@ -45,7 +45,7 @@ class PayementService {
       'currency': "INR",
       'name': "RS Books",
       'description': "Test Transaction",
-      'order_id': orderId,
+      'order_id': orderInfo.orderId,
       "prefill": {
         "name": orderInfo.address!.name,
         "email": orderInfo.address!.email!.isNotEmpty
@@ -54,11 +54,9 @@ class PayementService {
         "contact": orderInfo.address!.contactNo
       },
       'handler': (response) {
-        print('## order success $response');
         onSuccess();
       },
       'ondismiss': () {
-        print('## order cancel!');
         if (onCancel != null) onCancel();
       },
     };

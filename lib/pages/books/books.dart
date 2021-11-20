@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rs_books/api/brain_basket_service.dart';
 import 'package:rs_books/data/brain_basket.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
-import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/pages/books/widgets/books_large_screen.dart';
 import 'package:rs_books/pages/books/widgets/books_small_screen.dart';
 import 'package:rs_books/widgets/centered_view.dart';
@@ -21,7 +18,6 @@ class BooksPage extends StatelessWidget {
             future: dataService.getData(),
             builder: (context, AsyncSnapshot<BrainBasketData> snapshot) {
               if (snapshot.hasError) {
-                print('error ${snapshot.error}');
                 return const Center(
                   child: Text('An error has occurred!'),
                 );

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
 
 class OrderSuccessPage extends StatelessWidget {
-  final dynamic args;
-  late String orderId;
-  OrderSuccessPage({Key? key, required this.args}) : super(key: key) {
-    this.orderId = this.args['orderId'];
-  }
+  final String orderId;
+  OrderSuccessPage({Key? key, required this.orderId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final AppTheme theme = context.watch();
     return CenteredView(
       child: Container(
         child: Column(
@@ -20,7 +20,7 @@ class OrderSuccessPage extends StatelessWidget {
               style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Colors.pink.shade400),
+                  color: theme.accent1),
             ),
             SizedBox(
               height: 5,

@@ -1,12 +1,15 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
+import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styled_widgets/ui_text.dart';
+import 'package:rs_books/styles.dart';
 import 'package:rs_books/widgets/book_item_small.dart';
 
 class BookItem extends StatelessWidget {
@@ -42,9 +45,8 @@ class BookItem extends StatelessWidget {
           ),
           Expanded(
               child: Container(
-            // height: showDetails ? 800 : 400,
             margin: EdgeInsets.only(top: 15, right: 30, bottom: 15),
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(Insets.sm),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3),
                 border: Border.all(
@@ -53,26 +55,16 @@ class BookItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min, // TODO: why this is needed?
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              Container(
-                  child: Text(
-                    book.title.toUpperCase(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.w200,
-                      fontSize: 22,
-                    ),
-                  ),
-                ),
+                UiText(
+                    text: book.title.toUpperCase(),
+                    style: TextStyles.title2.copyWith(fontSize: FontSizes.s24)),
+                VSpace.sm,
+                UiText(
+                    text: 'By: Rohit Agrawal(RA), Shubhkaran (SKC)',
+                    style: TextStyles.callout1),
                 Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Text(
-                    'Authors: Rohit Agrawal(RA), Shubhkaran (SKC)',
-                    style:
-                        TextStyle(fontSize: 14, color: Colors.purple.shade300),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  padding: EdgeInsets.symmetric(vertical: 5),
+                  margin: EdgeInsets.only(top: Insets.sm),
+                  padding: EdgeInsets.symmetric(vertical: Insets.xs),
                   child: Text(
                     book.description,
                     style: TextStyle(
@@ -81,102 +73,48 @@ class BookItem extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                // Spacer(),
-                Container(
-                  margin: EdgeInsets.only(top: 30),
-                  child: Row(
-                    children: [
-                      Row(
+                VSpace(Insets.xl),
+                Row(
+                  children: [
+                    Row(
+                      children: [Text('₹ ${book.price}', style: TextStyles.h2)],
+                    ),
+                    Container(
+                      child: Row(
                         children: [
-                          Text(
-                            '₹ ${book.price}',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          )
+                          RoundedButton(
+                            isPrimary: true,
+                            label: 'Buy Now',
+                            onPressed: () {
+                              context.read<CartController>().addToCart(Product(
+                                  name: book.title,
+                                  cost: 120,
+                                  id: this.book.details.isbn));
+                              menuController.changeActiveItemTo(CartPageRoute);
+                              context.goNamed(CartPageRoute);
+                            },
+                          ),
+                          RoundedButton(
+                            label: 'Add to Cart',
+                            onPressed: () {
+                              context.read<CartController>().addToCart(Product(
+                                    name: this.book.title,
+                                    cost: 120,
+                                    id: this.book.details.isbn,
+                                  ));
+                            },
+                          ),
                         ],
                       ),
-                      Container(
-                        child: Row(
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                context.read<CartController>().addToCart(
-                                    Product(
-                                        name: book.title,
-                                        cost: 120,
-                                        id: this.book.details.isbn));
-                                menuController.changeActiveItemTo(CartPageRoute);
-                                navigationController.navigateTo(CartPageRoute);
-                              },
-                              child: Container(
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.black,
-                                        width: 1,
-                                        style: BorderStyle.solid),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.elliptical(20, 20))),
-                                // width: 150,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'Buy Now',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                print('adding to the cart: ${book.title}');
-                                context
-                                    .read<CartController>()
-                                    .addToCart(Product(
-                                      name: this.book.title,
-                                      cost: 120,
-                                      id: this.book.details.isbn,
-                                    ));
-                              },
-                              child: Container(
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.red.shade400,
-                                        width: 1,
-                                        style: BorderStyle.solid),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.elliptical(20, 20))),
-                                padding: EdgeInsets.only(
-                                    top: 6, bottom: 6, left: 10, right: 10),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'Add to cart',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  ),
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
                 Visibility(
                   child: Flexible(
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
+                        VSpace(Insets.sm),
                         AdditionalDetails(
                           gridColumnCount: 3,
                           bookDetails: this.book.details,

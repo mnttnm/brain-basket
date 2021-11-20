@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:rs_books/helpers/local_navigator.dart';
+import 'package:rs_books/styles.dart';
 
 class LargeScreen extends StatelessWidget {
-  const LargeScreen({Key? key}) : super(key: key);
+  final Widget child;
+  LargeScreen({required this.child, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: localNavigator(),
-      ),
+          padding: EdgeInsets.symmetric(horizontal: Insets.lg),
+            child: child)
     );
   }
 }

@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/src/provider.dart';
+import 'package:rs_books/themes.dart';
 
 List<String> parseJson(String instructionJson) {
   final parsedObject =
@@ -26,6 +28,7 @@ class ContactPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppTheme theme = context.watch();
     return FutureBuilder<List<String>>(
       future: parseInstructions(),
       builder: (context, snapshot) {
@@ -40,7 +43,7 @@ class ContactPage extends StatelessWidget {
                   "Please Note:",
                   style: TextStyle(
                     fontSize: 24,
-                    color: Colors.purple.shade300,
+                    color: theme.accent1
                   ),
                 ),
                 SizedBox(
@@ -50,7 +53,7 @@ class ContactPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                          color: Colors.purpleAccent.shade100, width: 2)),
+                          color: theme.accent1.withOpacity(0.9), width: 2)),
                   padding: EdgeInsets.all(20),
                   constraints: BoxConstraints(maxWidth: 700),
                   child: Column(
@@ -71,7 +74,7 @@ class ContactPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(24.0),
                   decoration: BoxDecoration(
-                      color: Colors.deepPurple.shade300,
+                      color: theme.accent1.withOpacity(0.9),
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                       boxShadow: [
                         BoxShadow(

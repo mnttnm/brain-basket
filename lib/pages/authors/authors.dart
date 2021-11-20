@@ -15,7 +15,6 @@ class AuthorsPage extends StatelessWidget {
         future: dataService.getData(),
         builder: (context, AsyncSnapshot<BrainBasketData> snapshot) {
           if (snapshot.hasError) {
-            print('error ${snapshot.error}');
             return const Center(
               child: Text('An error has occurred!'),
             );

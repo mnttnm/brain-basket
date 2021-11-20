@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/routing/routes.dart';
-import 'package:rs_books/widgets/cart_page.dart';
+import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
+import 'package:rs_books/styled_widgets/styled_spacers.dart';
 
 class BookItemSmall extends StatelessWidget {
   final Book book;
@@ -71,41 +73,7 @@ class Reviews extends StatelessWidget {
               children: reviews
                   .map((review) =>
                       ReviewItem(name: review.name, review: review.review))
-                  .toList()
-              //  [
-              //   ReviewItem(
-              //       name: 'Sit gubergren',
-              //       review:
-              //           'Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.'),
-              //   VerticalDivider(
-              //     indent: 40,
-              //     endIndent: 40,
-              //     thickness: 2,
-              //   ),
-              //   ReviewItem(
-              //       name: 'Sit gubergren',
-              //       review:
-              //           'Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.'),
-              //   VerticalDivider(
-              //     indent: 40,
-              //     endIndent: 40,
-              //     thickness: 2,
-              //   ),
-              //   ReviewItem(
-              //       name: 'Sit gubergren',
-              //       review:
-              //           'Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.'),
-              //   VerticalDivider(
-              //     indent: 40,
-              //     endIndent: 40,
-              //     thickness: 2,
-              //   ),
-              //   ReviewItem(
-              //       name: 'Sit gubergren',
-              //       review:
-              //           'Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.'),
-              // ],
-              ),
+                  .toList()),
         ),
       ),
     );
@@ -238,51 +206,23 @@ class PurchaseOptions extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          width: 150,
-          child: ElevatedButton(
-            onPressed: () {
-              context.read<CartController>().addToCart(Product(
-                  name: this.bookName, cost: bookPrice, id: this.bookId));
-              menuController.changeActiveItemTo(CartPageRoute);
-              navigationController.navigateTo(CartPageRoute);
-            },
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                'Buy Now'.toUpperCase(),
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
+        RoundedButton(
+          label: 'Buy Now',
+          isPrimary: true,
+          onPressed: () {
+            context.read<CartController>().addToCart(
+                Product(name: this.bookName, cost: bookPrice, id: this.bookId));
+            menuController.changeActiveItemTo(CartPageRoute);
+            context.goNamed(CartPageRoute);
+          },
         ),
-        SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          width: 150,
-          child: ElevatedButton(
-            // style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white), side: MaterialStateBorderSide.resolveWith((states) => BorderSide(color:secondaryDark))),
+        VSpace.sm,
+        RoundedButton(
+            label: 'Add to Cart',
             onPressed: () {
-              print('adding to the cat');
               context.read<CartController>().addToCart(
                   Product(name: bookName, cost: bookPrice, id: bookId));
-            },
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                'Add to Cart'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-        ),
+            }),
       ],
     );
   }
@@ -346,19 +286,7 @@ class AdditionalDetails extends StatelessWidget {
                           .entries
                           .map((entry) => BookDetailItem(
                               label: entry.key, value: entry.value))
-                          .toList()
-                      //  <Widget>[
-                      //   BookDetailItem(
-                      //       label: 'dimensions',
-                      //       value: "10 x 10 x 10 (L x W x H)"),
-                      //   BookDetailItem(label: 'weight', value: '350 gm'),
-                      //   BookDetailItem(label: 'delivery', value: '3-7 days'),
-                      //   BookDetailItem(
-                      //       label: 'publication', value: 'Brain Basket'),
-                      //   BookDetailItem(label: 'isbn', value: 'b08sdfdsf'),
-                      //   BookDetailItem(label: 'ratings', value: '4.7/5'),
-                      // ],
-                      ),
+                          .toList()),
                 )
               ],
             ),
@@ -383,20 +311,13 @@ class BookDetailItem extends StatelessWidget {
         children: [
           Text(
             label.toUpperCase(),
-            // style: TextStyle(
-            //   fontSize: 12,
-            //   color: primaryMedium,
-            // ),
           ),
           SizedBox(
             height: 3,
           ),
           Text(
             value,
-            style: TextStyle(
-                fontSize: 14,
-                // color: Colors.blueGrey.withOpacity(0.7),
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
         ],
       ),

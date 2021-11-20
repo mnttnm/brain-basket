@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/constants/style.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/routing/routes.dart';
-import 'package:rs_books/widgets/custom_text.dart';
+import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
+import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/side_menu_item.dart';
+import 'package:rs_books/widgets/site_title.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
     double _width = MediaQuery.of(context).size.width;
     return Container(
         color: light,
@@ -21,34 +26,29 @@ class SideMenu extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(
-                    height: 40,
-                  ),
+                  VSpace(40),
                   Row(
                     children: [
-                      SizedBox(
-                        width: _width / 48,
+                      HSpace(_width / 48),
+                      Padding(
+                        padding: EdgeInsets.all(Insets.sm),
+                        child: Image.asset('assets/logo/bb-bw.jpeg',
+                            width: 48,
+                            height: 48,
+                            color: theme.accent1,
+                            colorBlendMode: BlendMode.color),
                       ),
                       Flexible(
-                          child: CustomText(
-                        text: "RS-Books",
-                        size: 20,
-                        weight: FontWeight.bold,
-                        color: active,
+                          child: SiteTitle(
+                        siteTitle: "Brain Basket",
                       )),
-                      SizedBox(
-                        width: _width / 48,
-                      ),
+                      HSpace(_width / 48),
                     ],
                   ),
                 ],
               ),
-            SizedBox(
-              height: 40,
-            ),
-            Divider(
-              color: Colors.purpleAccent.shade400
-            ),
+            VSpace(40),
+            Divider(color: theme.accent1),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: sideMenuItems
@@ -57,9 +57,7 @@ class SideMenu extends StatelessWidget {
                       onTap: () {
                         if (!menuController.isActive(itemName)) {
                           menuController.changeActiveItemTo(itemName);
-                          if (ResponsiveWidget.isSmallScreen(context))
-                            Get.back();
-                          navigationController.navigateTo(itemName);
+                          context.goNamed(itemName);
                         }
                       }))
                   .toList(),
