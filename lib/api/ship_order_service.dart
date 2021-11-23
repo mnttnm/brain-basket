@@ -115,8 +115,7 @@ class ShipOrder {
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(await response.stream.bytesToString());
       final awbCode = jsonResponse['payload']['awb_code'];
-      print(
-          'Order created sucessfully, track at https://shiprocket.co/tracking/$awbCode');
+      return 'https://shiprocket.co/tracking/$awbCode';
     } else {
       // print(response.reasonPhrase);
     }

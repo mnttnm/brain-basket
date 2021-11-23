@@ -58,7 +58,7 @@ List<GoRoute> generateRoute(BuildContext context) {
       pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
           child: OrderSuccessPage(
-            orderId: state.extra! as String,
+            trackingId: state.extra! as String,
         ),
       ),
     ),

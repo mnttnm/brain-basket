@@ -99,7 +99,7 @@ class BookItem extends StatelessWidget {
                             context.read<CartController>().addToCart(
                                     Product(
                                   name: book.title,
-                                  cost: 120,
+                                  cost: book.price.toDouble(),
                                   id: book.details.isbn,
                                     ),
                                   );
@@ -113,7 +113,7 @@ class BookItem extends StatelessWidget {
                             context.read<CartController>().addToCart(
                                     Product(
                                       name: book.title,
-                                    cost: 120,
+                                    cost: book.price.toDouble(),
                                   id: book.details.isbn,
                                     ),
                                   );
