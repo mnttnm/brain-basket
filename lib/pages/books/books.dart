@@ -18,7 +18,7 @@ class BooksPage extends StatelessWidget {
       child: FutureBuilder(
         future: dataService.getData(),
         builder: (context, AsyncSnapshot<BrainBasketData> snapshot) {
-          if (snapshot.hasError) {
+          if (snapshot.hasError) { 
             return const Center(
               child: Text('An error has occurred!'),
             );

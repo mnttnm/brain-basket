@@ -22,9 +22,7 @@ class HorizontalMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
-    final Color linkColor = menuController.isHovering(itemName) == true
-        ? theme.focus
-        : theme.accent1;
+    final Color linkColor = theme.surface1;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
@@ -41,7 +39,7 @@ class HorizontalMenuItem extends StatelessWidget {
                     menuController.isActive(itemName) == true
                 ? BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(width: 6, color: theme.accent1),
+                      bottom: BorderSide(width: 6, color: theme.surface1),
                     ),
                   )
                 : null,

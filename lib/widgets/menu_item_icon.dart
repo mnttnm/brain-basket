@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/widgets/cart_icon.dart';
 
 class MenuItemIcon extends StatelessWidget {
   final String iconLabel;
@@ -29,6 +30,15 @@ class MenuItemIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(getIconData(iconLabel), size: iconSize, color: iconColor);
+    final isCartItem = iconLabel == CartPageRoute;
+    final customIcon = Icon(
+      getIconData(iconLabel),
+      size: isCartItem ? 32 : iconSize,
+      color: iconColor,
+    );
+    if (isCartItem) {
+      return CartIcon(icon: customIcon);
+    }
+    return customIcon;
   }
 }

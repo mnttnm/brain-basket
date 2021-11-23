@@ -10,20 +10,16 @@ import 'package:rs_books/widgets/menu_item_icon.dart';
 class VerticalMenuItem extends StatelessWidget {
   final String itemName;
   final void Function() onTap;
-  const VerticalMenuItem(
-      {
+  const VerticalMenuItem({
     Key? key,
     required this.itemName,
     required this.onTap,
-  })
-      : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
-    final Color linkColor = menuController.isHovering(itemName) == true
-        ? theme.focus
-        : theme.accent1;
+    final Color linkColor = theme.accent1;
     return InkWell(
       onTap: onTap,
       onHover: (value) {
@@ -47,7 +43,7 @@ class VerticalMenuItem extends StatelessWidget {
                 child: Container(
                   width: 6,
                   height: 72,
-                  color: theme.greyStrong,
+                  color: theme.accent1,
                 ),
               ),
               Expanded(
@@ -67,7 +63,7 @@ class VerticalMenuItem extends StatelessWidget {
                         color: linkColor,
                         size: 18,
                         weight: FontWeight.bold,
-                    ),
+                      ),
                     )
                   ],
                 ),

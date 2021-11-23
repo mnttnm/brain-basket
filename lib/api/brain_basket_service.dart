@@ -27,6 +27,7 @@ class BrainBasketDataService {
     // Go through each recipe and convert json to ExploreRecipe object.
     if (json['authors'] != null) {
       final authors = <Author>[];
+
       json['authors'].forEach((v) {
         authors.add(Author.fromJson(v as Map<String, dynamic>));
       });

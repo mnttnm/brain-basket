@@ -26,7 +26,7 @@ void main() {
         lazy: false,
       ),
     ],
-    child: MyApp(),
+    child: const MyApp(),
     ),
   );
 }

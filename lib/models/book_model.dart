@@ -32,13 +32,14 @@ class Book {
         title: json["title"] as String,
         images: Images.fromJson(json["images"] as Map<String, dynamic>),
         authors:
-            List<String>.from((json["authors"] as List<String>).map((x) => x)),
+            List<String>.from((json["authors"] as List<dynamic>).map((x) => x)),
         price: json["price"] as int,
         description: json["description"] as String,
         details: Details.fromJson(json["details"] as Map<String, dynamic>),
         reviews:
-            List<Review>.from((json["reviews"] as List<Review>)
-            .map((x) => Review.fromJson(x as Map<String, dynamic>)),
+            List<Review>.from(
+          (json["reviews"] as List<dynamic>)
+              .map((x) => Review.fromJson(x as Map<String, dynamic>)),
         ),
       );
 

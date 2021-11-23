@@ -34,7 +34,7 @@ class Author {
             SocialLinks.fromJson(json["social_links"] as Map<String, dynamic>),
         experience: json["experience"] as int,
         institutes:
-            List<String>.from(json["institutes"].map((x) => x) as List<String>),
+            List<String>.from(json["institutes"] as List<dynamic>),
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,7 +43,7 @@ class Author {
         "about": about,
         "social_links": socialLinks != null ? socialLinks!.toJson() : {},
         "experience": experience,
-        "institutes": institutes != null ?  List<dynamic>.from(institutes!.map((x) => x)): [],
+        "institutes": institutes != null ? List<dynamic>.from(institutes!) : [],
       };
 }
 
