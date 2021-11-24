@@ -17,6 +17,8 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
     final double _width = MediaQuery.of(context).size.width;
+    const siteTitle = String.fromEnvironment('SITE_TITLE');
+
     return Container(
         color: theme.surface1,
         child: ListView(
@@ -40,7 +42,7 @@ class SideMenu extends StatelessWidget {
                       ),
                       const Flexible(
                           child: SiteTitle(
-                        siteTitle: "Brain Basket",
+                        siteTitle: siteTitle
                       ),
                     ),
                       HSpace(_width / 48),
