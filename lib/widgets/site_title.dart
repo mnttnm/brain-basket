@@ -13,7 +13,7 @@ class SiteTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
     return CustomText(
-      text: "Brain Basket",
+      text: siteTitle,
       size: 20,
       weight: FontWeight.bold,
       color: color ?? theme.accent1,

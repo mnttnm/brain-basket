@@ -42,7 +42,7 @@ class SideMenu extends StatelessWidget {
                       ),
                       const Flexible(
                           child: SiteTitle(
-                        siteTitle: siteTitle
+                        siteTitle: siteTitle,
                       ),
                     ),
                       HSpace(_width / 48),
