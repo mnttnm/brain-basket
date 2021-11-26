@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:rs_books/config/config_handler.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/data/models.dart';
 import 'package:rs_books/data/order.dart';
@@ -20,12 +21,12 @@ class ShipOrder {
     const headers = {'Content-Type': 'application/json'};
     final request = Request('POST', Uri.parse(shiprocket_urls['login_url']!));
 
+    final configHandler = ConfigHandler();
     //TODO: Security, avoid order creation from the network tab?
     request.body = json.encode(
-        // TODO: How to store this info?
         {
-          "email": "mohittater.iiita@gmail.com",
-          "password": "Zqi2T#AK#hH4g7!",
+          "email": configHandler.shiprocketConfig['email'] as String,
+      "password": configHandler.shiprocketConfig['password'] as String,
         });
     request.headers.addAll(headers);
     final StreamedResponse response = await request.send();

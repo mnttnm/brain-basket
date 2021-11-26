@@ -1,14 +1,22 @@
 import 'dart:convert';
 import 'dart:js' as js;
 import 'package:http/http.dart' as http;
+import 'package:rs_books/config/config_handler.dart';
 import 'package:rs_books/data/order.dart';
 
 class PayementService {
-  PayementService();
+  final configHandler = ConfigHandler();
+  late String username;
+  late String password;
+  late String key;
+
+  PayementService() {
+    username = configHandler.razorpayConfig['username'] as String;
+    password = configHandler.razorpayConfig['password'] as String;
+    key = configHandler.razorpayConfig['key'] as String;
+  }
 
   Future<String> createOrder(double orderTotal, String orderId) async {
-    const String username = 'rzp_test_mmvDFiAwZW0q7S';
-    const String password = 'UZVtRMbK1OcMvUgvmykFj9vZ';
     final String basicAuth =
         'Basic ${base64Encode(utf8.encode('$username:$password'))}';
 
@@ -42,7 +50,7 @@ class PayementService {
     Function()? onCancel,
   }) {
     final options = {
-      'key': 'rzp_test_mmvDFiAwZW0q7S',
+      'key': key,
       'amount':
           orderInfo.orderTotal * 100, // amount converted to currency subunit
       'currency': "INR",
