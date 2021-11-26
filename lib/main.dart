@@ -6,27 +6,23 @@ import 'package:provider/provider.dart';
 import 'package:rs_books/controllers/address_controller.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/controllers/menu_controller.dart';
-import 'package:rs_books/data/order_dao.dart';
 import 'package:rs_books/layout.dart';
 import 'package:rs_books/routing/router.dart';
 import 'package:rs_books/themes.dart';
 
 void main() {
   Get.put(MenuController());
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (context) => CartController(),
-      ),
-      ChangeNotifierProvider(
-        create: (context) => AddressController(),
-      ),
-      Provider(
-        create: (_) => OrderDao(),
-        lazy: false,
-      ),
-    ],
-    child: const MyApp(),
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CartController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AddressController(),
+        )
+      ],
+      child: const MyApp(),
     ),
   );
 }
@@ -60,14 +56,14 @@ class MyApp extends StatelessWidget {
     );
 
     return Provider.value(
-        value: _theme,
-        child: GetMaterialApp.router(
-          routeInformationParser: _router.routeInformationParser,
-          routerDelegate: _router.routerDelegate,
-          theme: _theme.toThemeData(),
-          debugShowCheckedModeBanner: false,
-          title: "Brain Basket",
-        ),
+      value: _theme,
+      child: GetMaterialApp.router(
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate,
+        theme: _theme.toThemeData(),
+        debugShowCheckedModeBanner: false,
+        title: "Brain Basket",
+      ),
     );
   }
 }

@@ -8,7 +8,6 @@ import 'package:rs_books/api/ship_order_service.dart';
 import 'package:rs_books/controllers/address_controller.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/data/order.dart';
-import 'package:rs_books/data/order_dao.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/address_model.dart';
 import 'package:rs_books/routing/routes.dart';
@@ -26,10 +25,6 @@ class Payment extends StatefulWidget {
 class _PaymentState extends State<Payment> {
   bool errorHappend = false;
   bool orderInProgress = false;
-  void _sendOrder(OrderDao orderDao, Order order) {
-    orderDao.saveMessage(order);
-  }
-
   Order _createOrder(String orderId, double orderTotal, AddressModel address) {
     final orderCreationTime = DateTime.now();
     final Order order = Order(
@@ -43,7 +38,6 @@ class _PaymentState extends State<Payment> {
 
   @override
   Widget build(BuildContext context) {
-    final orderDao = Provider.of<OrderDao>(context, listen: false);
     final paymentService = PayementService();
     final shipOrderService = ShipOrder();
     final AppTheme theme = context.watch();
@@ -199,7 +193,6 @@ class _PaymentState extends State<Payment> {
                                       cart.total,
                                       addressController.currentAddress!,
                                     );
-                                    _sendOrder(orderDao, order);
                                     paymentService.executeOrder(
                                       order,
                                       onSuccess: () async {

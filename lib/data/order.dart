@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rs_books/models/address_model.dart';
 
 class Order {
@@ -7,7 +6,7 @@ class Order {
   final AddressModel? address;
   final double orderTotal;
 
-  DocumentReference? reference;
+  // DocumentReference? reference;
 
   Order(
       {required this.orderId,
@@ -29,11 +28,4 @@ class Order {
         'address': address?.toJson(),
         'orderTotal': orderTotal
       };
-
-  factory Order.fromSnapshot(DocumentSnapshot snapshot) {
-    // ignore: cast_nullable_to_non_nullable
-    final message = Order.fromJson(snapshot.data() as Map<String, dynamic>);
-    message.reference = snapshot.reference;
-    return message;
-  }
 }
