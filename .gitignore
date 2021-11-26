@@ -48,3 +48,7 @@ app.*.map.json
 # vscode
 ./vscode
 .metadata
+
+#config files
+.env
+.app.config.json
