@@ -10,6 +10,7 @@ import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/styled_widgets/ui_text.dart';
 import 'package:rs_books/styles.dart';
+import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/book_item_small.dart';
 
 class BookItem extends StatelessWidget {
@@ -24,6 +25,7 @@ class BookItem extends StatelessWidget {
       'assets/books/book-${book.details.isbn}/${book.images.front}',
       width: MediaQuery.of(context).size.width / 12 * 2,
     );
+    final AppTheme theme = context.watch();
     return Card(
       margin: const EdgeInsets.all(10),
       elevation: 6,
@@ -35,7 +37,7 @@ class BookItem extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.transparent,
                 boxShadow: [
-                BoxShadow(
+                  BoxShadow(
                     blurRadius: 6,
                     color: Colors.black54,
                     offset: Offset(2, 10),
@@ -43,105 +45,69 @@ class BookItem extends StatelessWidget {
                 ],
               ),
               child: ClipRRect(
-                  clipBehavior: Clip.hardEdge,
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                clipBehavior: Clip.hardEdge,
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
                 child: image,
               ),
             ),
           ),
           Expanded(
-              child: Container(
-            margin: const EdgeInsets.only(top: 15, right: 30, bottom: 15),
-            padding: EdgeInsets.all(Insets.sm),
-            decoration: BoxDecoration(
+            child: Container(
+              margin: const EdgeInsets.only(top: 15, right: 30, bottom: 15),
+              padding: EdgeInsets.all(Insets.sm),
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3),
                 border: Border.all(
-                    color: Colors.black45,
+                  color: Colors.black45,
                 ),
               ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min, // TODO: why this is needed?
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                UiText(
+              child: Column(
+                mainAxisSize: MainAxisSize.min, // TODO: why this is needed?
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  UiText(
                     text: book.title.toUpperCase(),
                     style: TextStyles.title2.copyWith(fontSize: FontSizes.s24),
                   ),
-                VSpace.sm,
-                UiText(
+                  VSpace.sm,
+                  UiText(
                     text: 'By: Rohit Agrawal(RA), Shubhkaran (SKC)',
                     style: TextStyles.callout1,
                   ),
-                Container(
-                  margin: EdgeInsets.only(top: Insets.sm),
-                  padding: EdgeInsets.symmetric(vertical: Insets.xs),
-                  child: Text(
-                    book.description,
-                    style: const TextStyle(
-                      fontSize: 16,
+                  Container(
+                    margin: EdgeInsets.only(top: Insets.sm),
+                    padding: EdgeInsets.symmetric(vertical: Insets.xs),
+                    child: Text(
+                      book.description,
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.start,
                     ),
-                    textAlign: TextAlign.start,
                   ),
-                ),
-                VSpace.xl,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [Text('₹ ${book.price}', style: TextStyles.h2)],
-                    ),
-                    Row(
+                  VSpace.xl,
+                  BookActions(
+                    book: book,
+                  ),
+                  Visibility(
+                    visible: showDetails,
+                    child: Flexible(
+                      child: Column(
                         children: [
-                          RoundedButton(
-                            isPrimary: true,
-                            label: 'Buy Now',
-                            onPressed: () {
-                            context.read<CartController>().addToCart(
-                                    Product(
-                                  name: book.title,
-                                  cost: book.price.toDouble(),
-                                  id: book.details.isbn,
-                                    ),
-                                  );
-                              menuController.changeActiveItemTo(CartPageRoute);
-                              context.goNamed(CartPageRoute);
-                            },
+                          VSpace.sm,
+                          AdditionalDetails(
+                            gridColumnCount: 3,
+                            bookDetails: book.details,
+                            bookDescription: book.description,
                           ),
-                          RoundedButton(
-                            label: 'Add to Cart',
-                            onPressed: () {
-                            context.read<CartController>().addToCart(
-                                    Product(
-                                      name: book.title,
-                                    cost: book.price.toDouble(),
-                                  id: book.details.isbn,
-                                    ),
-                                  );
-                            },
-                          ),
+                          Reviews(reviews: book.reviews!)
                         ],
-                    ),
-                  ],
-                ),
-                Visibility(
-                  visible: showDetails,
-                  child: Flexible(
-                    child: Column(
-                      children: [
-                        VSpace.sm,
-                        AdditionalDetails(
-                          gridColumnCount: 3,
-                          bookDetails: book.details,
-                          bookDescription: book.description,
-                        ),
-                        Reviews(reviews: book.reviews!)
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
           )
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
@@ -32,16 +33,12 @@ class OrderSuccessPage extends StatelessWidget {
                 "Your order has been placed successfuly, you will receive further details on your contact no.You can track your order at",
                 style: TextStyle(fontSize: 16),
               ),
-              TextButton(
+              Link(
+                trackingId,
                 onPressed: () {
                   launch(trackingId);
                 },
-                child: Text(
-                  trackingId,
-                  style: TextStyle(
-                    color: theme.accent1,
-                  ),
-                ),
+                style: TextStyle(color: theme.accent1),
               )
             ],
           )

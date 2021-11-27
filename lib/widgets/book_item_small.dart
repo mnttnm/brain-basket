@@ -212,12 +212,13 @@ class PurchaseOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Flex(
+      direction: ResponsiveWidget.isLargeScreen(context) == true
+          ? Axis.horizontal
+          : Axis.vertical,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        RoundedButton(
-          label: 'Buy Now',
-          isPrimary: true,
+        PrimaryButton(
           onPressed: () {
             context.read<CartController>().addToCart(
                 Product(name: bookName, cost: bookPrice, id: bookId),
@@ -225,9 +226,13 @@ class PurchaseOptions extends StatelessWidget {
             menuController.changeActiveItemTo(CartPageRoute);
             context.goNamed(CartPageRoute);
           },
+          label: 'Buy Now',
         ),
-        VSpace.sm,
-        RoundedButton(
+        if (ResponsiveWidget.isLargeScreen(context) == true)
+          HSpace.sm
+        else
+          VSpace.sm,
+        SecondaryButton(
             label: 'Add to Cart',
             onPressed: () {
               context.read<CartController>().addToCart(

@@ -11,6 +11,7 @@ import 'package:rs_books/data/order.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/address_model.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
@@ -124,14 +125,13 @@ class _PaymentState extends State<Payment> {
                                           ),
                                         ),
                                         VSpace.xs,
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: theme.accent1,
-                                          ),
+                                        PrimaryButton(
                                           onPressed: () {
                                             context.goNamed(CheckOutPageRoute);
                                           },
-                                          child: const Text('Edit Address'),
+                                          label: 'Edit Address',
+                                          backgroundColor:
+                                              theme.accent1.withOpacity(0.5),
                                         ),
                                       ],
                                     ),
@@ -174,7 +174,7 @@ class _PaymentState extends State<Payment> {
                                 ),
                               ),
                               VSpace.lg,
-                              ElevatedButton(
+                              PrimaryButton(
                                 onPressed: () async {
                                   setState(() {
                                     errorHappend = false;

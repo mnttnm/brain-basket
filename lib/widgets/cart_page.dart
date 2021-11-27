@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/routing/routes.dart';
+import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
@@ -12,111 +13,114 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
-    return Scaffold(body: Consumer<CartController>(
-      builder: (BuildContext context, CartController cart, Widget? child) {
-        return cart.products.isEmpty
-            ? Center(
-                child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Padding(
-                        padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "You haven't added any books yet, Please grab some!",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          menuController.changeActiveItemTo(BooksPageRoute);
-                          context.goNamed(BooksPageRoute);
-                        },
-                        child: const Text('Order Books'),
-                        ),
-                  )
-                ],
-              ),
-                )
-            : CenteredView(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+    return Scaffold(
+      body: Consumer<CartController>(
+        builder: (BuildContext context, CartController cart, Widget? child) {
+          return cart.products.isEmpty
+              ? Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      VSpace.xs,
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "You haven't added any books yet, Please grab some!",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: PrimaryButton(
+                          onPressed: () {
+                            menuController.changeActiveItemTo(BooksPageRoute);
+                            context.goNamed(BooksPageRoute);
+                          },
+                          label: 'Order Books',
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              : CenteredView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        VSpace.xs,
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
                               border: Border.all(
-                                  color: theme.accent1,
+                                color: theme.accent1,
                               ),
                             ),
-                          child: ListView.builder(
-                            padding: const EdgeInsets.all(10),
-                            itemCount: cart.products.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final productList = cart.products.values.toList();
-                              if (cart.products.isEmpty) {
-                                return const Text('no products in cart');
-                              }
-                              final item = productList[index];
-                              return ListTile(
+                            child: ListView.builder(
+                              padding: const EdgeInsets.all(10),
+                              itemCount: cart.products.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final productList =
+                                    cart.products.values.toList();
+                                if (cart.products.isEmpty) {
+                                  return const Text('no products in cart');
+                                }
+                                final item = productList[index];
+                                return ListTile(
                                   title: Text(
                                     item.name.toUpperCase(),
                                     style: TextStyle(
-                                        color: theme.accent1,
-                                        fontSize: 18,
+                                      color: theme.accent1,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   subtitle: BookQuantityControl(
                                     product: item,
                                   ),
                                   trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                            '(${item.quantity} x ${item.cost})',
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        '(${item.quantity} x ${item.cost})',
                                       ),
-                                    VSpace.lg,
-                                        Text('${item.quantity * item.cost}',
-                                            style: TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold,
-                                                color:
-                                                    Colors.blueAccent.shade100,
+                                      VSpace.lg,
+                                      Text(
+                                        '${item.quantity * item.cost}',
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blueAccent.shade100,
                                         ),
                                       )
                                     ],
                                   ),
                                 );
-                            },
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                      const Divider(),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                  text: 'Total:',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                  ),
+                        const Divider(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                text: TextSpan(
                                   children: [
                                     TextSpan(
-                                        text:
-                                            '${context.select((CartController c) => c.total)}',
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                          color: theme.accent1,
-                                        ),
+                                      text: 'Total:',
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              '${context.select((CartController c) => c.total)}',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                            color: theme.accent1,
+                                          ),
                                         ),
                                       ],
                                     )
@@ -124,39 +128,29 @@ class CartPage extends StatelessWidget {
                                 ),
                               ),
                               const Spacer(),
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(12),
-                                ),
+                              PrimaryButton(
                                 onPressed: () async {
                                   context.read<CartController>().clearCart();
                                 },
-                                child: const Text(
-                                  'Clear Cart',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                            ),
+                                label: 'Clear Cart',
+                                backgroundColor: theme.focus.withOpacity(0.5),
+                              ),
                               HSpace.sm,
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(12),
-                                ),
+                              PrimaryButton(
                                 onPressed: () {
                                   context.goNamed(CheckOutPageRoute);
                                 },
-                                child: const Text('Checkout',
-                                    style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                          ],
+                                label: 'Checkout',
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-      },
-    ),
+                );
+        },
+      ),
     );
   }
 }
@@ -170,8 +164,9 @@ class Back extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
     return InkWell(
-      child: Text('<  Back',
-          style: TextStyle(fontSize: 18, color: theme.accent1),
+      child: Text(
+        '<  Back',
+        style: TextStyle(fontSize: 18, color: theme.accent1),
       ),
       onTap: () {
         Navigator.pop(context);
@@ -190,15 +185,15 @@ class BookQuantityControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<CartController>(
-        builder: (BuildContext context, CartController cart, Widget? child) {
-      return Row(
-        children: <Widget>[
-          if (product.quantity != 0)
+      builder: (BuildContext context, CartController cart, Widget? child) {
+        return Row(
+          children: <Widget>[
+            if (product.quantity != 0)
               IconButton(
                 icon: const Icon(Icons.remove),
-                  onPressed: () => context
-                      .read<CartController>()
-                      .decreaseBookQuantity(product.id),
+                onPressed: () => context
+                    .read<CartController>()
+                    .decreaseBookQuantity(product.id),
               )
             else
               Container(),
@@ -209,9 +204,9 @@ class BookQuantityControl extends StatelessWidget {
                   .read<CartController>()
                   .increaseBookQuantity(product.id),
             )
-        ],
-      );
-    },
+          ],
+        );
+      },
     );
   }
 }

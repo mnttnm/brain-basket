@@ -63,7 +63,7 @@ class AppTheme {
           grey: const Color(0xff999999),
           greyMedium: const Color(0xff747474),
           greyStrong: const Color(0xff333333),
-          focus: const Color.fromARGB(255, 62, 167, 136),
+          focus: const Color(0xffef5350),
         );
       default:
         return AppTheme.fromType(defaultTheme);

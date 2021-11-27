@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/controllers/address_controller.dart';
 import 'package:rs_books/models/address_model.dart';
+import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 
 class AddressForm extends StatefulWidget {
   final void Function(BuildContext context, AddressModel) onFormSubmit;
@@ -126,7 +127,7 @@ class _AddressFormState extends State<AddressForm> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
+            child: PrimaryButton(
                 onPressed: () {
                   // Validate will return true if the form is valid, or false if
                   // the form is invalid.
@@ -136,15 +137,9 @@ class _AddressFormState extends State<AddressForm> {
                     widget.onFormSubmit(context, model);
                   }
                 },
-                child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                    'Place Order',
-                    style: TextStyle(fontSize: 18),
-                  ),
+              label: 'Place Order',
                 ),
               ),
-            ),
           ],
         ),
       );
