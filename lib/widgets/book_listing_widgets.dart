@@ -305,13 +305,39 @@ class BookDetailItem extends StatelessWidget {
   const BookDetailItem({Key? key, required this.label, required this.value})
       : super(key: key);
 
+  IconData getIconForEntry(String entry) {
+    switch (entry.toLowerCase()) {
+      case "pages":
+        return Icons.pages_outlined;
+      case "language":
+        return Icons.language_outlined;
+      case "shipping":
+        return Icons.local_shipping_outlined;
+      case "publication":
+        return Icons.corporate_fare_outlined;
+      case "isbn":
+        return Icons.code_outlined;
+      case "ratings":
+        return Icons.star_outline_outlined;
+      default:
+        return Icons.list_alt;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
-          Text(
-            label.toUpperCase(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(getIconForEntry(label)),
+              HSpace.xs,
+              Text(
+                label.toUpperCase(),
+              ),
+            ],
           ),
           VSpace.xs,
           Text(
@@ -334,15 +360,17 @@ class Authors extends StatelessWidget {
     return Row(
       children: [
         const Text(
-          'Authors:',
+          'By:',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         HSpace.sm,
-        RichText(
-          textAlign: TextAlign.left,
-          text: const TextSpan(
-            text: 'Rohit Agrawal(RA), Shubhkaran (SKC)',
-            // style: TextStyle(fontSize: 14, color: secondaryDark),
+        Expanded(
+          child: RichText(
+            textAlign: TextAlign.left,
+            text: const TextSpan(
+              text: 'Rohit Agrawal(RA), Shubhkaran (SKC)',
+              // style: TextStyle(fontSize: 14, color: secondaryDark),
+            ),
           ),
         ),
       ],

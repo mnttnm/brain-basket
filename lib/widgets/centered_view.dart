@@ -16,7 +16,7 @@ class CenteredView extends StatelessWidget {
           horizontal: isMobile == true ? 0 : 0,
         vertical: 5,
       ),
-      alignment: Alignment.center, //Todo how is this working?
+      alignment: Alignment.topCenter, //Todo how is this working?
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: isMobile == true ? 600 : 1200),
         child: child,

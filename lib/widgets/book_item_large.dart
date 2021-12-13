@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/src/provider.dart';
 import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/styled_widgets/ui_text.dart';
 import 'package:rs_books/styles.dart';
+import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/book_listing_widgets.dart';
 
 class BookItem extends StatelessWidget {
@@ -14,12 +16,12 @@ class BookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
     final Image image = Image.asset(
       'assets/books/book-${book.details.isbn}/${book.images.front}',
       width: MediaQuery.of(context).size.width / 12 * 2,
     );
     return Card(
-      margin: const EdgeInsets.all(10),
       elevation: 6,
       child: Row(
         children: [
@@ -48,9 +50,9 @@ class BookItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 15, right: 30, bottom: 15),
               padding: EdgeInsets.all(Insets.sm),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
+                borderRadius: BorderRadius.circular(2),
                 border: Border.all(
-                  color: Colors.black45,
+                  color: theme.accent1, width: 2
                 ),
               ),
               child: Column(

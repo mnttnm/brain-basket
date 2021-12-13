@@ -249,7 +249,7 @@ class CartPage extends StatelessWidget {
                           ),
                           Divider(
                             thickness: 2,
-                            color: theme.greyMedium,
+                            color: theme.accent1,
                           ),
                           // const CartHeader(),
                           if (ResponsiveWidget.isLargeScreen(context)) ...[
