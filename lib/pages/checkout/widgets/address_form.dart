@@ -125,21 +125,24 @@ class _AddressFormState extends State<AddressForm> {
                   hintText: 'xyz@gmail.com',
                 ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: PrimaryButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    addressController.updateCurrentAddress(model);
-                    widget.onFormSubmit(context, model);
-                  }
-                },
-              label: 'Place Order',
+            Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: PrimaryButton(
+                    onPressed: () {
+                      // Validate will return true if the form is valid, or false if
+                      // the form is invalid.
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        addressController.updateCurrentAddress(model);
+                        widget.onFormSubmit(context, model);
+                      }
+                    },
+                    label: 'Place Order',
+                  ),
                 ),
-              ),
+            ),
           ],
         ),
       );

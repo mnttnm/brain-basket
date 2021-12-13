@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:rs_books/constants/controllers.dart';
-import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/models/book_model.dart';
-import 'package:rs_books/routing/routes.dart';
-import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/styled_widgets/ui_text.dart';
 import 'package:rs_books/styles.dart';
-import 'package:rs_books/themes.dart';
-import 'package:rs_books/widgets/book_item_small.dart';
+import 'package:rs_books/widgets/book_listing_widgets.dart';
 
 class BookItem extends StatelessWidget {
   final Book book;
@@ -25,7 +18,6 @@ class BookItem extends StatelessWidget {
       'assets/books/book-${book.details.isbn}/${book.images.front}',
       width: MediaQuery.of(context).size.width / 12 * 2,
     );
-    final AppTheme theme = context.watch();
     return Card(
       margin: const EdgeInsets.all(10),
       elevation: 6,

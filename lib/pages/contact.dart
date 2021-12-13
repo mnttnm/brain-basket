@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
+import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
 
 List<String> parseJson(String instructionJson) {
@@ -31,12 +33,14 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
+    final bool isSmallScreen = ResponsiveWidget.isSmallScreen(context) == true;
     return FutureBuilder<List<String>>(
       future: parseInstructions(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                EdgeInsets.all(isSmallScreen == true ? Insets.xs : Insets.sm),
             child: Column(
               children: [
                 const Spacer(),
@@ -50,27 +54,30 @@ class ContactPage extends StatelessWidget {
                 VSpace.sm,
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: theme.accent1.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: theme.accent1.withOpacity(0.9),
                       width: 2,
                     ),
                   ),
-                  padding: const EdgeInsets.all(20),
-                  constraints: const BoxConstraints(maxWidth: 700),
+                  padding: EdgeInsets.all(
+                    isSmallScreen == true ? Insets.xs : Insets.med,
+                  ),
+                  constraints:
+                      const BoxConstraints(maxWidth: 700, minWidth: 360),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: snapshot.data!
-                        .map<Widget>((instruction) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                '-> $instruction',
-                                style:
-                                    const TextStyle(
+                        .map<Widget>(
+                          (instruction) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '-> $instruction',
+                              style: const TextStyle(
                                 fontSize: 20,
                                 letterSpacing: 1.2,
                               ),
-                              ),
+                            ),
                           ),
                         )
                         .toList(),
@@ -78,19 +85,21 @@ class ContactPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 Container(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: EdgeInsets.all(
+                    isSmallScreen == true ? Insets.xs : Insets.med,
+                  ),
                   decoration: BoxDecoration(
-                      color: theme.accent1.withOpacity(0.9),
-                      borderRadius: const BorderRadius.all(
+                    color: theme.accent1.withOpacity(0.9),
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(16),
                     ),
                     boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 2,
-                          color: Color.fromARGB(255, 247, 228, 231),
-                        ),
-                      ],
+                      BoxShadow(
+                        offset: Offset(1, 1),
+                        blurRadius: 2,
+                        color: Color.fromARGB(255, 247, 228, 231),
+                      ),
+                    ],
                   ),
                   child: Align(
                     widthFactor: 1,
@@ -111,10 +120,10 @@ class ContactPage extends StatelessWidget {
                             text: 'Contact ',
                             children: [
                               TextSpan(
-                                  text: '+91-9024489556',
-                                  style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold,
+                                text: '+91-9024489556',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               TextSpan(

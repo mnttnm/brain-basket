@@ -70,8 +70,7 @@ class AuthorItem extends StatelessWidget {
               .toList(),
         ),
         Container(
-            width: 600,
-            height: 400,
+            width: containerWidth,
             padding: EdgeInsets.all(Insets.xl),
             child: Text(
               authorDetails,

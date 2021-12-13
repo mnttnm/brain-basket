@@ -30,6 +30,7 @@ class Insets {
   static double scale = 1;
   static double offsetScale = 1;
   // Regular paddings
+  static double get xxs => 2 * scale;
   static double get xs => 4 * scale;
   static double get sm => 8 * scale;
   static double get med => 12 * scale;
@@ -84,6 +85,7 @@ class FontSizes {
   static double get s12 => 12 * scale;
   static double get s14 => 14 * scale;
   static double get s16 => 16 * scale;
+  static double get s18 => 18 * scale;
   static double get s24 => 24 * scale;
   static double get s48 => 48 * scale;
 }
@@ -125,7 +127,7 @@ class TextStyles {
   static TextStyle get h2 =>
       h1.copyWith(fontSize: FontSizes.s24, letterSpacing: -.5, height: 1.16);
   static TextStyle get h3 =>
-      h1.copyWith(fontSize: FontSizes.s14, letterSpacing: -.05, height: 1.29);
+      h1.copyWith(fontSize: FontSizes.s18, letterSpacing: 1, height: 1.29);
   static TextStyle get title1 => poppins.copyWith(
       fontWeight: FontWeight.bold,
         fontSize: FontSizes.s16,
