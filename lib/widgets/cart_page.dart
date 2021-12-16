@@ -9,80 +9,8 @@ import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
+import 'package:rs_books/widgets/book_quantity_controller.dart';
 import 'package:rs_books/widgets/centered_view.dart';
-
-class QuantityIconButton extends StatelessWidget {
-  final void Function() onPressedFn;
-  final IconData iconType;
-  const QuantityIconButton({
-    Key? key,
-    required this.onPressedFn,
-    required this.iconType,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final AppTheme theme = context.watch();
-
-    return IconButton(
-      padding: EdgeInsets.all(Insets.xs),
-      iconSize: 20,
-      constraints: const BoxConstraints(maxHeight: 24),
-      onPressed: onPressedFn,
-      icon: Icon(iconType),
-      hoverColor: theme.accent1,
-      splashRadius: 12,
-    );
-  }
-}
-
-class BookQuantityControl extends StatelessWidget {
-  final Product product;
-  const BookQuantityControl({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final AppTheme theme = context.watch();
-    return Consumer<CartController>(
-      builder: (BuildContext context, CartController cart, Widget? child) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (!ResponsiveWidget.isLargeScreen(context)) ...[
-              Text(
-                'Qty:',
-                style: TextStyles.body1.copyWith(
-                  color: theme.greyStrong,
-                ),
-              )
-            ],
-            QuantityIconButton(
-              iconType: Icons.remove,
-              onPressedFn: () => context
-                  .read<CartController>()
-                  .decreaseBookQuantity(product.id),
-            ),
-            HSpace.xs,
-            Text(
-              product.quantity.toString(),
-              style: const TextStyle(fontSize: 16),
-            ),
-            HSpace.xs,
-            QuantityIconButton(
-              iconType: Icons.add,
-              onPressedFn: () => context
-                  .read<CartController>()
-                  .increaseBookQuantity(product.id),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
 
 class CartHeaderItem extends StatelessWidget {
   final String headerLabel;
@@ -196,6 +124,68 @@ class CartTable extends StatelessWidget {
   }
 }
 
+class CartItem extends StatelessWidget {
+  const CartItem({
+    Key? key,
+    required this.item,
+    required this.theme,
+  }) : super(key: key);
+
+  final Product item;
+  final AppTheme theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Image.asset(
+          'assets/books/book-${item.id}/front.jpeg',
+          fit: BoxFit.cover,
+          width: 75,
+          height: 100,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            VSpace.sm,
+            Text(
+              item.name.toUpperCase(),
+              style: TextStyle(
+                color: theme.accent1,
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            BookQuantityControl(
+              product: item,
+            ),
+            Column(
+              children: [
+                VSpace.sm,
+                Text(
+                  '₹ ${item.quantity * item.cost}',
+                  style: TextStyles.h3.copyWith(
+                    color: theme.greyMedium,
+                  ),
+                ),
+                VSpace.xs,
+                Text(
+                  '(${item.quantity} x ₹${item.cost})',
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -225,7 +215,7 @@ class CartPage extends StatelessWidget {
                           },
                           label: 'Order Books',
                         ),
-                      )
+                      ),
                     ],
                   ),
                 )
@@ -336,88 +326,6 @@ class CartPage extends StatelessWidget {
                 );
         },
       ),
-    );
-  }
-}
-
-class CartItem extends StatelessWidget {
-  const CartItem({
-    Key? key,
-    required this.item,
-    required this.theme,
-  }) : super(key: key);
-
-  final Product item;
-  final AppTheme theme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          'assets/books/book-${item.id}/front.jpeg',
-          fit: BoxFit.cover,
-          width: 75,
-          height: 100,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            VSpace.sm,
-            Text(
-              item.name.toUpperCase(),
-              style: TextStyle(
-                color: theme.accent1,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BookQuantityControl(
-              product: item,
-            ),
-            Column(
-              children: [
-                VSpace.sm,
-                Text(
-                  '₹ ${item.quantity * item.cost}',
-                  style: TextStyles.h3.copyWith(
-                    color: theme.greyMedium,
-                  ),
-                ),
-                VSpace.xs,
-                Text(
-                  '(${item.quantity} x ₹${item.cost})',
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class Back extends StatelessWidget {
-  const Back({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final AppTheme theme = context.watch();
-    return InkWell(
-      child: Text(
-        '<  Back',
-        style: TextStyle(fontSize: 18, color: theme.accent1),
-      ),
-      onTap: () {
-        Navigator.pop(context);
-      },
     );
   }
 }

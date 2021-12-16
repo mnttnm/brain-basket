@@ -43,7 +43,7 @@ class _PaymentState extends State<Payment> {
     final paymentService = PayementService();
     final shipOrderService = ShipOrder();
     final AppTheme theme = context.watch();
-
+    final isSmallestScreen = ResponsiveWidget.isSmallestScreen(context);
     return Consumer<CartController>(
       builder: (BuildContext context, CartController cart, Widget? child) {
         return Consumer<AddressController>(
@@ -57,103 +57,100 @@ class _PaymentState extends State<Payment> {
                 child: orderInProgress == true
                     ? const CircularProgressIndicator()
                     : Container(
+                        constraints: const BoxConstraints(
+                          maxWidth: 800,
+                        ),
                         padding: const EdgeInsets.all(10),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: theme.accent1.withOpacity(0.9),
-                                  width: 2,
-                                ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Order Summary',
+                                style: TextStyles.h3,
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 20,
-                                horizontal: 10,
-                              ),
-                              constraints: BoxConstraints(
-                                maxWidth:
-                                    ResponsiveWidget.isSmallestScreen(context)
-                                        ? 300
-                                        : 700,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order Summary',
-                                    style: TextStyles.h3,
-                                  ),
-                                  VSpace.sm,
-                                  Flex(
-                                    direction:
-                                        ResponsiveWidget.isSmallestScreen(
-                                                context)
+                            ),
+                            Divider(
+                              thickness: 2,
+                              color: theme.accent1,
+                            ),
+                            VSpace.sm,
+                            SizedBox(
+                              width: double.infinity,
+                              child: Card(
+                                margin: EdgeInsets.all(Insets.med),
+                                child: Padding(
+                                  padding: EdgeInsets.all(Insets.med),
+                                  child: Flex(
+                                    direction: isSmallestScreen
                                             ? Axis.vertical
                                             : Axis.horizontal,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: isSmallestScreen
+                                        ? MainAxisAlignment.spaceAround
+                                        : MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Shipping Details:',
-                                            style: TextStyles.title1.copyWith(
-                                              color: theme.greyMedium,
+                                      Expanded(
+                                        flex: isSmallestScreen ? 0 : 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Shipping Details:',
+                                              style: TextStyles.title1.copyWith(
+                                                color: theme.greyMedium,
+                                              ),
                                             ),
-                                          ),
-                                          VSpace.xs,
-                                          SizedBox(
-                                            width: 250,
-                                            child: Text(
+                                            VSpace.xs,
+                                            Text(
                                               addressController.address
                                                   .toString(),
+                                                  textAlign: TextAlign.start,
                                               style: const TextStyle(
                                                 fontSize: 14,
                                               ),
                                             ),
-                                          ),
-                                          VSpace.sm,
-                                          SecondaryButton(
-                                            onPressed: () {
-                                              context
-                                                  .goNamed(CheckOutPageRoute);
-                                            },
-                                            label: 'Edit Address',
-                                            backgroundColor:
-                                                theme.accent1.withOpacity(0.8),
-                                          ),
-                                        ],
+                                            VSpace.sm,
+                                            SecondaryButton(
+                                              onPressed: () {
+                                                context
+                                                    .goNamed(CheckOutPageRoute);
+                                              },
+                                              label: 'Edit Address',
+                                              backgroundColor: theme.accent1
+                                                  .withOpacity(0.8),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      if (ResponsiveWidget.isSmallestScreen(
-                                          context))
+                                      if (isSmallestScreen)
                                         VSpace.med,
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Order Total',
-                                            style: TextStyles.title1.copyWith(
-                                              color: theme.greyMedium,
+                                      SizedBox(
+                                        width: 100,
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Order Total',
+                                              style: TextStyles.title1.copyWith(
+                                                color: theme.greyMedium,
+                                              ),
                                             ),
-                                          ),
-                                          VSpace.xs,
-                                          SizedBox(
-                                            child: Text(
-                                              '₹ ${cart.total}',
-                                              style: TextStyles.h3,
+                                            VSpace.xs,
+                                            SizedBox(
+                                              child: Text(
+                                                '₹ ${cart.total}',
+                                                style: TextStyles.h3,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
                             ),
                             Column(

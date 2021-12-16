@@ -12,6 +12,7 @@ import 'package:rs_books/widgets/centered_view.dart';
 
 import 'widgets/address_form.dart';
 
+
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({Key? key}) : super(key: key);
 
@@ -34,12 +35,17 @@ class CheckoutPage extends StatelessWidget {
                 // Back(),
                 Text(
                   "Shipping Details",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: theme.accent1,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyles.h3,
                 ),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 800,
+                  ),
+                  child: Divider(
+                    thickness: 2,
+                    color: theme.accent1,
+                  ),
+                ), 
                 VSpace.sm,
                 const Text(
                   'Please fill the below form with the complete information about the shipping address and contact deatils.',
@@ -48,16 +54,7 @@ class CheckoutPage extends StatelessWidget {
                 VSpace.med,
                 Container(
                   constraints: const BoxConstraints(maxWidth: 800),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: theme.accent1.withOpacity(0.9),
-                      width: 2,
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Insets.lg,
-                    vertical: Insets.xl,
-                  ),
+                  padding: EdgeInsets.all(Insets.lg),
                   child: AddressForm(
                     onFormSubmit: onCheckout,
                   ),
