@@ -27,7 +27,8 @@ class CheckoutPage extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(
-              ResponsiveWidget.isSmallScreen(context) ? Insets.sm : Insets.med),
+            ResponsiveWidget.isSmallScreen(context) ? Insets.sm : Insets.med,
+          ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

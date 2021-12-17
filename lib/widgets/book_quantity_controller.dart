@@ -40,7 +40,6 @@ class BookQuantityControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppTheme theme = context.watch();
     return Consumer<CartController>(
       builder: (BuildContext context, CartController cart, Widget? child) {
         return Row(

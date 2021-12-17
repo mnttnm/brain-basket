@@ -225,7 +225,7 @@ class _PaymentState extends State<Payment> {
                                   child: Text(
                                     "Order failed, Please try again!",
                                       style: TextStyles.callout1
-                                          .copyWith(color: Colors.red)
+                                        .copyWith(color: Colors.red),
                                   ),
                                 )
                               ],

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:rs_books/styles.dart';
-import 'package:rs_books/themes.dart';
 
 class Back extends StatelessWidget {
   const Back({
@@ -10,7 +8,6 @@ class Back extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppTheme theme = context.watch();
     return InkWell(
       child: Text(
         '<  Back',

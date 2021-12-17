@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/pages/authors/authors.dart';
 import 'package:rs_books/pages/books/books.dart';
 import 'package:rs_books/pages/checkout/checkout_page.dart';
@@ -13,32 +14,57 @@ List<GoRoute> generateRoute(BuildContext context) {
   return [
     GoRoute(
       path: '/',
-      pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: BooksPage()),
+      pageBuilder: (context, state) {
+        menuController.changeActiveItemTo(BooksPageRoute);
+        return MaterialPage<void>(
+          key: state.pageKey,
+          child: BooksPage(),
+        );
+      },
     ),
     GoRoute(
       name: BooksPageRoute,
       path: getPathStrForRoute(BooksPageRoute),
-      pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: BooksPage()),
+      pageBuilder: (context, state) {
+        menuController.changeActiveItemTo(BooksPageRoute);
+        return MaterialPage<void>(
+          key: state.pageKey,
+          child: BooksPage(),
+        );
+      },
     ),
     GoRoute(
       name: ContactPageRoute,
       path: getPathStrForRoute(ContactPageRoute),
-      pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: const ContactPage()),
+      pageBuilder: (context, state) {
+        menuController.changeActiveItemTo(ContactPageRoute);
+        return MaterialPage<void>(
+          key: state.pageKey,
+          child: const ContactPage(),
+        );
+      },
     ),
     GoRoute(
       name: AuthorsPageRoute,
       path: getPathStrForRoute(AuthorsPageRoute),
-      pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: AuthorsPage()),
+      pageBuilder: (context, state) {
+        menuController.changeActiveItemTo(AuthorsPageRoute);
+        return MaterialPage<void>(
+          key: state.pageKey,
+          child: AuthorsPage(),
+        );
+      },
     ),
     GoRoute(
       name: CartPageRoute,
       path: getPathStrForRoute(CartPageRoute),
-      pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: CartPage()),
+      pageBuilder: (context, state) {
+        menuController.changeActiveItemTo(CartPageRoute);
+        return MaterialPage<void>(
+          key: state.pageKey,
+          child: CartPage(),
+        );
+      },
     ),
     GoRoute(
       name: PaymentsPageRoute,
@@ -56,9 +82,9 @@ List<GoRoute> generateRoute(BuildContext context) {
       name: OrderSuccessPageRoute,
       path: getPathStrForRoute(OrderSuccessPageRoute),
       pageBuilder: (context, state) => MaterialPage<void>(
-          key: state.pageKey,
-          child: OrderSuccessPage(
-            trackingId: state.extra! as String,
+        key: state.pageKey,
+        child: OrderSuccessPage(
+          trackingId: state.extra! as String,
         ),
       ),
     ),

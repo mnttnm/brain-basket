@@ -21,7 +21,7 @@ class OrderSuccessPage extends StatelessWidget {
         children: [
           Text(
             "Order Successful!!",
-              style: TextStyles.h1.copyWith(color: theme.accent1)
+            style: TextStyles.h1.copyWith(color: theme.accent1),
           ),
           VSpace.xs,
           Wrap(
