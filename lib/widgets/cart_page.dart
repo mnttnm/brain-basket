@@ -38,7 +38,6 @@ class CartTable extends StatelessWidget {
   const CartTable({Key? key, required this.products}) : super(key: key);
 
   List<TableRow> getCartEntries(List<Product> products, BuildContext context) {
-    final AppTheme theme = context.watch();
     final List<TableRow> tableEntries = [];
     tableEntries.add(
       const TableRow(
@@ -88,15 +87,15 @@ class CartTable extends StatelessWidget {
             ),
           ),
           Text(
-            product.cost.toString(),
+            '₹ ${product.cost.toString()}',
             textAlign: TextAlign.center,
-            style: TextStyles.title1.copyWith(color: theme.greyStrong),
+            style: TextStyles.title1,
           ),
           BookQuantityControl(
             product: product,
           ),
           Text(
-            '${product.cost * product.quantity}',
+            '₹ ${product.cost * product.quantity}',
             textAlign: TextAlign.center,
             style: TextStyles.title1,
           ),
@@ -125,8 +124,8 @@ class CartTable extends StatelessWidget {
   }
 }
 
-class CartItem extends StatelessWidget {
-  const CartItem({
+class CartItemSmall extends StatelessWidget {
+  const CartItemSmall({
     Key? key,
     required this.item,
     required this.theme,
@@ -137,52 +136,53 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          'assets/books/book-${item.id}/front.jpeg',
-          fit: BoxFit.cover,
-          width: 75,
-          height: 100,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            VSpace.sm,
-            Text(
-              item.name.toUpperCase(),
-              style: TextStyle(
-                color: theme.accent1,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BookQuantityControl(
-              product: item,
-            ),
-            Column(
+    return Padding(
+      padding: EdgeInsets.all(
+        Insets.lg,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(
+            'assets/books/book-${item.id}/front.jpeg',
+            fit: BoxFit.cover,
+            width: 75,
+            height: 100,
+          ),
+          HSpace.lg,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                VSpace.sm,
                 Text(
-                  '₹ ${item.quantity * item.cost}',
-                  style: TextStyles.h3.copyWith(
-                    color: theme.greyMedium,
+                  item.name.toUpperCase(),
+                  style: TextStyles.title2.copyWith(
+                    color: theme.accent1,
                   ),
                 ),
-                VSpace.xs,
-                Text(
-                  '(${item.quantity} x ₹${item.cost})',
+                VSpace.med,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BookQuantityControl(
+                      product: item,
+                    ),
+                    Column(
+                      children: [
+                        VSpace.sm,
+                        Text(
+                          '₹ ${item.quantity * item.cost}',
+                          style: TextStyles.title1,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -261,7 +261,7 @@ class CartPage extends StatelessWidget {
                                 final productList =
                                     cart.products.values.toList();
                                 final item = productList[index];
-                                return CartItem(item: item, theme: theme);
+                                return CartItemSmall(item: item, theme: theme);
                               },
                             )
                           ],
@@ -279,12 +279,16 @@ class CartPage extends StatelessWidget {
                                   children: [
                                     TextSpan(
                                       text: 'SUBTOTAL:',
-                                      style: TextStyles.body1,
+                                      style: TextStyles.body1.copyWith(
+                                        color: theme.greyMedium,
+                                      ),
                                       children: [
                                         TextSpan(
                                           text:
                                               ' ₹ ${context.select((CartController c) => c.total)}',
-                                          style: TextStyles.h3,
+                                          style: TextStyles.h3.copyWith(
+                                            color: theme.greyStrong,
+                                          ),
                                         ),
                                       ],
                                     )

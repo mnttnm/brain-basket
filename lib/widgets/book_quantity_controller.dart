@@ -54,7 +54,7 @@ class BookQuantityControl extends StatelessWidget {
             HSpace.xs,
             Text(
               product.quantity.toString(),
-              style: const TextStyle(fontSize: 16),
+              style: TextStyles.title1,
             ),
             HSpace.xs,
             QuantityIconButton(
