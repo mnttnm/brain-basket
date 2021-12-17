@@ -11,16 +11,14 @@ class AuthorItem extends StatelessWidget {
   final String authorDetails;
   final double containerWidth;
   final SocialLinks? socialLinks;
-  AuthorItem(
-      {
+  AuthorItem({
     Key? key,
-      required this.image,
-      required this.authorDetails,
-      required this.name,
-      required this.containerWidth,
-      this.socialLinks,
-  })
-      : super(key: key);
+    required this.image,
+    required this.authorDetails,
+    required this.name,
+    required this.containerWidth,
+    this.socialLinks,
+  }) : super(key: key);
 
   final Map<String, dynamic> iconMap = {
     "facebook": {
@@ -41,39 +39,44 @@ class AuthorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const VSpace(80),
         Image.asset(
           image,
           width: 300,
           height: 310,
           fit: BoxFit.fill,
         ),
+        VSpace.sm,
+        Text(
+          name,
+          style: TextStyles.h3,
+        ),
         Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: socialLinks!
-                .toJson()
-                .entries
-                .map((e) => IconButton(
-                    onPressed: () async {
-                      if (await canLaunch(e.value! as String)) {
-                        await launch(e.value as String);
-                      } else {
-                        throw 'Could not launch ${e.value}';
-                      }
-                    },
-                    icon: Icon(
-                      iconMap[e.key]!['icon_data'] as IconData,
-                      color: iconMap[e.key]!['color'] as Color,
-                    ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: socialLinks!
+              .toJson()
+              .entries
+              .map(
+                (e) => IconButton(
+                  onPressed: () async {
+                    if (await canLaunch(e.value! as String)) {
+                      await launch(e.value as String);
+                    } else {
+                      throw 'Could not launch ${e.value}';
+                    }
+                  },
+                  icon: Icon(
+                    iconMap[e.key]!['icon_data'] as IconData,
+                    color: iconMap[e.key]!['color'] as Color,
+                  ),
                 ),
               )
               .toList(),
         ),
         Container(
-            width: containerWidth,
-            padding: EdgeInsets.all(Insets.xl),
-            child: Text(
-              authorDetails,
+          width: containerWidth,
+          padding: EdgeInsets.all(Insets.xl),
+          child: Text(
+            authorDetails,
             style: TextStyles.body16.copyWith(fontWeight: FontWeight.w500),
           ),
         ),
