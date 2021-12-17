@@ -74,13 +74,8 @@ class AuthorItem extends StatelessWidget {
             padding: EdgeInsets.all(Insets.xl),
             child: Text(
               authorDetails,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  wordSpacing: 5,
-                  height: 1.5,
-              ),
-            ),
+            style: TextStyles.body16.copyWith(fontWeight: FontWeight.w500),
+          ),
         ),
       ],
     );

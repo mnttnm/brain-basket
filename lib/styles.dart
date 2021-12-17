@@ -127,7 +127,7 @@ class TextStyles {
   static TextStyle get h2 =>
       h1.copyWith(fontSize: FontSizes.s24, letterSpacing: -.5, height: 1.16);
   static TextStyle get h3 =>
-      h1.copyWith(fontSize: FontSizes.s18, letterSpacing: 1, height: 1.29);
+      h1.copyWith(fontSize: FontSizes.s16, letterSpacing: 0.5, height: 1.29);
   static TextStyle get title1 => poppins.copyWith(
       fontWeight: FontWeight.bold,
         fontSize: FontSizes.s16,
@@ -138,8 +138,13 @@ class TextStyles {
         fontSize: FontSizes.s14,
         height: 1.36,
       );
+  static TextStyle get body16 => poppins.copyWith(
+        fontWeight: FontWeight.normal,
+        fontSize: FontSizes.s16,
+        height: 1.71,
+      );
   static TextStyle get body1 => poppins.copyWith(
-      fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.normal,
         fontSize: FontSizes.s14,
         height: 1.71,
       );

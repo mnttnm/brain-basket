@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
-import 'package:rs_books/helpers/responsiveness.dart';
+import 'package:rs_books/models/product_model.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
@@ -46,14 +46,6 @@ class BookQuantityControl extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (!ResponsiveWidget.isLargeScreen(context)) ...[
-              Text(
-                'Qty:',
-                style: TextStyles.body1.copyWith(
-                  color: theme.greyStrong,
-                ),
-              )
-            ],
             QuantityIconButton(
               iconType: Icons.remove,
               onPressedFn: () => context

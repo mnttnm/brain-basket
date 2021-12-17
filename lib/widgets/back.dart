@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
 
 class Back extends StatelessWidget {
@@ -13,7 +14,7 @@ class Back extends StatelessWidget {
     return InkWell(
       child: Text(
         '<  Back',
-        style: TextStyle(fontSize: 18, color: theme.accent1),
+        style: TextStyles.h3,
       ),
       onTap: () {
         Navigator.pop(context);

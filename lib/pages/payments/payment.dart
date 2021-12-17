@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/api/payment_service.dart';
@@ -109,9 +107,7 @@ class _PaymentState extends State<Payment> {
                                               addressController.address
                                                   .toString(),
                                                   textAlign: TextAlign.start,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                              ),
+                                              style: TextStyles.body1,
                                             ),
                                             VSpace.sm,
                                             SecondaryButton(
@@ -217,22 +213,19 @@ class _PaymentState extends State<Payment> {
                                     padding: EdgeInsets.all(
                                       Insets.sm,
                                     ),
-                                    child: const Text(
+                                    child: Text(
                                       "MAKE PAYMENT",
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
+                                      style: TextStyles.h2,
                                     ),
                                   ),
                                 ),
                                 VSpace.sm,
                                 Visibility(
                                   visible: errorHappend,
-                                  child: const Text(
+                                  child: Text(
                                     "Order failed, Please try again!",
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                    ),
+                                      style: TextStyles.callout1
+                                          .copyWith(color: Colors.red)
                                   ),
                                 )
                               ],

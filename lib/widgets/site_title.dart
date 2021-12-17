@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
-import 'package:rs_books/widgets/custom_text.dart';
 
 class SiteTitle extends StatelessWidget {
   final String siteTitle;
@@ -12,11 +12,11 @@ class SiteTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
-    return CustomText(
-      text: siteTitle,
-      size: 20,
-      weight: FontWeight.bold,
-      color: color ?? theme.accent1,
+    return Text(
+      siteTitle,
+      style: TextStyles.h2.copyWith(
+        color: color ?? theme.accent1,
+      ),
     );
   }
 }

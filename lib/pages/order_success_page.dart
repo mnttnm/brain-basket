@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/centered_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,11 +21,7 @@ class OrderSuccessPage extends StatelessWidget {
         children: [
           Text(
             "Order Successful!!",
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: theme.accent1,
-            ),
+              style: TextStyles.h1.copyWith(color: theme.accent1)
           ),
           VSpace.xs,
           Wrap(

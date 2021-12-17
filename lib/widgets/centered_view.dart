@@ -1,6 +1,10 @@
 // ignore_for_file: avoid_bool_literals_in_conditional_expressions
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:rs_books/helpers/responsiveness.dart';
+import 'package:rs_books/styles.dart';
 
 class CenteredView extends StatelessWidget {
   final Widget? child;
@@ -8,18 +12,18 @@ class CenteredView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600 ? true : false;
-    // print(
-    //     'width x heigh ${MediaQuery.of(context).size.width} x ${MediaQuery.of(context).size.height}');
-    return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: isMobile == true ? 0 : 0,
-        vertical: 5,
-      ),
-      alignment: Alignment.topCenter, //Todo how is this working?
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: isMobile == true ? 600 : 1200),
-        child: child,
+
+    final isMobile = ResponsiveWidget.isSmallestScreen(context);
+    return Padding(
+      padding: EdgeInsets.all(Insets.med),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: isMobile == true
+                        ? max(MediaQuery.of(context).size.width * .9, 360)
+                        : 1200,),
+          child: child,
+        ),
       ),
     );
   }

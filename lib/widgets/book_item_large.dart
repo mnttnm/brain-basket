@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/styled_widgets/ui_text.dart';
@@ -8,20 +7,21 @@ import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
 import 'package:rs_books/widgets/book_listing_widgets.dart';
 
-class BookItem extends StatelessWidget {
+class BookItemlarge extends StatelessWidget {
   final Book book;
   final bool showDetails;
-  const BookItem({Key? key, required this.showDetails, required this.book})
+  const BookItemlarge({Key? key, required this.showDetails, required this.book})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
+    final AppTheme theme = context.watch();
     final Image image = Image.asset(
       'assets/books/book-${book.details.isbn}/${book.images.front}',
       width: MediaQuery.of(context).size.width / 12 * 2,
     );
     return Card(
+      margin: EdgeInsets.zero,
       elevation: 6,
       child: Row(
         children: [
@@ -52,7 +52,8 @@ class BookItem extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2),
                 border: Border.all(
-                  color: theme.accent1, width: 2
+                  color: theme.accent1,
+                  width: 2,
                 ),
               ),
               child: Column(
@@ -68,18 +69,7 @@ class BookItem extends StatelessWidget {
                     text: 'By: Rohit Agrawal(RA), Shubhkaran (SKC)',
                     style: TextStyles.callout1,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: Insets.sm),
-                    padding: EdgeInsets.symmetric(vertical: Insets.xs),
-                    child: Text(
-                      book.description,
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  VSpace.xl,
+                  VSpace.sm,
                   BookActions(
                     book: book,
                   ),

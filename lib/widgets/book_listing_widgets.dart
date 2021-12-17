@@ -5,9 +5,11 @@ import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/data/models.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
+import 'package:rs_books/models/product_model.dart';
 import 'package:rs_books/routing/routes.dart';
 import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
+import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
 
 class Reviews extends StatelessWidget {
@@ -20,18 +22,31 @@ class Reviews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: IntrinsicHeight(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: reviews
-                .map(
-                  (review) =>
-                      ReviewItem(name: review.name, review: review.review),
-                )
-                .toList(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: Insets.sm, top: Insets.sm),
+            child: Text(
+              'Reviews:',
+              style: TextStyles.h3,
+            ),
           ),
-        ),
+          VSpace.sm,
+          IntrinsicHeight(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: reviews
+                    .map(
+                      (review) =>
+                          ReviewItem(name: review.name, review: review.review),
+                    )
+                    .toList(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -49,36 +64,41 @@ class ReviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: SizedBox(
+    return Padding(
+      padding: EdgeInsets.all(
+        Insets.sm,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
             width: 200,
             child: Text(
               name.toUpperCase(),
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
+              style: TextStyles.callout1.copyWith(
+                fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
-        ),
-        VSpace.sm,
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
+          VSpace.xs,
+          SizedBox(
             width: 200,
             height: 150,
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Text(review),
+                  Text(
+                    review,
+                    style: TextStyles.body1,
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -124,8 +144,9 @@ class Pricing extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Price:',
+          style: TextStyles.title2,
         ),
         VSpace.xs,
         RichText(
@@ -133,10 +154,7 @@ class Pricing extends StatelessWidget {
             children: [
               TextSpan(
                 text: '₹ $bookPrice',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyles.title1,
               ),
               const TextSpan(text: ' '),
               const TextSpan(
@@ -169,9 +187,9 @@ class PurchaseOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
     return Flex(
-      direction: ResponsiveWidget.isLargeScreen(context) == true
-          ? Axis.horizontal
-          : Axis.vertical,
+      direction: ResponsiveWidget.isSmallestScreen(context) == true
+          ? Axis.vertical
+          : Axis.horizontal,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         PrimaryButton(
@@ -184,10 +202,10 @@ class PurchaseOptions extends StatelessWidget {
           },
           label: 'Buy Now',
         ),
-        if (ResponsiveWidget.isLargeScreen(context) == true)
-          HSpace.sm
+        if (ResponsiveWidget.isSmallestScreen(context) == true)
+          VSpace.sm
         else
-          VSpace.sm,
+          HSpace.sm,
         SecondaryButton(
           label: 'Add to Cart',
           onPressed: () {
@@ -195,9 +213,7 @@ class PurchaseOptions extends StatelessWidget {
               SnackBar(
                 content: Text(
                   "Item added to the cart",
-                  style: TextStyle(
-                    color: theme.greyStrong,
-                  ),
+                  style: TextStyles.body1,
                 ),
                 backgroundColor: theme.accent1,
                 action: SnackBarAction(
@@ -261,9 +277,9 @@ class AdditionalDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Details:',
-                  // style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 16),
+                  style: TextStyles.h3,
                 ),
                 VSpace.sm,
                 SingleChildScrollView(
@@ -272,10 +288,8 @@ class AdditionalDetails extends StatelessWidget {
                     shrinkWrap: true,
                     primary: true,
                     mainAxisSpacing: 5,
-                    crossAxisCount: ResponsiveWidget.isLargeScreen(context) ||
-                            ResponsiveWidget.isMediumScreen(context)
-                        ? 3
-                        : 2,
+                    crossAxisCount:
+                        ResponsiveWidget.isSmallestScreen(context) ? 2 : 3,
                     childAspectRatio: 3,
                     crossAxisSpacing: 5,
                     children: bookDetails
@@ -326,6 +340,7 @@ class BookDetailItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppTheme theme = context.watch();
     return Center(
       child: Column(
         children: [
@@ -336,13 +351,14 @@ class BookDetailItem extends StatelessWidget {
               HSpace.xs,
               Text(
                 label.toUpperCase(),
+                style: TextStyles.body3.copyWith(color: theme.greyMedium),
               ),
             ],
           ),
           VSpace.xs,
           Text(
             value,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: TextStyles.callout1,
           ),
         ],
       ),

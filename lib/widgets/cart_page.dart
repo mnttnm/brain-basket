@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rs_books/constants/controllers.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
+import 'package:rs_books/models/product_model.dart';
 import 'package:rs_books/routing/routes.dart';
 import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
@@ -199,11 +200,11 @@ class CartPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "You haven't added any books yet, Please grab some!",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyles.title2,
                         ),
                       ),
                       Padding(

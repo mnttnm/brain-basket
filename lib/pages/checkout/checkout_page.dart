@@ -47,9 +47,9 @@ class CheckoutPage extends StatelessWidget {
                   ),
                 ), 
                 VSpace.sm,
-                const Text(
+                Text(
                   'Please fill the below form with the complete information about the shipping address and contact deatils.',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyles.body1,
                 ),
                 VSpace.med,
                 Container(

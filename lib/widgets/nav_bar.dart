@@ -61,7 +61,10 @@ class __NavBarItemState extends State<_NavBarItem> {
         ),
         child: Text(
           widget.title!,
-          style: TextStyle(color: elementColor, fontSize: 16),
+          style: TextStyles.body1.copyWith(
+            color: elementColor,
+          ),
+          // style: TextStyle(color: elementColor, fontSize: 16),
         ),
       ),
     );

@@ -9,6 +9,7 @@ import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
 import 'package:rs_books/styles.dart';
 import 'package:rs_books/themes.dart';
+import 'package:rs_books/widgets/centered_view.dart';
 
 List<String> parseJson(String instructionJson) {
   final parsedObject =
@@ -33,124 +34,131 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
-    final bool isSmallScreen = ResponsiveWidget.isSmallScreen(context) == true;
-    return FutureBuilder<List<String>>(
-      future: parseInstructions(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Padding(
-            padding:
-                EdgeInsets.all(isSmallScreen == true ? Insets.xs : Insets.sm),
-            child: Column(
-              children: [
-                const Spacer(),
-                Text(
-                  "Please Note:",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: theme.accent1,
-                  ),
-                ),
-                VSpace.sm,
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: theme.accent1.withOpacity(0.9),
-                      width: 2,
+    return CenteredView(
+      child: SingleChildScrollView(
+        child: FutureBuilder<List<String>>(
+          future: parseInstructions(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    VSpace.med,
+                    Text(
+                      "Please Note:",
+                      style: TextStyles.h3,
                     ),
-                  ),
-                  padding: EdgeInsets.all(
-                    isSmallScreen == true ? Insets.xs : Insets.med,
-                  ),
-                  constraints:
-                      const BoxConstraints(maxWidth: 700, minWidth: 360),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: snapshot.data!
-                        .map<Widget>(
-                          (instruction) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '-> $instruction',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                letterSpacing: 1.2,
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-                const Spacer(),
-                Container(
-                  padding: EdgeInsets.all(
-                    isSmallScreen == true ? Insets.xs : Insets.med,
-                  ),
-                  decoration: BoxDecoration(
-                    color: theme.accent1.withOpacity(0.9),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(16),
-                    ),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 2,
-                        color: Color.fromARGB(255, 247, 228, 231),
+                    VSpace.sm,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: theme.accent1.withOpacity(0.9),
+                          width: 2,
+                        ),
                       ),
-                    ],
-                  ),
-                  child: Align(
-                    widthFactor: 1,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.phone_enabled_outlined,
-                          color: Color.fromARGB(255, 236, 224, 234),
-                          size: 64,
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        RichText(
-                          text: const TextSpan(
-                            text: 'Contact ',
-                            children: [
-                              TextSpan(
-                                text: '+91-9024489556',
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
+                      padding: EdgeInsets.all(
+                        ResponsiveWidget.isSmallestScreen(context)
+                            ? Insets.sm
+                            : Insets.lg,
+                      ),
+                      constraints:
+                          const BoxConstraints(maxWidth: 700, minWidth: 360),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: snapshot.data!
+                            .map<Widget>(
+                              (instruction) => Padding(
+                                padding: EdgeInsets.all(
+                                  Insets.sm,
+                                ),
+                                child: Text(
+                                  '-> $instruction',
+                                  style: TextStyles.body2.copyWith(
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                              TextSpan(
-                                text: ' for help and support!',
-                              ),
-                            ],
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 236, 224, 234),
-                            ),
-                          ),
-                        ),
-                      ],
+                            )
+                            .toList(),
+                      ),
                     ),
-                  ),
+                    VSpace.lg,
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: Insets.med,
+                      ),
+                      width: 700,
+                      padding: EdgeInsets.all(
+                        Insets.lg,
+                      ),
+                      decoration: BoxDecoration(
+                        color: theme.accent1.withOpacity(0.9),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(16),
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 2,
+                            color: Color.fromARGB(255, 247, 228, 231),
+                          ),
+                        ],
+                      ),
+                      child: Align(
+                        widthFactor: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.phone_enabled_outlined,
+                              color: Color.fromARGB(255, 236, 224, 234),
+                              size: 64,
+                            ),
+                            VSpace.lg,
+                            RichText(
+                              text: const TextSpan(
+                                text: 'Contact ',
+                                children: [
+                                  TextSpan(
+                                    text: '+91-9024489556',
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' for help and support!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            VSpace.lg,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const Spacer(),
-              ],
-            ),
-          );
-        } else {
-          // print(snapshot.error);
-          return const Center(
-            child: Text("Error"),
-          );
-        }
-      },
+              );
+            } else {
+              // print(snapshot.error);
+              return const Center(
+                child: Text("Error"),
+              );
+            }
+          },
+        ),
+      ),
     );
   }
 }

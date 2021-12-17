@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/book_model.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
@@ -17,21 +15,19 @@ class BookItemSmall extends StatelessWidget {
     final _imageWidth =
         _isSmallestScreen ? MediaQuery.of(context).size.width * .75 : 300.0;
     final _imageHeight = _isSmallestScreen ? _imageWidth * 1.33 : 400.0;
-
-    // return Container(child: const Text('Hello1'),);
     return Card(
       elevation: 5,
       child: Container(
-        padding: EdgeInsets.all(Insets.sm),
+        padding: EdgeInsets.all(Insets.med),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BookTitle(title: book.title),
             BookImageContainer(
-                imagePath:
-                    'assets/books/book-${book.details.isbn}/${book.images.front}',
-                imageWidth: _imageWidth,
-                imageHeight: _imageHeight,
+              imagePath:
+                  'assets/books/book-${book.details.isbn}/${book.images.front}',
+              imageWidth: _imageWidth,
+              imageHeight: _imageHeight,
             ),
             BookActions(
               book: book,

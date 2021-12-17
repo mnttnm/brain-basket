@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rs_books/api/brain_basket_service.dart';
 import 'package:rs_books/data/brain_basket.dart';
@@ -13,32 +12,22 @@ class BooksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return CenteredView(
       child: FutureBuilder(
         future: dataService.getData(),
         builder: (context, AsyncSnapshot<BrainBasketData> snapshot) {
-          if (snapshot.hasError) { 
+          if (snapshot.hasError) {
             return const Center(
               child: Text('An error has occurred!'),
             );
           } else if (snapshot.hasData) {
-            return CenteredView(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        if (ResponsiveWidget.isLargeScreen(context) ||
-                            ResponsiveWidget.isMediumScreen(context))
-                          BooksLargeScreen(books: snapshot.data?.books ?? [])
-                        else
-                          BooksSmallScreen(books: snapshot.data?.books ?? [])
-                      ],
-                    ),
-                  )
-                ],
-              ),
+            return ListView(
+              children: [
+                if (ResponsiveWidget.isSmallestScreen(context))
+                  BooksSmallScreen(books: snapshot.data?.books ?? [])
+                else
+                  BooksLargeScreen(books: snapshot.data?.books ?? [])
+              ],
             );
           } else {
             return const Center(
