@@ -9,7 +9,10 @@ import 'package:rs_books/layout.dart';
 import 'package:rs_books/routing/router.dart';
 import 'package:rs_books/themes.dart';
 
+import 'controllers/progress_bar_controller.dart';
+
 void main() {
+  GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
   Get.put(MenuController());
   runApp(
     MultiProvider(
@@ -19,6 +22,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => AddressController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProgressBarController(),
         )
       ],
       child: const MyApp(),
@@ -34,6 +40,7 @@ class MyApp extends StatelessWidget {
     final cart = Provider.of<CartController>(context, listen: false);
     final GoRouter _router = GoRouter(
       redirect: (state) {
+        // redirect to /books for all the invalid manual route attempt
         if (state.location == '/payment' ||
             state.location == '/ordersuccess' ||
             state.location == '/checkout') {
@@ -43,7 +50,6 @@ class MyApp extends StatelessWidget {
           return null;
         }
       },
-      urlPathStrategy: UrlPathStrategy.path,
       routes: generateRoute(context),
       errorPageBuilder: (context, state) => MaterialPage<void>(
         key: state.pageKey,
@@ -56,7 +62,7 @@ class MyApp extends StatelessWidget {
 
     return Provider.value(
       value: _theme,
-      child: GetMaterialApp.router(
+      child: MaterialApp.router(
         routeInformationParser: _router.routeInformationParser,
         routerDelegate: _router.routerDelegate,
         theme: _theme.toThemeData(),

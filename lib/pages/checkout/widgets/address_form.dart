@@ -44,7 +44,7 @@ class BBTextFormField extends StatelessWidget {
 }
 
 class AddressForm extends StatefulWidget {
-  final void Function(BuildContext context, AddressModel) onFormSubmit;
+  final void Function(BuildContext context, AddressModel model) onFormSubmit;
 
   const AddressForm({Key? key, required this.onFormSubmit}) : super(key: key);
 

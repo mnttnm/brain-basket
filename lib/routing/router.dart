@@ -14,79 +14,65 @@ List<GoRoute> generateRoute(BuildContext context) {
   return [
     GoRoute(
       path: '/',
-      pageBuilder: (context, state) {
+      builder: (context, state) {
         menuController.changeActiveItemTo(BooksPageRoute);
-        return MaterialPage<void>(
-          key: state.pageKey,
-          child: BooksPage(),
-        );
+        return BooksPage();
       },
     ),
     GoRoute(
       name: BooksPageRoute,
       path: getPathStrForRoute(BooksPageRoute),
-      pageBuilder: (context, state) {
+      builder: (context, state) {
         menuController.changeActiveItemTo(BooksPageRoute);
-        return MaterialPage<void>(
-          key: state.pageKey,
-          child: BooksPage(),
-        );
+        return BooksPage();
       },
     ),
     GoRoute(
       name: ContactPageRoute,
       path: getPathStrForRoute(ContactPageRoute),
-      pageBuilder: (context, state) {
+      builder: (context, state) {
         menuController.changeActiveItemTo(ContactPageRoute);
-        return MaterialPage<void>(
-          key: state.pageKey,
-          child: const ContactPage(),
-        );
+        return const ContactPage();
       },
     ),
     GoRoute(
       name: AuthorsPageRoute,
       path: getPathStrForRoute(AuthorsPageRoute),
-      pageBuilder: (context, state) {
+      builder: (context, state) {
         menuController.changeActiveItemTo(AuthorsPageRoute);
-        return MaterialPage<void>(
-          key: state.pageKey,
-          child: AuthorsPage(),
-        );
+        return AuthorsPage();
       },
     ),
     GoRoute(
       name: CartPageRoute,
       path: getPathStrForRoute(CartPageRoute),
-      pageBuilder: (context, state) {
+      builder: (context, state) {
         menuController.changeActiveItemTo(CartPageRoute);
-        return MaterialPage<void>(
-          key: state.pageKey,
-          child: CartPage(),
-        );
+        return CartPage();
       },
     ),
     GoRoute(
       name: PaymentsPageRoute,
       path: getPathStrForRoute(PaymentsPageRoute),
-      pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: const Payment()),
+      builder: (context, state) {
+        return const Payment();
+      },
     ),
     GoRoute(
       name: CheckOutPageRoute,
       path: getPathStrForRoute(CheckOutPageRoute),
-      pageBuilder: (context, state) =>
-          MaterialPage<void>(key: state.pageKey, child: const CheckoutPage()),
+      builder: (context, state) {
+        return const CheckoutPage();
+      },
     ),
     GoRoute(
       name: OrderSuccessPageRoute,
       path: getPathStrForRoute(OrderSuccessPageRoute),
-      pageBuilder: (context, state) => MaterialPage<void>(
-        key: state.pageKey,
-        child: OrderSuccessPage(
+      builder: (context, state) {
+        return OrderSuccessPage(
           trackingId: state.extra! as String,
-        ),
-      ),
+        );
+      },
     ),
   ];
 }

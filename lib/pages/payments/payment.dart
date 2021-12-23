@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rs_books/api/payment_service.dart';
 import 'package:rs_books/api/ship_order_service.dart';
 import 'package:rs_books/controllers/address_controller.dart';
 import 'package:rs_books/controllers/cart_controller.dart';
+import 'package:rs_books/controllers/progress_bar_controller.dart';
 import 'package:rs_books/data/order.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/address_model.dart';
@@ -42,6 +44,18 @@ class _PaymentState extends State<Payment> {
     final shipOrderService = ShipOrder();
     final AppTheme theme = context.watch();
     final isSmallestScreen = ResponsiveWidget.isSmallestScreen(context);
+    if (GoRouter.of(context)
+        .location
+        .contains(getPathStrForRoute(PaymentsPageRoute))) {
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        final progressBarController =
+            Provider.of<ProgressBarController>(context, listen: false);
+        progressBarController.setStepState({
+          ProgressBarSteps.payment: ProgressItemState.active,
+          ProgressBarSteps.shipping: ProgressItemState.complete,
+        });
+      });
+    }
     return Consumer<CartController>(
       builder: (BuildContext context, CartController cart, Widget? child) {
         return Consumer<AddressController>(
@@ -83,8 +97,8 @@ class _PaymentState extends State<Payment> {
                                   padding: EdgeInsets.all(Insets.med),
                                   child: Flex(
                                     direction: isSmallestScreen
-                                            ? Axis.vertical
-                                            : Axis.horizontal,
+                                        ? Axis.vertical
+                                        : Axis.horizontal,
                                     mainAxisAlignment: isSmallestScreen
                                         ? MainAxisAlignment.spaceAround
                                         : MainAxisAlignment.spaceBetween,
@@ -106,7 +120,7 @@ class _PaymentState extends State<Payment> {
                                             Text(
                                               addressController.address
                                                   .toString(),
-                                                  textAlign: TextAlign.start,
+                                              textAlign: TextAlign.start,
                                               style: TextStyles.body1,
                                             ),
                                             VSpace.sm,
@@ -122,8 +136,7 @@ class _PaymentState extends State<Payment> {
                                           ],
                                         ),
                                       ),
-                                      if (isSmallestScreen)
-                                        VSpace.med,
+                                      if (isSmallestScreen) VSpace.med,
                                       SizedBox(
                                         width: 100,
                                         child: Column(
@@ -188,6 +201,16 @@ class _PaymentState extends State<Payment> {
                                             OrderSuccessPageRoute,
                                             extra: trackingId,
                                           );
+                                          final progressBarController = Provider
+                                              .of<ProgressBarController>(
+                                                  context,
+                                                  listen: false);
+                                          progressBarController.setStepState({
+                                            ProgressBarSteps.payment:
+                                                ProgressItemState.complete,
+                                            ProgressBarSteps.confirmation:
+                                                ProgressItemState.complete
+                                          });
                                           cart.clearCart();
                                         },
                                         onCancel: () {
@@ -224,7 +247,7 @@ class _PaymentState extends State<Payment> {
                                   visible: errorHappend,
                                   child: Text(
                                     "Order failed, Please try again!",
-                                      style: TextStyles.callout1
+                                    style: TextStyles.callout1
                                         .copyWith(color: Colors.red),
                                   ),
                                 )

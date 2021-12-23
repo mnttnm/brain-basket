@@ -7,12 +7,11 @@ class LargeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Insets.lg),
-            child: child,
+        padding: EdgeInsets.symmetric(horizontal: Insets.lg),
+        child: child,
       ),
     );
   }
