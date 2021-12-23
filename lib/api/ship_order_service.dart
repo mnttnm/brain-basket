@@ -5,55 +5,20 @@ import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/data/models.dart';
 import 'package:rs_books/data/order.dart';
 
-// ignore: constant_identifier_names
-const shiprocket_urls = {
-  'login_url': 'https://apiv2.shiprocket.in/v1/external/auth/login',
-  'create_order': 'https://apiv2.shiprocket.in/v1/external/orders/create/adhoc',
-  'generate_awb': 'https://apiv2.shiprocket.in/v1/external/courier/assign/awb',
-  'generate_pickup':
-      'https://apiv2.shiprocket.in/v1/external/courier/generate/pickup',
-  'create_and_ship':
-      'https://apiv2.shiprocket.in/v1/external/shipments/create/forward-shipment',
-};
-
 class ShipOrder {
-  Future _generateToken() async {
-    const headers = {'Content-Type': 'application/json'};
-    final request = Request('POST', Uri.parse(shiprocket_urls['login_url']!));
-
-    final configHandler = ConfigHandler();
-    //TODO: Security, avoid order creation from the network tab?
-    request.body = json.encode(
-        {
-          "email": configHandler.shiprocketConfig['email'] as String,
-      "password": configHandler.shiprocketConfig['password'] as String,
-        });
-    request.headers.addAll(headers);
-    final StreamedResponse response = await request.send();
-    if (response.statusCode == 200) {
-      final responseJson = json.decode(await response.stream.bytesToString());
-      return responseJson['token'];
-    } else {
-      // print(response.reasonPhrase);
-    }
-  }
-
+  final serverUrl = ConfigHandler().serverUrl;
   Future<Map<String, String>> getStateAndCityFromPinCode(String pinCode) async {
     final request = Request(
       'GET',
-      Uri.parse('https://api.postalpincode.in/pincode/$pinCode'),
+      Uri.parse('$serverUrl/pincode/$pinCode'),
     );
     final StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(await response.stream.bytesToString());
-      final cityState = {'city': '', 'state': ''};
-      if (jsonResponse[0]['Status'] == 'Success') {
-        cityState['city'] =
-            jsonResponse[0]['PostOffice'][0]['District'] as String;
-        cityState['state'] =
-            jsonResponse[0]['PostOffice'][0]['State'] as String;
-      }
-      return cityState;
+      return {
+        "city": jsonResponse['city'] as String,
+        "state": jsonResponse['state'] as String
+      };
     } else {
       throw Exception(response.reasonPhrase);
     }
@@ -77,18 +42,15 @@ class ShipOrder {
 
   Future createQuickShipment(Order order, CartController cart) async {
     final request =
-        Request('POST', Uri.parse(shiprocket_urls['create_and_ship']!));
-
-    final token = await _generateToken();
+        Request('POST', Uri.parse('$serverUrl/shipment/create'));
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token'
     };
 
     request.headers.addAll(headers);
 
     final cityState = await getStateAndCityFromPinCode(order.address!.pincode!);
-    request.body = bookToMap(
+    request.body = srOrderToMap(
       ShipRocketOrder(
         orderId: order.orderId,
         orderDate: order.orderCreationTime.toString(),
@@ -115,8 +77,8 @@ class ShipOrder {
     final StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(await response.stream.bytesToString());
-      final awbCode = jsonResponse['payload']['awb_code'];
-      return 'https://shiprocket.co/tracking/$awbCode';
+      final trackingUrl = jsonResponse['tracking_url'];
+      return trackingUrl;
     } else {
       // print(response.reasonPhrase);
     }

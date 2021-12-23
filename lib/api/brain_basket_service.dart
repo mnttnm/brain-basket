@@ -2,9 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:rs_books/data/models.dart';
 
-// Mock recipe service that grabs sample json data to mock recipe request/response
 class BrainBasketDataService {
-  // Batch request that gets both today recipes and friend's feed
   Future<BrainBasketData> getData() async {
     final authors = await _getAuthors();
     final books = await _getBooks();
@@ -12,7 +10,6 @@ class BrainBasketDataService {
     return BrainBasketData(authors, books);
   }
 
-  // Get sample explore recipes json to display in ui
   Future<List<Author>> _getAuthors() async {
     // Simulate api request wait time
     // await Future.delayed(const Duration(milliseconds: 300));
@@ -23,7 +20,6 @@ class BrainBasketDataService {
     // Decode to json
     final Map<String, dynamic> json =
         jsonDecode(dataString) as Map<String, dynamic>;
-    // Go through each recipe and convert json to ExploreRecipe object.
     if (json['authors'] != null) {
       final authors = <Author>[];
 

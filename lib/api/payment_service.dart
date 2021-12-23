@@ -6,20 +6,13 @@ import 'package:rs_books/data/order.dart';
 
 class PayementService {
   final configHandler = ConfigHandler();
-  late String username;
-  late String password;
   late String key;
 
   PayementService() {
-    username = configHandler.razorpayConfig['username'] as String;
-    password = configHandler.razorpayConfig['password'] as String;
     key = configHandler.razorpayConfig['key'] as String;
   }
 
   Future<String> createOrder(double orderTotal, String orderId) async {
-    final String basicAuth =
-        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
-
     final paymentRequestBody = {
       'amount': orderTotal * 100, // convert to current subunit
       'currency': "INR",
@@ -29,12 +22,9 @@ class PayementService {
 
     try {
       final response = await http.post(
-        Uri.parse('https://api.razorpay.com/v1/orders'),
+        Uri.parse('${configHandler.serverUrl}/order/create'),
         body: jsonEncode(paymentRequestBody),
-        headers: <String, String>{
-          'authorization': basicAuth,
-          "content-type": "application/json"
-        },
+        headers: {"content-type": "application/json"},
       );
       final resObject = jsonDecode(response.body);
       return resObject['id'] as String;

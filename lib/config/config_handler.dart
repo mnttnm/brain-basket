@@ -22,6 +22,10 @@ class ConfigHandler {
     return _config?['shiprocketConfig'] as Map<String, dynamic>;
   }
 
+  String get serverUrl {
+    return _config?['server_url'] as String;
+  }
+
   factory ConfigHandler() {
     return _configHandler ?? ConfigHandler._internal();
   }
