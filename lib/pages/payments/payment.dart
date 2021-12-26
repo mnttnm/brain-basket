@@ -83,8 +83,8 @@ class _PaymentState extends State<Payment> {
                                   padding: EdgeInsets.all(Insets.med),
                                   child: Flex(
                                     direction: isSmallestScreen
-                                            ? Axis.vertical
-                                            : Axis.horizontal,
+                                        ? Axis.vertical
+                                        : Axis.horizontal,
                                     mainAxisAlignment: isSmallestScreen
                                         ? MainAxisAlignment.spaceAround
                                         : MainAxisAlignment.spaceBetween,
@@ -106,7 +106,7 @@ class _PaymentState extends State<Payment> {
                                             Text(
                                               addressController.address
                                                   .toString(),
-                                                  textAlign: TextAlign.start,
+                                              textAlign: TextAlign.start,
                                               style: TextStyles.body1,
                                             ),
                                             VSpace.sm,
@@ -122,8 +122,7 @@ class _PaymentState extends State<Payment> {
                                           ],
                                         ),
                                       ),
-                                      if (isSmallestScreen)
-                                        VSpace.med,
+                                      if (isSmallestScreen) VSpace.med,
                                       SizedBox(
                                         width: 100,
                                         child: Column(
@@ -161,12 +160,15 @@ class _PaymentState extends State<Payment> {
                                     });
                                     final receiptId =
                                         '#${addressController.currentAddress!.contactNo!}${DateTime.now().microsecond}';
+                                    // a new orderId != receiptId is returned by razropay
+                                    // creates a order entity on razorpay
                                     final String orderId =
                                         await paymentService.createOrder(
                                       cart.total,
                                       receiptId,
                                     );
                                     if (orderId.isNotEmpty) {
+                                      // creates local order object
                                       final order = _createOrder(
                                         orderId,
                                         cart.total,
@@ -174,12 +176,14 @@ class _PaymentState extends State<Payment> {
                                       );
                                       paymentService.executeOrder(
                                         order,
-                                        onSuccess: () async {
+                                        onSuccess: (Map<String, dynamic>
+                                            paymentInfo) async {
                                           final trackingId =
                                               await shipOrderService
                                                   .createQuickShipment(
                                             order,
                                             cart,
+                                            paymentInfo,
                                           );
                                           setState(() {
                                             orderInProgress = false;
@@ -224,7 +228,7 @@ class _PaymentState extends State<Payment> {
                                   visible: errorHappend,
                                   child: Text(
                                     "Order failed, Please try again!",
-                                      style: TextStyles.callout1
+                                    style: TextStyles.callout1
                                         .copyWith(color: Colors.red),
                                   ),
                                 )

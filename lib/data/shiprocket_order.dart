@@ -2,7 +2,7 @@ import 'dart:convert';
 
 ShipRocketOrder srOrderFromMap(String str) =>
     ShipRocketOrder.fromMap(json.decode(str) as Map<String, dynamic>);
-String srOrderToMap(ShipRocketOrder data) => json.encode(data.toMap());
+String srOrderToJson(ShipRocketOrder data) => json.encode(data.toMap());
 
 class ShipRocketOrder {
   ShipRocketOrder({

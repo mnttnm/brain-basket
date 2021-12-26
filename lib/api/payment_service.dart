@@ -35,7 +35,7 @@ class PayementService {
 
   void executeOrder(
     Order orderInfo, {
-    required Function() onSuccess,
+    required Function(Map<String, dynamic> paymentId) onSuccess,
     Function()? onFailure,
     Function()? onCancel,
   }) {
@@ -61,8 +61,13 @@ class PayementService {
         },
       },
       'handler': (response) {
-        if (response['razorpay_order_id'].toString().isNotEmpty) {
-          onSuccess();
+        if (response['razorpay_payment_id'].toString().isNotEmpty) {
+          final paymentInfo = {
+            "payment_id": response['razorpay_payment_id'] as String,
+            "order_id": response['razorpay_order_id'] as String,
+            "signature": response['razorpay_signature'] as String
+          };
+          onSuccess(paymentInfo);
         } else {
           onFailure!();
         }

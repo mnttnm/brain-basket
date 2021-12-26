@@ -15,31 +15,33 @@ class OrderSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.watch();
-    return CenteredView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "Order Successful!!",
-            style: TextStyles.h1.copyWith(color: theme.accent1),
-          ),
-          VSpace.xs,
-          Wrap(
-            children: [
-              const Text(
-                "Your order has been placed successfuly, you will receive further details on your contact no.You can track your order at",
-                style: TextStyle(fontSize: 16),
-              ),
-              Link(
-                trackingId,
-                onPressed: () {
-                  launch(trackingId);
-                },
-                style: TextStyle(color: theme.accent1),
-              )
-            ],
-          )
-        ],
+    return Center(
+      child: CenteredView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Order Successful!!",
+              style: TextStyles.h1.copyWith(color: theme.accent1),
+            ),
+            VSpace.xs,
+            Wrap(
+              children: [
+                const Text(
+                  "Your order has been placed successfuly, you will receive further details on your contact no.You can track your order at",
+                  style: TextStyle(fontSize: 16),
+                ),
+                Link(
+                  trackingId,
+                  onPressed: () {
+                    launch(trackingId);
+                  },
+                  style: TextStyle(color: theme.accent1),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

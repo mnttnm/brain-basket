@@ -40,7 +40,11 @@ class ShipOrder {
     return orderItemList;
   }
 
-  Future createQuickShipment(Order order, CartController cart) async {
+  Future createQuickShipment(
+    Order order,
+    CartController cart,
+    Map<String, dynamic> paymentInfo,
+  ) async {
     final request =
         Request('POST', Uri.parse('$serverUrl/shipment/create'));
     final headers = {
@@ -50,30 +54,33 @@ class ShipOrder {
     request.headers.addAll(headers);
 
     final cityState = await getStateAndCityFromPinCode(order.address!.pincode!);
-    request.body = srOrderToMap(
-      ShipRocketOrder(
-        orderId: order.orderId,
-        orderDate: order.orderCreationTime.toString(),
-        pickupLocation: "Rohit",
-        billingCustomerName: order.address!.name!,
-        billingCustomerLastName: order.address!.name ?? "",
-        billingAddress: order.address!.address1!,
-        billingCity: cityState['city'] ?? "na",
-        billingState: cityState['state'] ?? "na",
-        billingPincode: order.address!.pincode!,
-        billingCountry: "India",
-        billingEmail: order.address!.email!,
-        billingPhone: order.address!.contactNo!,
-        shippingIsBilling: true,
-        orderItems: _createOrderItem(cart),
-        paymentMethod: "Prepaid",
-        subTotal: order.orderTotal.toInt(),
-        length: 20,
-        breadth: 10,
-        height: 5,
-        weight: 0.49,
+    request.body = json.encode({
+      "shiprocket_order_info": srOrderToJson(
+        ShipRocketOrder(
+          orderId: order.orderId,
+          orderDate: order.orderCreationTime.toString(),
+          pickupLocation: "Rohit",
+          billingCustomerName: order.address!.name!,
+          billingCustomerLastName: order.address!.name ?? "",
+          billingAddress: order.address!.address1!,
+          billingCity: cityState['city'] ?? "na",
+          billingState: cityState['state'] ?? "na",
+          billingPincode: order.address!.pincode!,
+          billingCountry: "India",
+          billingEmail: order.address!.email!,
+          billingPhone: order.address!.contactNo!,
+          shippingIsBilling: true,
+          orderItems: _createOrderItem(cart),
+          paymentMethod: "Prepaid",
+          subTotal: order.orderTotal.toInt(),
+          length: 20,
+          breadth: 10,
+          height: 5,
+          weight: 0.49,
+        ),
       ),
-    );
+      "payment_info": json.encode(paymentInfo),
+    });
     final StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(await response.stream.bytesToString());
