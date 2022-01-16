@@ -1,5 +1,49 @@
 {
     "books": [{
+        "title": "SKC & RA'S Organic Chemistry For NEET",
+        "images": {
+            "front": "front.jpeg",
+            "back": "back.jpeg",
+            "others": "others"
+        },
+        "authors": ["skc", "ra"],
+        "price": 370,
+        "description": "Book by #1 educator on Un-Academy and Joint director Nucleus kota",
+        "details": {
+            "pages": "304",
+            "shipping": "3-7 days",
+            "publication": "Brain Basket",
+            "isbn": "9789354267353",
+            "ratings": "4.9/5",
+            "language": "English"
+        },
+        "reviews": [{
+            "name": "Sit gubergren.",
+            "review": "Mohit est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }, {
+            "name": "Sit gubergren.",
+            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
+            "rating": 5,
+            "link": "https://www.link.com"
+        }]
+        }, {
         "title": "Fundamental Problems In Organic Chemistry For NEET",
         "images": {
             "front": "front.jpeg",

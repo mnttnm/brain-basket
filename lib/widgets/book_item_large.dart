@@ -21,7 +21,7 @@ class BookItemlarge extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 12 * 2,
     );
     return Card(
-      margin: EdgeInsets.zero,
+      margin: EdgeInsets.only(bottom: Insets.sm),
       elevation: 6,
       child: Row(
         children: [

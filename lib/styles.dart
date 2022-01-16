@@ -54,26 +54,7 @@ class Corners {
   static const Radius lgRadius = Radius.circular(lg);
 }
 
-class Strokes {
-  static const double thin = 1;
-  static const double thick = 4;
-}
 
-class Shadows {
-  static List<BoxShadow> get universal => [
-        BoxShadow(
-            color: const Color(0xff333333).withOpacity(.15),
-            blurRadius: 10,
-        ),
-      ];
-  static List<BoxShadow> get small => [
-        BoxShadow(
-            color: const Color(0xff333333).withOpacity(.15),
-            blurRadius: 3,
-            offset: const Offset(0, 1),
-        ),
-      ];
-}
 
 /// Font Sizes
 /// You can use these directly if you need, but usually there should be a predefined style in TextStyles.
