@@ -177,7 +177,8 @@ class _PaymentState extends State<Payment> {
                                       paymentService.executeOrder(
                                         order,
                                         onSuccess: (Map<String, dynamic>
-                                            paymentInfo) async {
+                                            paymentInfo,
+                                        ) async {
                                           final trackingId =
                                               await shipOrderService
                                                   .createQuickShipment(
