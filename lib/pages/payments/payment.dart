@@ -154,63 +154,71 @@ class _PaymentState extends State<Payment> {
                                 VSpace.lg,
                                 PrimaryButton(
                                   onPressed: () async {
-                                    setState(() {
-                                      errorHappend = false;
-                                      orderInProgress = true;
-                                    });
-                                    final receiptId =
-                                        '#${addressController.currentAddress!.contactNo!}${DateTime.now().microsecond}';
-                                    // a new orderId != receiptId is returned by razropay
-                                    // creates a order entity on razorpay
-                                    final String orderId =
-                                        await paymentService.createOrder(
-                                      cart.total,
-                                      receiptId,
-                                    );
-                                    if (orderId.isNotEmpty) {
-                                      // creates local order object
-                                      final order = _createOrder(
-                                        orderId,
-                                        cart.total,
-                                        addressController.currentAddress!,
-                                      );
-                                      paymentService.executeOrder(
-                                        order,
-                                        onSuccess: (Map<String, dynamic>
-                                            paymentInfo,
-                                        ) async {
-                                          final trackingId =
-                                              await shipOrderService
-                                                  .createQuickShipment(
-                                            order,
-                                            cart,
-                                            paymentInfo,
-                                          );
-                                          setState(() {
-                                            orderInProgress = false;
-                                          });
-                                          context.goNamed(
-                                            OrderSuccessPageRoute,
-                                            extra: trackingId,
-                                          );
-                                          cart.clearCart();
-                                        },
-                                        onCancel: () {
-                                          setState(() {
-                                            orderInProgress = false;
-                                          });
-                                        },
-                                        onFailure: () {
-                                          setState(() {
-                                            errorHappend = true;
-                                            orderInProgress = false;
-                                          });
-                                        },
-                                      );
-                                    } else {
+                                    try {
                                       setState(() {
-                                        errorHappend = true;
-                                        orderInProgress = false;
+                                        errorHappend = false;
+                                        orderInProgress = true;
+                                      });
+                                      final receiptId =
+                                          '#${addressController.currentAddress!.contactNo!}${DateTime.now().microsecond}';
+                                      // a new orderId != receiptId is returned by razropay
+                                      // creates a order entity on razorpay
+                                      final String orderId =
+                                          await paymentService.createOrder(
+                                        cart.total,
+                                        receiptId,
+                                      );
+                                      if (orderId.isNotEmpty) {
+                                        // creates local order object
+                                        final order = _createOrder(
+                                          orderId,
+                                          cart.total,
+                                          addressController.currentAddress!,
+                                        );
+                                        paymentService.executeOrder(
+                                          order,
+                                          onSuccess: (
+                                            Map<String, dynamic> paymentInfo,
+                                          ) async {
+                                            final trackingId =
+                                                await shipOrderService
+                                                    .createQuickShipment(
+                                              order,
+                                              cart,
+                                              paymentInfo,
+                                            );
+                                            setState(() {
+                                              orderInProgress = false;
+                                            });
+                                            context.goNamed(
+                                              OrderSuccessPageRoute,
+                                              extra: trackingId,
+                                            );
+                                            cart.clearCart();
+                                          },
+                                          onCancel: () {
+                                            setState(() {
+                                              orderInProgress = false;
+                                            });
+                                          },
+                                          onFailure: () {
+                                            setState(() {
+                                              errorHappend = true;
+                                              orderInProgress = false;
+                                            });
+                                          },
+                                        );
+                                      } else {
+                                        setState(() {
+                                          errorHappend = true;
+                                          orderInProgress = false;
+                                        });
+                                      }
+                                    } on Exception catch (e) {
+                                      print('error #### $e');
+                                      setState(() {
+                                        errorHappend = false;
+                                        orderInProgress = true;
                                       });
                                     }
                                   },

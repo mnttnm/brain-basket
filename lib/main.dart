@@ -28,6 +28,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final AppTheme _theme = AppTheme.fromType(ThemeType.Teal_Light);
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           return null;
         }
       },
-      urlPathStrategy: UrlPathStrategy.path,
+      // urlPathStrategy: UrlPathStrategy.path,
       routes: generateRoute(context),
       errorPageBuilder: (context, state) => MaterialPage<void>(
         key: state.pageKey,
@@ -51,9 +52,8 @@ class MyApp extends StatelessWidget {
           child: Text("Error Page"),
         ),
       ),
-      navigatorBuilder: (context, child) => SiteLayout(child: child!),
+      navigatorBuilder: (context, state, child) => SiteLayout(child: child),
     );
-
     return Provider.value(
       value: _theme,
       child: GetMaterialApp.router(

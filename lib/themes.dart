@@ -78,10 +78,8 @@ class AppTheme {
       // Use ColorScheme to generate the bulk of the color theme
       colorScheme: ColorScheme(
           brightness: isDark ? Brightness.dark : Brightness.light,
-          primary: accent1,
-          primaryVariant: shift(accent1, .1),
-          secondary: accent1,
-          secondaryVariant: shift(accent1, .1),
+        primary: accent1,
+        secondary: accent1,
           background: bg1,
           surface: surface1,
           onBackground: mainTextColor,
