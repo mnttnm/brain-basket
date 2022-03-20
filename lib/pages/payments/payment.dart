@@ -8,6 +8,7 @@ import 'package:rs_books/controllers/cart_controller.dart';
 import 'package:rs_books/data/order.dart';
 import 'package:rs_books/helpers/responsiveness.dart';
 import 'package:rs_books/models/address_model.dart';
+import 'package:rs_books/pages/order_success_page.dart';
 import 'package:rs_books/routing/routes.dart';
 import 'package:rs_books/styled_widgets/buttons/styled_buttons.dart';
 import 'package:rs_books/styled_widgets/styled_spacers.dart';
@@ -190,9 +191,14 @@ class _PaymentState extends State<Payment> {
                                             setState(() {
                                               orderInProgress = false;
                                             });
+                                            // ignore: use_build_context_synchronously
                                             context.goNamed(
                                               OrderSuccessPageRoute,
-                                              extra: trackingId,
+                                              extra: OrderSuccessInfo(
+                                                trackingId as String,
+                                                addressController
+                                                    .address!.contactNo!,
+                                              ),
                                             );
                                             cart.clearCart();
                                           },
