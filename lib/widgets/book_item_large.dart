@@ -84,7 +84,9 @@ class BookItemlarge extends StatelessWidget {
                             bookDetails: book.details,
                             bookDescription: book.description,
                           ),
-                          Reviews(reviews: book.reviews!)
+                          if (book.reviews!.isNotEmpty) ...[
+                            Reviews(reviews: book.reviews!)
+                          ]
                         ],
                       ),
                     ),

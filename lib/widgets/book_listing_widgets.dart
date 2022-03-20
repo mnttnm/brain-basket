@@ -86,6 +86,7 @@ class ReviewItem extends StatelessWidget {
             width: 200,
             height: 150,
             child: SingleChildScrollView(
+              primary: false,
               child: Column(
                 children: [
                   Text(

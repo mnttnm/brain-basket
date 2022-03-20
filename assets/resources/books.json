@@ -17,33 +17,8 @@
             "ratings": "4.9/5",
             "language": "English"
         },
-        "reviews": [{
-            "name": "Sit gubergren.",
-            "review": "Mohit est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
-        }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
-        }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
-        }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
-        }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
-        }]
-        }, {
+        "reviews": []
+    }, {
         "title": "Fundamental Problems In Organic Chemistry For NEET",
         "images": {
             "front": "front.jpeg",
@@ -62,30 +37,22 @@
             "language": "English"
         },
         "reviews": [{
-            "name": "Sit gubergren.",
-            "review": "Mohit est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
+            "name": "Prateek jain",
+            "review": "Finally the wait for the best organic chemistry book for NEET aspirants is over. Shubh karan choudhary sir is undoubtedly one of the best organic chemistry Faculties for NEET in Kota and in Unacademy . He has taught at many top coaching institutes and has produced several top ranks in his career.He has been working on this masterpiece since many years and has put all his heart and soul in this book.I am sure this book will help immensely all the NEET aspirants all over india in securing maximum marks in Organic chemistry and cracking NEET exam with best ranks.",
+            "rating": 5
         }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
+            "name": "Varun G.",
+            "review": "RA sir is the most iconic organic chemistry teacher in the world he clears the concepts very easily Reviewed in India on 17 February 2022 Best book by best teacher in the world❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️ He clears all the concepts very easliy and in a very good way that will remmber till last Thanks sir ji🙏🏻🙏🏻🙏🏻🙏🏻🙏🏻",
+            "rating": 5
         }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
+            "name": "Ashutosh roy",
+            "review": "BEST BOOK EVER FOR ORGANIC CHEMISTRY HIGHLY RECOMMEND FOR NEET ASPIRATIONS Reviewed in India on 30 July 2021 BEST BOOK EVER FOR ORGANIC CHEMISTRY this book have all the important questions and THEORY which are essential for neet AND THERE IS A LOT OF LOVE OF BTS💝 IN THIS BOOK this book is one of the necessary study material for neet🥰🥳🥳 ",
+            "rating": 5
         }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
-        }, {
-            "name": "Sit gubergren.",
-            "review": "Ipsum dolores est dolore diam sadipscing ipsum diam et labore invidunt, invidunt vero sed no sit stet kasd voluptua nonumy, no sed amet sed accusam diam rebum, dolore stet aliquyam.",
-            "rating": 5,
-            "link": "https://www.link.com"
-        }]
+            "name": "Shivam",
+            "review": "The overall view of the book Reviewed in India on 25 February 2021 The book is full of good questions....and exercises are divided into parts with a paper on covering its important theory.....for every chapter....this book makes has remarks too on some difficult questions....skc sir and RA sir has put up all his effort in order to make path for us... for the best....",
+            "rating": 5
+        }
+    ]
     }]
 }

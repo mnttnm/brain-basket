@@ -119,19 +119,19 @@ class Review {
     required this.name,
     required this.review,
     required this.rating,
-    required this.link,
+      this.link
   });
 
   final String name;
   final String review;
   final int rating;
-  final String link;
+  final String? link;
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
         name: json["name"] as String,
         review: json["review"] as String,
         rating: json["rating"] as int,
-        link: json["link"] as String,
+        link: json["link"] != null ? json["link"] as String : '',
       );
 
   Map<String, dynamic> toJson() => {
